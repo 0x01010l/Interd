@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-brand-bg: #050505;
+  --color-brand-surface: #0F0F0F;
+  --color-brand-border: #1F1F1F;
+  --color-brand-accent: #0070FF;
+  
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-white font-sans antialiased;
+  }
+}
+
+@layer components {
+  .glass {
+    background-color: color-mix(in srgb, var(--color-brand-surface) 50%, transparent);
+    backdrop-filter: blur(24px);
+    border: 1px solid var(--color-brand-border);
+  }
+  
+  .bento-card {
+    background-color: color-mix(in srgb, var(--color-brand-surface) 50%, transparent);
+    backdrop-filter: blur(24px);
+    border: 1px solid var(--color-brand-border);
+    border-radius: var(--radius-2xl);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  .bento-card:hover {
+    border-color: color-mix(in srgb, var(--color-brand-accent) 50%, transparent);
+    box-shadow: 0 0 30px rgba(0, 112, 255, 0.1);
+  }
+  
+  .mono-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
