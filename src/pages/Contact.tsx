@@ -31,7 +31,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="mono-label">Technical Support</div>
-                    <div className="text-xl font-bold">support@interdot.net</div>
+                    <div className="text-xl font-bold">advisory@interdot.net</div>
                   </div>
                 </div>
                 <div className="flex items-center space-x-6">
