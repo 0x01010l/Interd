@@ -40,7 +40,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="mono-label">HQ</div>
-                    <div className="text-xl font-bold">Zurich, Switzerland</div>
+                    <div className="text-xl font-bold">6545 Market Avenue North, North Canton, 44721, OH, US</div>
                   </div>
                 </div>
               </div>
