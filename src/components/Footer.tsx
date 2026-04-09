@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Terminal, Github, Twitter, Linkedin } from 'lucide-react';
+import { Waypoints, Github, Twitter, Linkedin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-2">
             <Link to="/" className="flex items-center space-x-2 mb-6">
-              <Terminal className="w-6 h-6 text-brand-accent" />
+              <Waypoints className="w-6 h-6 text-brand-accent" />
               <span className="font-mono font-bold tracking-tighter text-xl">INTERDOT</span>
             </Link>
             <p className="text-white/50 max-w-sm mb-6 leading-relaxed">

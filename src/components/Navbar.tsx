@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
-import { Terminal, Menu, X } from 'lucide-react';
+import { Waypoints, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Navbar() {
@@ -20,7 +20,7 @@ export default function Navbar() {
         <div className="flex justify-between h-16 items-center">
           <Link to="/" className="flex items-center space-x-2 group">
             <div className="w-8 h-8 bg-brand-accent rounded-lg flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(0,112,255,0.5)] transition-shadow">
-              <Terminal className="w-5 h-5 text-white" />
+              <Waypoints className="w-5 h-5 text-white" />
             </div>
             <span className="font-mono font-bold tracking-tighter text-xl">INTERDOT</span>
           </Link>
@@ -38,9 +38,9 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <button className="bg-brand-accent hover:bg-brand-accent/90 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all hover:scale-105 active:scale-95 shadow-lg shadow-brand-accent/20">
+            <Link to="/contact" className="bg-brand-accent hover:bg-brand-accent/90 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all hover:scale-105 active:scale-95 shadow-lg shadow-brand-accent/20">
               Request API Access
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -69,9 +69,13 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
-          <button className="w-full bg-brand-accent text-white px-5 py-3 rounded-xl text-sm font-semibold">
+          <Link 
+            to="/contact" 
+            onClick={() => setIsOpen(false)}
+            className="block w-full bg-brand-accent text-white px-5 py-3 rounded-xl text-sm font-semibold text-center"
+          >
             Request API Access
-          </button>
+          </Link>
         </motion.div>
       )}
     </nav>

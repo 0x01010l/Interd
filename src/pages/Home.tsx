@@ -30,10 +30,10 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accent/90 text-white px-8 py-4 rounded-xl font-bold transition-all hover:scale-105 shadow-xl shadow-brand-accent/20 flex items-center justify-center space-x-2">
+              <Link to="/contact" className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accent/90 text-white px-8 py-4 rounded-xl font-bold transition-all hover:scale-105 shadow-xl shadow-brand-accent/20 flex items-center justify-center space-x-2">
                 <span>Request API Access</span>
                 <ArrowRight className="w-5 h-5" />
-              </button>
+              </Link>
               <Link to="/services" className="w-full sm:w-auto glass hover:bg-white/5 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center justify-center">
                 Explore Services
               </Link>
@@ -201,9 +201,9 @@ export default function Home() {
               Interdot for deterministic reasoning.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative">
-              <button className="bg-brand-accent hover:bg-brand-accent/90 text-white px-8 py-4 rounded-xl font-bold transition-all">
+              <Link to="/contact" className="bg-brand-accent hover:bg-brand-accent/90 text-white px-8 py-4 rounded-xl font-bold transition-all">
                 Request API Access
-              </button>
+              </Link>
               <Link to="/contact" className="text-white/60 hover:text-white transition-colors">
                 Contact Sales
               </Link>

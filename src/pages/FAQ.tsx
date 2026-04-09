@@ -1,5 +1,6 @@
 import PageLayout from '../components/PageLayout';
 import { HelpCircle, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function FAQ() {
   const faqs = [
@@ -62,10 +63,10 @@ export default function FAQ() {
             <p className="text-white/60 mb-8">
               Our technical team is available for deep-dive consultations.
             </p>
-            <button className="inline-flex items-center space-x-2 text-brand-accent font-bold hover:underline">
+            <Link to="/contact" className="inline-flex items-center space-x-2 text-brand-accent font-bold hover:underline">
               <span>Contact Technical Support</span>
               <ChevronRight className="w-5 h-5" />
-            </button>
+            </Link>
           </div>
         </div>
       </section>

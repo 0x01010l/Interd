@@ -1,5 +1,6 @@
 import PageLayout from '../components/PageLayout';
 import { Quote, ExternalLink, Activity } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Testimonials() {
   const caseStudies = [
@@ -56,10 +57,10 @@ export default function Testimonials() {
                       <div className="text-[10px] text-white/40 uppercase tracking-widest">{study.stats.metric}</div>
                     </div>
                   </div>
-                  <button className="w-full glass py-3 rounded-xl text-xs font-mono uppercase tracking-widest hover:bg-white/5 flex items-center justify-center space-x-2">
+                  <Link to="/contact" className="w-full glass py-3 rounded-xl text-xs font-mono uppercase tracking-widest hover:bg-white/5 flex items-center justify-center space-x-2">
                     <span>Read Full Case Study</span>
                     <ExternalLink className="w-4 h-4" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -76,9 +77,9 @@ export default function Testimonials() {
                 fidelity of our reasoning engine. Apply for API access to see how 
                 Interdot can transform your data intelligence.
               </p>
-              <button className="bg-brand-accent text-white px-8 py-4 rounded-xl font-bold">
+              <Link to="/contact" className="inline-block bg-brand-accent text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-accent/90 transition-all">
                 Apply for Access
-              </button>
+              </Link>
             </div>
           </div>
         </div>
