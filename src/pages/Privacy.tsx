@@ -12,9 +12,9 @@ export default function Privacy() {
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">1. Introduction</h2>
               <p>
-                Interdot ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy 
-                explains how we collect, use, and safeguard your information when you use our 
-                Reasoning-as-a-Service platform.
+Interdot, a brand operated by FIX FIGURES LLC (“we,” “our,” or “us”), is committed to protecting your privacy.
+This Privacy Policy explains how we collect, use, and safeguard your information when you use our
+Reasoning-as-a-Service platform.
               </p>
             </section>
 
