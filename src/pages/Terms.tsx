@@ -12,9 +12,9 @@ export default function Terms() {
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">1. Acceptance of Terms</h2>
               <p>
-                By accessing or using the Interdot platform, you agree to be bound by these Terms of Use 
-                and all applicable laws and regulations. If you do not agree with these terms, you are 
-                prohibited from using the service.
+               By accessing or using the Interdot platform, operated by FIX FIGURES LLC and doing business as
+    “Interdot,” you agree to be bound by these Terms of Use and all applicable laws and regulations.
+    If you do not agree with these terms, you are prohibited from using the service.
               </p>
             </section>
 
