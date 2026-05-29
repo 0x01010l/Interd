@@ -21,7 +21,7 @@ export default function Contact() {
                     <Mail className="w-6 h-6 text-brand-accent" />
                   </div>
                   <div>
-                    <div className="mono-label">Priority Email</div>
+                    <div className="mono-label">Main Email</div>
                     <div className="text-xl font-bold">contact@interdot.net</div>
                   </div>
                 </div>
