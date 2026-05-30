@@ -8,7 +8,11 @@ The app is designed to run inside Snowflake and keep sensitive compliance workfl
 
 ---
 
+
+ 
 ## 2) Core Capabilities
+
+
 
 - Deterministic alert triage (priority score, priority band, suggested disposition, SLA bucket)
 - Cortex-assisted explanation generation with safety guardrails
@@ -21,7 +25,9 @@ The app is designed to run inside Snowflake and keep sensitive compliance workfl
 
 ---
 
+
 ## 3) Repository Structure
+
 
 - `native_app/manifest.yml` - Native App manifest
 - `native_app/setup.sql` - main setup entrypoint
@@ -47,7 +53,9 @@ The app is designed to run inside Snowflake and keep sensitive compliance workfl
 - `STAGING.TRANSACTIONS_NORMALIZED`
 - `STAGING.CUSTOMERS_NORMALIZED`
 
+
 ### Feature and Output Tables
+
 
 - `FEATURES.ALERT_FEATURES`
 - `OUTPUT.TRIAGE_QUEUE`
