@@ -5,18 +5,21 @@ import { useEffect } from 'react';
 export default function Contact() {
   useEffect(() => {
     // Load Tally script
-    if (typeof window.Tally === 'undefined') {
-      const script = document.createElement('script');
-      script.src = 'https://tally.so/widgets/embed.js';
-      script.onload = () => {
-        if (typeof window.Tally !== 'undefined') {
-          window.Tally.loadEmbeds();
-        }
+    const script = document.createElement('script');
+    script.innerHTML = `
+      var d=document,w="https://tally.so/widgets/embed.js",v=function(){
+        "undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))
       };
-      document.body.appendChild(script);
-    } else {
-      window.Tally.loadEmbeds();
-    }
+      if("undefined"!=typeof Tally)v();
+      else if(d.querySelector('script[src="'+w+'"]')==null){
+        var s=d.createElement("script");
+        s.src=w;
+        s.onload=v;
+        s.onerror=v;
+        d.body.appendChild(s);
+      }
+    `;
+    document.body.appendChild(script);
   }, []);
 
   return (
@@ -65,7 +68,7 @@ export default function Contact() {
 
             <div className="glass p-10 rounded-[2.5rem] border-brand-border">
               <iframe
-                data-tally-src="https://tally.so/embed/jaXl9Q?dynamicHeight=1&formEventsForwarding=1"
+                data-tally-src="https://tally.so/embed/jaXl9Q?dynamicHeight=1"
                 loading="lazy"
                 width="100%"
                 height="447"
