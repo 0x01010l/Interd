@@ -39,7 +39,7 @@ export default function Navbar() {
               </Link>
             ))}
             <Link to="/contact" className="bg-brand-accent hover:bg-brand-accent/90 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all hover:scale-105 active:scale-95 shadow-lg shadow-brand-accent/20">
-              Request API Access
+               Get in Touch
             </Link>
           </div>
 
