@@ -1,6 +1,7 @@
 import PageLayout from '../components/PageLayout';
 import { Target, Eye, ShieldCheck, Zap } from 'lucide-react';
 
+
 export default function About() {
   return (
     <PageLayout title="About Us">
