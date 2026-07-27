@@ -1,7 +1,24 @@
 import PageLayout from '../components/PageLayout';
-import { Mail, MessageSquare, Globe, ArrowRight } from 'lucide-react';
+import { Mail, MessageSquare, Globe } from 'lucide-react';
+import { useEffect } from 'react';
 
 export default function Contact() {
+  useEffect(() => {
+    // Load Tally script
+    if (typeof window.Tally === 'undefined') {
+      const script = document.createElement('script');
+      script.src = 'https://tally.so/widgets/embed.js';
+      script.onload = () => {
+        if (typeof window.Tally !== 'undefined') {
+          window.Tally.loadEmbeds();
+        }
+      };
+      document.body.appendChild(script);
+    } else {
+      window.Tally.loadEmbeds();
+    }
+  }, []);
+
   return (
     <PageLayout title="Contact">
       <section className="py-24">
@@ -47,46 +64,16 @@ export default function Contact() {
             </div>
 
             <div className="glass p-10 rounded-[2.5rem] border-brand-border">
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="mono-label ml-1">Full Name</label>
-                    <input 
-                      type="text" 
-                      className="w-full bg-white/5 border border-brand-border rounded-xl px-4 py-3 focus:border-brand-accent outline-none transition-colors"
-                      placeholder="John Doe"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="mono-label ml-1">Work Email</label>
-                    <input 
-                      type="email" 
-                      className="w-full bg-white/5 border border-brand-border rounded-xl px-4 py-3 focus:border-brand-accent outline-none transition-colors"
-                      placeholder="john@company.com"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="mono-label ml-1">Sector</label>
-                  <select className="w-full bg-white/5 border border-brand-border rounded-xl px-4 py-3 focus:border-brand-accent outline-none transition-colors appearance-none">
-                    <option className="bg-brand-bg">Finance / Quant</option>
-                    <option className="bg-brand-bg">Cybersecurity / Defense</option>
-                    <option className="bg-brand-bg">Enterprise AI / Other</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="mono-label ml-1">Message</label>
-                  <textarea 
-                    rows={4}
-                    className="w-full bg-white/5 border border-brand-border rounded-xl px-4 py-3 focus:border-brand-accent outline-none transition-colors"
-                    placeholder="How can we help you?"
-                  />
-                </div>
-                <button className="w-full bg-brand-accent hover:bg-brand-accent/90 text-white py-4 rounded-xl font-bold transition-all flex items-center justify-center space-x-2">
-                  <span>Send Inquiry</span>
-                  <ArrowRight className="w-5 h-5" />
-                </button>
-              </form>
+              <iframe
+                data-tally-src="https://tally.so/embed/jaXl9Q?dynamicHeight=1&formEventsForwarding=1"
+                loading="lazy"
+                width="100%"
+                height="447"
+                frameBorder="0"
+                marginHeight={0}
+                marginWidth={0}
+                title="Contact Form"
+              />
             </div>
           </div>
         </div>
