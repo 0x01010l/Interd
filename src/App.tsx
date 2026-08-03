@@ -24,10 +24,12 @@ import ProductFaqGenerator from './pages/tools/ProductFaqGenerator';
 import SeoMetaGenerator from './pages/tools/SeoMetaGenerator';
 import BulkDescriptionRewriter from './pages/tools/BulkDescriptionRewriter';
 import NotFound from './pages/NotFound';
+import Analytics from './components/Analytics';
 
 export default function App() {
   return (
     <Router>
+      <Analytics />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />

@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Cookie, X } from 'lucide-react';
-
-const CONSENT_KEY = 'interdot_cookie_consent_v1';
+import { CONSENT_EVENT, CONSENT_KEY } from './Analytics';
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -22,6 +21,7 @@ export default function CookieConsent() {
     } catch {
       // ignore
     }
+    window.dispatchEvent(new Event(CONSENT_EVENT));
     setVisible(false);
   };
 
