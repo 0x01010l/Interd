@@ -1,10 +1,16 @@
 import PageLayout from '../components/PageLayout';
-import { Target, Eye, ShieldCheck, Zap } from 'lucide-react';
-
+import SEO from '../components/SEO';
+import { Target, Eye, ShieldCheck, Zap, Wrench } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function About() {
   return (
     <PageLayout title="About Us">
+      <SEO
+        title="About Interdot | Reasoning-as-a-Service & AI Tools"
+        description="Learn about Interdot — built by FIX FIGURES LLC to deliver deterministic AI reasoning and practical free ecommerce writing tools powered by Azure OpenAI."
+        path="/about"
+      />
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-20">
@@ -12,7 +18,7 @@ export default function About() {
             <h1 className="text-5xl font-bold mb-8">Bridging the Gap between Raw Data and Decision.</h1>
             <p className="text-xl text-white/60 leading-relaxed">
               In an era of information overload, the bottleneck is no longer data 
-              collection—it's reasoning. Interdot was founded to provide 
+              collection—it&apos;s reasoning. Interdot was founded to provide 
               deterministic, audit-ready AI outputs that leaders can trust.
             </p>
           </div>
@@ -22,7 +28,7 @@ export default function About() {
               <Target className="w-10 h-10 text-brand-accent mb-6" />
               <h3 className="text-2xl font-bold mb-4">Deterministic Logic</h3>
               <p className="text-white/50 leading-relaxed">
-                We reject the "black box" approach to AI. Every conclusion drawn by 
+                We reject the &quot;black box&quot; approach to AI. Every conclusion drawn by 
                 our engine is mapped to a verifiable logic chain, ensuring 
                 transparency and accountability in critical sectors.
               </p>
@@ -36,6 +42,26 @@ export default function About() {
                 a 1% margin of error is unacceptable.
               </p>
             </div>
+          </div>
+
+          <div className="bento-card mb-24">
+            <Wrench className="w-10 h-10 text-brand-accent mb-6" />
+            <h3 className="text-2xl font-bold mb-4">Why we built the AI tools suite</h3>
+            <p className="text-white/50 leading-relaxed mb-4">
+              Alongside our Reasoning-as-a-Service platform, we publish free ecommerce
+              writing tools so merchants can draft product copy, titles, tags, review
+              replies, ads, FAQs, and SEO metas faster. Each tool includes human-written
+              guidance — not empty AI pages — and runs through Azure OpenAI on the server
+              so API keys never touch the browser.
+            </p>
+            <p className="text-white/50 leading-relaxed mb-6">
+              Interdot is operated by FIX FIGURES LLC. We built this suite to demonstrate
+              practical, transparent AI utilities that respect privacy: prompts are processed
+              for generation only and are not stored in a user database.
+            </p>
+            <Link to="/tools" className="text-brand-accent font-semibold hover:underline">
+              Browse free AI tools →
+            </Link>
           </div>
 
           <div className="glass p-12 rounded-[2.5rem] relative overflow-hidden">

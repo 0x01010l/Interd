@@ -1,4 +1,5 @@
 import PageLayout from '../components/PageLayout';
+import SEO from '../components/SEO';
 import { Mail, MessageSquare, Globe } from 'lucide-react';
 import { useEffect } from 'react';
 
@@ -11,15 +12,20 @@ export default function Contact() {
 
   return (
     <PageLayout title="Contact">
+      <SEO
+        title="Contact Interdot"
+        description="Contact Interdot for Reasoning-as-a-Service integrations or questions about our free ecommerce AI tools. Email contact@interdot.net."
+        path="/contact"
+      />
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
               <h2 className="mono-label mb-4">Contact Us</h2>
-              <h1 className="text-5xl font-bold mb-8">Let's Synthesize.</h1>
+              <h1 className="text-5xl font-bold mb-8">Let&apos;s Synthesize.</h1>
               <p className="text-xl text-white/60 leading-relaxed mb-12">
-                Ready to integrate the reasoning layer? Our team of engineers and 
-                analysts is standing by to help you bridge the gap.
+                Ready to integrate the reasoning layer, or have a question about our free AI writing tools?
+                Our team is standing by to help you bridge the gap.
               </p>
               
               <div className="space-y-8">
@@ -29,7 +35,11 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="mono-label">Main Email</div>
-                    <div className="text-xl font-bold">contact@interdot.net</div>
+                    <div className="text-xl font-bold">
+                      <a href="mailto:contact@interdot.net" className="hover:text-brand-accent transition-colors">
+                        contact@interdot.net
+                      </a>
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center space-x-6">
@@ -38,7 +48,11 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="mono-label">Technical Support</div>
-                    <div className="text-xl font-bold">advisory@interdot.net</div>
+                    <div className="text-xl font-bold">
+                      <a href="mailto:advisory@interdot.net" className="hover:text-brand-accent transition-colors">
+                        advisory@interdot.net
+                      </a>
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center space-x-6">

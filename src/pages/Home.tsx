@@ -190,6 +190,34 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Free AI Tools */}
+      <section className="py-24 bg-brand-bg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div>
+              <h2 className="mono-label mb-4">Free Tools</h2>
+              <h3 className="text-3xl font-bold">Ecommerce AI writing suite</h3>
+            </div>
+            <Link to="/tools" className="text-brand-accent font-semibold inline-flex items-center gap-2 hover:underline">
+              View all tools <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { to: '/tools/product-description-generator', title: 'Product Descriptions', desc: 'Convert specs into benefit-led listing copy.' },
+              { to: '/tools/shopify-title-generator', title: 'Shopify Titles', desc: 'Clear, searchable titles built for click-through.' },
+              { to: '/tools/etsy-tag-generator', title: 'Etsy Tags', desc: 'Fill all 13 tags with buyer-intent phrases.' },
+              { to: '/tools/ad-copy-generator', title: 'Ad Copy', desc: 'Test urgency, proof, and benefit angles fast.' },
+            ].map((item) => (
+              <Link key={item.to} to={item.to} className="bento-card group block">
+                <h4 className="text-lg font-bold mb-2 group-hover:text-brand-accent transition-colors">{item.title}</h4>
+                <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-24">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -204,8 +232,8 @@ export default function Home() {
               <Link to="/contact" className="bg-brand-accent hover:bg-brand-accent/90 text-white px-8 py-4 rounded-xl font-bold transition-all">
                 Get In Touch
               </Link>
-              <Link to="/contact" className="text-white/60 hover:text-white transition-colors">
-                Contact Sales
+              <Link to="/tools" className="text-white/60 hover:text-white transition-colors">
+                Try free AI tools
               </Link>
             </div>
           </div>
