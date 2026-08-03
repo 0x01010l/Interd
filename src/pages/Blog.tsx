@@ -5,11 +5,13 @@ import SEO from '../components/SEO';
 import { BLOG_POSTS } from '../data/blogPosts';
 
 export default function Blog() {
+  const posts = [...BLOG_POSTS].sort((a, b) => (a.date < b.date ? 1 : -1));
+
   return (
     <PageLayout title="Blog">
       <SEO
         title="Ecommerce Writing Blog | Interdot"
-        description="Practical guides on product descriptions, Shopify titles, Etsy SEO tags, review replies, and ad copy — with free AI tools from Interdot."
+        description="Practical guides on product descriptions, Shopify titles, Etsy SEO tags, review replies, FAQs, SEO metas, and marketplace copy — with free AI tools from Interdot."
         path="/blog"
       />
       <section className="py-24">
@@ -23,7 +25,7 @@ export default function Blog() {
           </div>
 
           <div className="space-y-6">
-            {BLOG_POSTS.map((post) => (
+            {posts.map((post) => (
               <article key={post.slug} className="bento-card">
                 <div className="mono-label mb-3">
                   {post.date} · {post.readTime} read
