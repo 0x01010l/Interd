@@ -26,7 +26,7 @@ export default function Home() {
             
             <p className="text-xl text-white/60 mb-12 leading-relaxed max-w-2xl mx-auto">
               Interdot synthesizes raw data into deterministic logic chains. 
-              High-fidelity intelligence for Finance and Cybersecurity sectors.
+              High-fidelity intelligence for E-commerce and Finance and Cybersecurity sectors.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
