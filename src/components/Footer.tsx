@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Waypoints, Github, Twitter, Linkedin } from 'lucide-react';
+import { Waypoints } from 'lucide-react';
 import { TOOLS } from '../data/tools';
 
 export default function Footer() {
@@ -16,17 +16,12 @@ export default function Footer() {
               Bridging the gap between raw data and decision through deterministic, 
               audit-ready AI reasoning layers — plus free ecommerce writing tools.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-white/30 hover:text-brand-accent transition-colors" aria-label="GitHub">
-                <Github className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-white/30 hover:text-brand-accent transition-colors" aria-label="Twitter">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-white/30 hover:text-brand-accent transition-colors" aria-label="LinkedIn">
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div>
+            <a
+              href="mailto:contact@interdot.net"
+              className="text-sm text-brand-accent hover:underline"
+            >
+              contact@interdot.net
+            </a>
           </div>
           
           <div>

@@ -1,6 +1,24 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/api/*"]
+    "exclude": [
+      "/images/*.{png,jpg,gif}",
+      "/css/*",
+      "/api/*",
+      "/assets/*",
+      "/robots.txt",
+      "/sitemap.xml",
+      "/*.js",
+      "/*.css",
+      "/*.ico",
+      "/*.svg",
+      "/*.png",
+      "/*.jpg",
+      "/*.webp"
+    ]
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
   }
 }

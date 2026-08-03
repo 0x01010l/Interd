@@ -23,6 +23,7 @@ import AdCopyGenerator from './pages/tools/AdCopyGenerator';
 import ProductFaqGenerator from './pages/tools/ProductFaqGenerator';
 import SeoMetaGenerator from './pages/tools/SeoMetaGenerator';
 import BulkDescriptionRewriter from './pages/tools/BulkDescriptionRewriter';
+import NotFound from './pages/NotFound';
 
 export default function App() {
   return (
@@ -48,6 +49,7 @@ export default function App() {
         <Route path="/tools/product-faq-generator" element={<ProductFaqGenerator />} />
         <Route path="/tools/seo-meta-generator" element={<SeoMetaGenerator />} />
         <Route path="/tools/bulk-description-rewriter" element={<BulkDescriptionRewriter />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

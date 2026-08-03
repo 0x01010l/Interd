@@ -2,6 +2,7 @@ import { ReactNode, useEffect } from 'react';
 import { motion } from 'motion/react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import CookieConsent from './CookieConsent';
 import { useLocation } from 'react-router-dom';
 
 interface PageLayoutProps {
@@ -34,6 +35,7 @@ export default function PageLayout({ children, title }: PageLayoutProps) {
         </motion.div>
       </main>
       <Footer />
+      <CookieConsent />
     </div>
   );
 }
