@@ -41,6 +41,7 @@ import SEO from '../SEO';
 import AdSlot from '../AdSlot';
 import { Accordion, AccordionItem } from '../Accordion';
 import type { ToolDefinition } from '../../data/tools';
+import { TOOL_PAGE_EXTRAS } from '../../data/toolPageExtras';
 import {
   generateWithAzure,
   getDailyRemaining,
@@ -114,9 +115,15 @@ export default function ToolPage({ tool }: Props) {
   const [status, setStatus] = useState<string | null>(null);
   const [statusTone, setStatusTone] = useState<'ok' | 'err'>('ok');
   const [copied, setCopied] = useState(false);
-  const [remaining, setRemaining] = useState(3);
+  const [remaining, setRemaining] = useState(20);
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [activeTemplate, setActiveTemplate] = useState<string | null>(null);
+
+  const extras = TOOL_PAGE_EXTRAS[tool.slug];
+  const allFaqs = useMemo(
+    () => [...tool.faqs, ...(extras?.extraFaqs || [])],
+    [tool.faqs, extras]
+  );
 
   const ToolIcon = TOOL_ICONS[tool.slug] || Wand2;
 
@@ -129,7 +136,7 @@ export default function ToolPage({ tool }: Props) {
     () => ({
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
-      mainEntity: tool.faqs.map((faq) => ({
+      mainEntity: allFaqs.map((faq) => ({
         '@type': 'Question',
         name: faq.question,
         acceptedAnswer: {
@@ -138,7 +145,7 @@ export default function ToolPage({ tool }: Props) {
         },
       })),
     }),
-    [tool.faqs]
+    [allFaqs]
   );
 
   const applyTemplate = (id: string) => {
@@ -269,10 +276,38 @@ export default function ToolPage({ tool }: Props) {
               </Link>
               <span className="text-white/20">·</span>
               <span className="mono-label !normal-case tracking-normal text-white/40">
-                Azure-powered generation · results stay on your device
+                Azure-powered generation · results stay on your device · 20 free runs/day
               </span>
             </div>
           </div>
+
+          {extras && (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-10">
+              <div className="bento-card lg:col-span-1">
+                <div className="mono-label mb-2">Best for</div>
+                <p className="text-sm text-white/70 leading-relaxed">{extras.bestFor}</p>
+              </div>
+              <div className="bento-card lg:col-span-1">
+                <div className="mono-label mb-2">Output shape</div>
+                <p className="text-sm text-white/70 leading-relaxed">{extras.outputShape}</p>
+              </div>
+              <div className="bento-card lg:col-span-1">
+                <div className="mono-label mb-2">How this tool differs</div>
+                <p className="text-sm text-white/70 leading-relaxed">{extras.editorialAngle}</p>
+              </div>
+              <div className="bento-card lg:col-span-3">
+                <div className="mono-label mb-3">Publish checklist</div>
+                <ul className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  {extras.checklist.map((item) => (
+                    <li key={item} className="text-sm text-white/70 leading-relaxed flex gap-2">
+                      <Check className="w-4 h-4 text-brand-accent shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
 
           <AdSlot position="top" />
 
@@ -528,7 +563,7 @@ export default function ToolPage({ tool }: Props) {
               <h2 className="text-2xl md:text-3xl font-bold">Frequently asked questions</h2>
             </div>
             <Accordion>
-              {tool.faqs.map((faq, i) => (
+              {allFaqs.map((faq, i) => (
                 <AccordionItem key={i} question={faq.question} answer={faq.answer} />
               ))}
             </Accordion>

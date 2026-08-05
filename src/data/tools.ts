@@ -29,7 +29,7 @@ export type ToolDefinition = {
     whyUseful: string;
     body: string;
   };
-  faqs: [ToolFaq, ToolFaq, ToolFaq];
+  faqs: ToolFaq[];
 };
 
 export const TOOLS: ToolDefinition[] = [

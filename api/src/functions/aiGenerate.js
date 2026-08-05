@@ -1,7 +1,7 @@
 import { app } from '@azure/functions';
 
 const CACHE_TTL_MS = 60 * 60 * 1000;
-const DAILY_LIMIT = 3;
+const DAILY_LIMIT = 20;
 const memoryCache = new Map();
 const ipUsage = new Map();
 
@@ -100,7 +100,7 @@ app.http('aiGenerate', {
         return {
           status: 429,
           jsonBody: {
-            error: 'Daily limit reached (3 free generations per day). Please try again tomorrow.',
+            error: 'Daily limit reached (20 free generations per day). Please try again tomorrow.',
             code: 'rate_limit',
             remaining: 0,
           },

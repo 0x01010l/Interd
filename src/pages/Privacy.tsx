@@ -49,11 +49,17 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">4. Cookies</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">4. Cookies &amp; Consent</h2>
+              <p className="mb-4">
+                We use essential cookies required to operate the site (for example, remembering your cookie
+                preference and local tool history on your device). Non-essential cookies — including Google
+                Analytics measurement cookies and advertising cookies for Google AdSense when ads are enabled —
+                are used only after you choose <strong className="text-white">Accept all</strong> on our cookie banner.
+              </p>
               <p>
-                We use essential cookies and similar technologies to maintain session integrity and platform performance.
-                Analytical cookies may be used to understand aggregate traffic patterns. Where required by law, non-essential cookies
-                are used only with appropriate consent.
+                If you choose <strong className="text-white">Essential only</strong>, we do not load Google Analytics
+                or advertising cookies. You can clear site data in your browser to see the banner again and change
+                your choice. Details about advertising partners appear in the AdSense section below.
               </p>
             </section>
 

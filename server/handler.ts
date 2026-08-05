@@ -12,7 +12,7 @@ type CacheEntry = {
 };
 
 const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
-const DAILY_LIMIT = 3;
+const DAILY_LIMIT = 20;
 
 const memoryCache = new Map<string, CacheEntry>();
 const ipUsage = new Map<string, { count: number; day: string }>();
@@ -110,7 +110,7 @@ export async function handleAiGenerate(req: Request, res: Response) {
     const limit = checkIpLimit(ip);
     if (!limit.allowed) {
       return res.status(429).json({
-        error: 'Daily limit reached (3 free generations per day). Please try again tomorrow.',
+        error: 'Daily limit reached (20 free generations per day). Please try again tomorrow.',
         code: 'rate_limit',
         remaining: 0,
       });

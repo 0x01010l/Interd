@@ -41,6 +41,70 @@ export default function About() {
             </p>
           </div>
 
+          <div className="bento-card mb-24">
+            <h2 className="mono-label mb-4">Publisher identity</h2>
+            <h3 className="text-2xl font-bold mb-6">Who publishes Interdot</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-white/60 leading-relaxed">
+              <div className="space-y-3">
+                <p>
+                  <span className="text-white font-semibold">Brand:</span> Interdot
+                </p>
+                <p>
+                  <span className="text-white font-semibold">Legal entity:</span> FIX FIGURES LLC
+                </p>
+                <p>
+                  <span className="text-white font-semibold">Website:</span>{' '}
+                  <a href="https://interdot.net" className="text-brand-accent hover:underline">
+                    https://interdot.net
+                  </a>
+                </p>
+                <p>
+                  <span className="text-white font-semibold">Primary contact:</span>{' '}
+                  <a href="mailto:contact@interdot.net" className="text-brand-accent hover:underline">
+                    contact@interdot.net
+                  </a>
+                </p>
+                <p>
+                  <span className="text-white font-semibold">Support:</span>{' '}
+                  <a href="mailto:advisory@interdot.net" className="text-brand-accent hover:underline">
+                    advisory@interdot.net
+                  </a>
+                </p>
+              </div>
+              <div className="space-y-3">
+                <p>
+                  <span className="text-white font-semibold">Business address:</span>
+                  <br />
+                  6545 Market Avenue North
+                  <br />
+                  North Canton, OH 44721
+                  <br />
+                  United States
+                </p>
+                <p>
+                  We publish practical ecommerce writing tools, explanatory guides, and information
+                  about custom AI agent services. Tool guides and blog articles are written for
+                  merchants and operators — not as placeholders for advertising.
+                </p>
+                <p>
+                  For privacy or legal requests, email{' '}
+                  <a href="mailto:contact@interdot.net" className="text-brand-accent hover:underline">
+                    contact@interdot.net
+                  </a>
+                  . See also our{' '}
+                  <Link to="/privacy-policy" className="text-brand-accent hover:underline">
+                    Privacy Policy
+                  </Link>{' '}
+                  and{' '}
+                  <Link to="/terms" className="text-brand-accent hover:underline">
+                    Terms of Use
+                  </Link>
+                  .
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
             <div className="bento-card">
               <Target className="w-10 h-10 text-brand-accent mb-6" />

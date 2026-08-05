@@ -1,6 +1,6 @@
 const RATE_KEY = 'interdot_ai_daily_rate';
 const HISTORY_PREFIX = 'interdot_tool_history_';
-const DAILY_LIMIT = 3;
+const DAILY_LIMIT = 20;
 
 type RateState = {
   day: string;
@@ -91,7 +91,7 @@ export async function generateWithAzure(params: {
   const remaining = getDailyRemaining();
   if (remaining <= 0) {
     return {
-      error: 'Daily limit reached (3 free generations per day). Please try again tomorrow.',
+      error: 'Daily limit reached (20 free generations per day). Please try again tomorrow.',
       code: 'rate_limit',
       demo: true,
     };
