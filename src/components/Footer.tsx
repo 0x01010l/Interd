@@ -13,8 +13,8 @@ export default function Footer() {
               <span className="font-mono font-bold tracking-tighter text-xl">INTERDOT</span>
             </Link>
             <p className="text-white/50 max-w-sm mb-6 leading-relaxed">
-              Bridging the gap between raw data and decision through deterministic, 
-              audit-ready AI reasoning layers — plus free ecommerce writing tools.
+              Custom AI agents for ecommerce, finance, and cybersecurity — with free
+              writing tools that prove the workflows in the open.
             </p>
             <div className="flex items-center space-x-4 mb-4">
               <a

@@ -33,21 +33,21 @@ export default function Contact() {
   }, []);
 
   return (
-    <PageLayout title="Contact">
+    <PageLayout>
       <SEO
-        title="Contact Interdot"
-        description="Contact Interdot for Reasoning-as-a-Service integrations or questions about our free ecommerce AI tools. Email contact@interdot.net."
+        title="Contact Interdot | Custom AI Agents & Free Tools"
+        description="Contact Interdot to commission custom AI agents for ecommerce, finance, or cybersecurity — or ask about our free AI writing tools. Email contact@interdot.net."
         path="/contact"
+        keywords="contact Interdot, custom AI agents, hire AI agent builders, ecommerce AI tools support"
       />
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
               <h2 className="mono-label mb-4">Contact Us</h2>
-              <h1 className="text-5xl font-bold mb-8">Let&apos;s Synthesize.</h1>
+              <h1 className="text-5xl font-bold mb-8">Let&apos;s build your agent.</h1>
               <p className="text-xl text-white/60 leading-relaxed mb-12">
-                Ready to integrate the reasoning layer, or have a question about our free AI writing tools?
-                Our team is standing by to help you bridge the gap.
+                Ready for a custom agent in ecommerce, finance, or cybersecurity — or have a question about our free AI writing tools? Our team is ready to help.
               </p>
               
               <div className="space-y-8">

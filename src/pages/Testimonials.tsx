@@ -30,10 +30,10 @@ export default function Testimonials() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-20">
             <h2 className="mono-label mb-4">Case Studies</h2>
-            <h1 className="text-5xl font-bold mb-8">Proven Logic. Real Results.</h1>
+            <h1 className="text-5xl font-bold mb-8">Proven agents. Real results.</h1>
             <p className="text-xl text-white/60 leading-relaxed">
-              Leading institutions across Finance and Cybersecurity trust Interdot 
-              to provide the reasoning layer for their most critical operations.
+              Teams in finance and cybersecurity trust Interdot custom agents for high-stakes
+              workflows — the same agent approach behind our free ecommerce writing tools.
             </p>
           </div>
 
@@ -73,12 +73,11 @@ export default function Testimonials() {
             <div className="relative z-10 max-w-2xl">
               <h3 className="text-3xl font-bold mb-6">Join the 0.1%</h3>
               <p className="text-lg text-white/70 mb-8 leading-relaxed">
-                We work with a select group of partners to ensure the highest 
-                fidelity of our reasoning engine. Apply for API access to see how 
-                Interdot can transform your data intelligence.
+                Tell us about the niche agent you need — ecommerce, finance, or
+                cybersecurity — or start with free tools that already demonstrate our approach.
               </p>
               <Link to="/contact" className="inline-block bg-brand-accent text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-accent/90 transition-all">
-                Apply for Access
+                Talk to Interdot
               </Link>
             </div>
           </div>

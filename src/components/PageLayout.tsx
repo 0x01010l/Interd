@@ -15,10 +15,9 @@ export default function PageLayout({ children, title }: PageLayoutProps) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    // Prefer <SEO /> when present; PageLayout title is a fallback for pages without it.
     if (title) {
       document.title = `${title} | Interdot`;
-    } else {
-      document.title = 'Interdot | Reasoning-as-a-Service';
     }
   }, [pathname, title]);
 

@@ -6,7 +6,7 @@ export default function Privacy() {
     <PageLayout title="Privacy Policy">
       <SEO
         title="Privacy Policy | Interdot"
-        description="Interdot privacy policy covering Azure OpenAI processing, cookies, Google AdSense, and how tool inputs are handled."
+        description="Interdot privacy policy for custom AI agents and free tools — covering Azure OpenAI processing, cookies, Google AdSense, and how tool inputs are handled."
         path="/privacy-policy"
       />
 
@@ -21,7 +21,7 @@ export default function Privacy() {
               <p>
                 Interdot, a brand operated by FIX FIGURES LLC (“we,” “our,” or “us”), is committed to protecting your privacy.
                 This Privacy Policy explains how we collect, use, and safeguard your information when you use our
-                Reasoning-as-a-Service platform and free AI writing tools at interdot.net.
+                custom AI agent services and free AI writing tools at interdot.net.
               </p>
             </section>
 

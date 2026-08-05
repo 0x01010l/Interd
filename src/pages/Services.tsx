@@ -1,6 +1,7 @@
 import PageLayout from '../components/PageLayout';
+import SEO from '../components/SEO';
 import { motion } from 'motion/react';
-import { BarChart3, Shield, Cpu, Database, CheckCircle2, ArrowRight } from 'lucide-react';
+import { BarChart3, Shield, Cpu, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const VectorAnimation = ({ type }: { type: number }) => {
@@ -86,8 +87,8 @@ export default function Services() {
   const services = [
     {
       icon: <BarChart3 className="w-8 h-8 text-brand-accent" />,
-      title: 'Financial Logic Synthesis',
-      description: 'Beyond standard data scraping. We provide deep causal analysis for market movements.',
+      title: 'Finance Decision Agents',
+      description: 'Custom agents that turn market and ops data into audit-ready causal reasoning for finance teams.',
       features: [
         'High-frequency logic traces',
         'Causal relationship mapping',
@@ -97,8 +98,8 @@ export default function Services() {
     },
     {
       icon: <Shield className="w-8 h-8 text-red-500" />,
-      title: 'Automated Cyber Recon',
-      description: 'Deterministic threat modeling and adversary logic prediction.',
+      title: 'Security Ops Agents',
+      description: 'Custom agents for deterministic threat modeling and adversary logic prediction.',
       features: [
         'Attack surface vectorization',
         'Predictive adversary modeling',
@@ -108,8 +109,8 @@ export default function Services() {
     },
     {
       icon: <Cpu className="w-8 h-8 text-purple-500" />,
-      title: 'Custom Vector Training',
-      description: 'Train reasoning models on your proprietary datasets with absolute privacy.',
+      title: 'Custom Agent Training',
+      description: 'Train niche agents on your proprietary datasets with absolute privacy — including ecommerce and ops workflows.',
       features: [
         'Zero-leakage training protocols',
         'Proprietary vector optimization',
@@ -120,16 +121,36 @@ export default function Services() {
   ];
 
   return (
-    <PageLayout title="Services">
+    <PageLayout>
+      <SEO
+        title="Custom AI Agent Services | Interdot"
+        description="Commission custom AI agents for finance, cybersecurity, and ecommerce workflows. Interdot designs niche agents and also publishes free tools that prove the approach."
+        path="/services"
+        keywords="custom AI agent services, finance AI agents, cybersecurity AI agents, ecommerce AI agents, Interdot"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          name: 'Interdot Custom AI Agents',
+          provider: {
+            '@type': 'Organization',
+            name: 'Interdot',
+            url: 'https://interdot.net',
+          },
+          description:
+            'Custom AI agents for ecommerce, finance, and cybersecurity niches, plus free public writing tools.',
+          areaServed: 'Worldwide',
+          url: 'https://interdot.net/services',
+        }}
+      />
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-20">
             <h2 className="mono-label mb-4">Our Services</h2>
-            <h1 className="text-5xl font-bold mb-8">The Reasoning Layer vs. Data Scraping</h1>
+            <h1 className="text-5xl font-bold mb-8">Custom AI agents for your niche</h1>
             <p className="text-xl text-white/60 leading-relaxed">
-              Standard AI models scrape data and guess patterns. Interdot synthesizes 
-              reasoning chains. We don't just tell you what happened; we show you 
-              the logical "why" behind every data point.
+              Generic AI guesses. Interdot builds custom agents scoped to ecommerce, finance,
+              and cybersecurity workflows — with free tools that show the same approach in public
+              for merchant writing tasks.
             </p>
           </div>
 
@@ -161,7 +182,7 @@ export default function Services() {
                     to="/contact" 
                     className="inline-flex items-center space-x-2 bg-white/5 hover:bg-white/10 text-white px-6 py-3 rounded-xl font-bold transition-all border border-brand-border"
                   >
-                    <span>Request Access</span>
+                    <span>Request custom agent</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>

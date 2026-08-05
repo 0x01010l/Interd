@@ -6,7 +6,7 @@ export default function Terms() {
     <PageLayout title="Terms of Use">
       <SEO
         title="Terms of Use | Interdot"
-        description="Terms of use for Interdot services and free AI ecommerce writing tools operated by FIX FIGURES LLC."
+        description="Terms of use for Interdot custom AI agent services and free AI ecommerce writing tools operated by FIX FIGURES LLC."
         path="/terms"
       />
       <section className="py-24">

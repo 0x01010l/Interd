@@ -28,12 +28,45 @@ const TOOL_ICONS: Record<string, LucideIcon> = {
 };
 
 export default function ToolsIndex() {
+  const toolsJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Free Ecommerce AI Tools Suite | Interdot',
+    description:
+      'Free Interdot AI tools that demonstrate ecommerce writing agents — product descriptions, Shopify titles, Etsy tags, review replies, ad copy, FAQs, SEO metas, and bulk rewrites.',
+    url: 'https://interdot.net/tools',
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Interdot',
+      url: 'https://interdot.net',
+    },
+    about: {
+      '@type': 'Thing',
+      name: 'Custom AI agents and free ecommerce writing tools',
+    },
+    hasPart: TOOLS.map((tool) => ({
+      '@type': 'SoftwareApplication',
+      name: tool.name,
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+      url: `https://interdot.net${tool.path}`,
+      description: tool.metaDescription,
+    })),
+  };
+
   return (
-    <PageLayout title="AI Tools">
+    <PageLayout>
       <SEO
-        title="Free Ecommerce AI Tools Suite | Interdot"
-        description="Free Interdot AI tools for product descriptions, Shopify titles, Etsy tags, review replies, ad copy, FAQs, SEO metas, and bulk rewrites."
+        title="Free Ecommerce AI Tools | Interdot Custom Agents"
+        description="Free Interdot AI writing tools that prove our ecommerce agents in public — product descriptions, Shopify titles, Etsy tags, review replies, ads, FAQs, SEO metas, and bulk rewrites."
         path="/tools"
+        keywords="free AI tools, ecommerce AI agents, product description generator, Shopify title generator, Etsy tag generator, SEO meta generator, Interdot"
+        jsonLd={toolsJsonLd}
       />
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,#0070FF22,transparent_50%)] pointer-events-none" />
@@ -43,12 +76,13 @@ export default function ToolsIndex() {
               <Sparkles className="w-4 h-4 text-brand-accent" />
               <span className="mono-label !text-brand-accent">8 free tools</span>
             </div>
-            <h2 className="mono-label mb-4">AI Tools Suite</h2>
+            <h2 className="mono-label mb-4">Free Agent Workflows</h2>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
-              Ecommerce writing tools built for real catalogs
+              Ecommerce writing agents you can use free
             </h1>
             <p className="text-xl text-white/60 leading-relaxed">
-              Eight focused generators to help merchants draft faster — with human-written guides on every page.
+              These free tools are public proofs of Interdot&apos;s ecommerce agents —
+              focused generators with human-written guides. Need a deeper custom agent for your catalog? Contact us.
             </p>
           </div>
 

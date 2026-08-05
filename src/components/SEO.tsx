@@ -4,7 +4,9 @@ type SEOProps = {
   title: string;
   description: string;
   path?: string;
+  keywords?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  type?: 'website' | 'article' | 'profile';
 };
 
 function upsertMeta(attr: 'name' | 'property', key: string, content: string) {
@@ -17,12 +19,28 @@ function upsertMeta(attr: 'name' | 'property', key: string, content: string) {
   el.setAttribute('content', content);
 }
 
-export default function SEO({ title, description, path, jsonLd }: SEOProps) {
+export default function SEO({
+  title,
+  description,
+  path,
+  keywords,
+  jsonLd,
+  type = 'website',
+}: SEOProps) {
   useEffect(() => {
     document.title = title;
     upsertMeta('name', 'description', description);
+    upsertMeta('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+    upsertMeta('name', 'googlebot', 'index, follow');
+    if (keywords) upsertMeta('name', 'keywords', keywords);
+
     upsertMeta('property', 'og:title', title);
     upsertMeta('property', 'og:description', description);
+    upsertMeta('property', 'og:type', type);
+    upsertMeta('property', 'og:site_name', 'Interdot');
+    upsertMeta('property', 'og:locale', 'en_US');
+
+    upsertMeta('name', 'twitter:card', 'summary_large_image');
     upsertMeta('name', 'twitter:title', title);
     upsertMeta('name', 'twitter:description', description);
 
@@ -35,6 +53,7 @@ export default function SEO({ title, description, path, jsonLd }: SEOProps) {
         document.head.appendChild(link);
       }
       link.href = canonicalHref;
+      upsertMeta('property', 'og:url', canonicalHref);
     }
 
     const scriptId = 'interdot-jsonld';
@@ -53,7 +72,7 @@ export default function SEO({ title, description, path, jsonLd }: SEOProps) {
       const script = document.getElementById(scriptId);
       if (script) script.remove();
     };
-  }, [title, description, path, jsonLd]);
+  }, [title, description, path, keywords, jsonLd, type]);
 
   return null;
 }

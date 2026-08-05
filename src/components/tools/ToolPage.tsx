@@ -220,11 +220,12 @@ export default function ToolPage({ tool }: Props) {
   const wordCount = output.trim() ? output.trim().split(/\s+/).length : 0;
 
   return (
-    <PageLayout title={tool.name}>
+    <PageLayout>
       <SEO
-        title={`${tool.title} | Interdot`}
+        title={`${tool.title} | Free AI Tool | Interdot`}
         description={tool.metaDescription}
         path={tool.path}
+        keywords={`${tool.name}, free AI tool, ecommerce writing agent, Interdot custom AI agents`}
         jsonLd={faqJsonLd}
       />
 
