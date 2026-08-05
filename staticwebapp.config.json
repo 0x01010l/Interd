@@ -40,18 +40,7 @@
     { "route": "/tools/ad-copy-generator", "rewrite": "/index.html" },
     { "route": "/tools/product-faq-generator", "rewrite": "/index.html" },
     { "route": "/tools/seo-meta-generator", "rewrite": "/index.html" },
-    { "route": "/tools/bulk-description-rewriter", "rewrite": "/index.html" },
-    {
-      "route": "/404.html",
-      "headers": {
-        "Cache-Control": "no-cache"
-      }
-    },
-    {
-      "route": "/*",
-      "rewrite": "/404.html",
-      "statusCode": 404
-    }
+    { "route": "/tools/bulk-description-rewriter", "rewrite": "/index.html" }
   ],
   "responseOverrides": {
     "404": {
