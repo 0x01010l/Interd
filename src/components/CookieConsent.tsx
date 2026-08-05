@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Cookie, X } from 'lucide-react';
-import { CONSENT_EVENT, CONSENT_KEY } from './Analytics';
+
+const CONSENT_KEY = 'interdot_cookie_consent_v1';
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -21,7 +22,6 @@ export default function CookieConsent() {
     } catch {
       // ignore
     }
-    window.dispatchEvent(new Event(CONSENT_EVENT));
     setVisible(false);
   };
 
@@ -37,8 +37,8 @@ export default function CookieConsent() {
           <div className="flex-1 min-w-0">
             <h2 className="font-bold mb-2">Cookies &amp; ads</h2>
             <p className="text-sm text-white/60 leading-relaxed mb-4">
-              We use essential cookies to run the site. If we show Google AdSense or analytics,
-              partners may use cookies for ads and measurement. See our{' '}
+              We use cookies for site functionality, Google Analytics measurement, and may use
+              them for AdSense advertising. See our{' '}
               <Link to="/privacy-policy" className="text-brand-accent hover:underline">
                 Privacy Policy
               </Link>{' '}
@@ -50,20 +50,13 @@ export default function CookieConsent() {
                 onClick={() => save('accepted')}
                 className="bg-brand-accent hover:bg-brand-accent/90 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all"
               >
-                Accept
-              </button>
-              <button
-                type="button"
-                onClick={() => save('essential')}
-                className="glass hover:bg-white/5 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all"
-              >
-                Essential only
+                Got it
               </button>
             </div>
           </div>
           <button
             type="button"
-            onClick={() => save('essential')}
+            onClick={() => save('accepted')}
             className="text-white/40 hover:text-white shrink-0"
             aria-label="Dismiss cookie notice"
           >
