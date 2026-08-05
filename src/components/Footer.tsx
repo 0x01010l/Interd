@@ -63,8 +63,8 @@ export default function Footer() {
               <li><Link to="/tools" className="text-sm text-white/60 hover:text-white transition-colors">All Tools</Link></li>
               <li><Link to="/services" className="text-sm text-white/60 hover:text-white transition-colors">Services</Link></li>
               <li><Link to="/blog" className="text-sm text-white/60 hover:text-white transition-colors">Blog</Link></li>
-              <li><Link to="/faq" className="text-sm text-white/60 hover:text-white transition-colors">Technical FAQ</Link></li>
-              <li><Link to="/clients" className="text-sm text-white/60 hover:text-white transition-colors">Case Studies</Link></li>
+              <li><Link to="/faq" className="text-sm text-white/60 hover:text-white transition-colors">FAQ</Link></li>
+              <li><Link to="/clients" className="text-sm text-white/60 hover:text-white transition-colors">Scenarios</Link></li>
             </ul>
           </div>
           
@@ -81,7 +81,7 @@ export default function Footer() {
         
         <div className="pt-8 border-t border-brand-border flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-xs text-white/30 font-mono">
-            © 2026 INTERDOT NETWORKS. ALL RIGHTS RESERVED.
+            © 2026 FIX FIGURES LLC. Interdot is a brand of FIX FIGURES LLC. All rights reserved.
           </p>
           <p className="text-xs text-white/30 font-mono">
             CONTACT@INTERDOT.NET

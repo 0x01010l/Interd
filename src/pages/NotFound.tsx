@@ -5,11 +5,11 @@ import SEO from '../components/SEO';
 
 export default function NotFound() {
   return (
-    <PageLayout title="Page Not Found">
+    <PageLayout>
       <SEO
         title="Page Not Found | Interdot"
         description="The page you requested could not be found on Interdot."
-        path="/404"
+        noIndex
       />
       <section className="py-32">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

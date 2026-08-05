@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import SEO from '../components/SEO';
+import NotFound from './NotFound';
 import { getPostBySlug } from '../data/blogPosts';
 
 export default function BlogPost() {
@@ -9,18 +10,7 @@ export default function BlogPost() {
   const post = getPostBySlug(slug || '');
 
   if (!post) {
-    return (
-      <PageLayout title="Post Not Found">
-        <section className="py-24">
-          <div className="max-w-3xl mx-auto px-4 text-center">
-            <h1 className="text-4xl font-bold mb-6">Post not found</h1>
-            <Link to="/blog" className="text-brand-accent font-semibold">
-              Back to blog
-            </Link>
-          </div>
-        </section>
-      </PageLayout>
-    );
+    return <NotFound />;
   }
 
   return (

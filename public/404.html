@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="The page you requested could not be found on Interdot." />
+    <title>Page Not Found | Interdot</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #05070d;
+        --accent: #0070ff;
+        --border: rgba(255, 255, 255, 0.08);
+        --muted: rgba(255, 255, 255, 0.6);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        background: radial-gradient(circle at 50% -10%, rgba(0, 112, 255, 0.18), transparent 45%), var(--bg);
+        color: #fff;
+        padding: 24px;
+      }
+      main {
+        max-width: 36rem;
+        text-align: center;
+        border: 1px solid var(--border);
+        border-radius: 1.5rem;
+        padding: 2.5rem 1.75rem;
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        color: var(--accent);
+        margin-bottom: 1rem;
+      }
+      h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        margin: 0 0 1rem;
+        line-height: 1.1;
+      }
+      p {
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0 0 1.75rem;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+      }
+      a {
+        text-decoration: none;
+        border-radius: 0.75rem;
+        padding: 0.8rem 1.2rem;
+        font-weight: 700;
+        color: #fff;
+      }
+      .primary { background: var(--accent); }
+      .ghost {
+        border: 1px solid var(--border);
+        background: transparent;
+        color: rgba(255, 255, 255, 0.85);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="mono">Error 404</div>
+      <h1>Page not found</h1>
+      <p>
+        This URL does not match any published Interdot page. Check the address, or continue to the home page,
+        free tools, or contact.
+      </p>
+      <div class="actions">
+        <a class="primary" href="/">Home</a>
+        <a class="ghost" href="/tools">Free Tools</a>
+        <a class="ghost" href="/contact">Contact</a>
+      </div>
+    </main>
+  </body>
+</html>

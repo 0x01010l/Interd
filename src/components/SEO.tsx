@@ -7,6 +7,7 @@ type SEOProps = {
   keywords?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   type?: 'website' | 'article' | 'profile';
+  noIndex?: boolean;
 };
 
 function upsertMeta(attr: 'name' | 'property', key: string, content: string) {
@@ -26,12 +27,19 @@ export default function SEO({
   keywords,
   jsonLd,
   type = 'website',
+  noIndex = false,
 }: SEOProps) {
   useEffect(() => {
     document.title = title;
     upsertMeta('name', 'description', description);
-    upsertMeta('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
-    upsertMeta('name', 'googlebot', 'index, follow');
+    upsertMeta(
+      'name',
+      'robots',
+      noIndex
+        ? 'noindex, follow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+    );
+    upsertMeta('name', 'googlebot', noIndex ? 'noindex, follow' : 'index, follow');
     if (keywords) upsertMeta('name', 'keywords', keywords);
 
     upsertMeta('property', 'og:title', title);
@@ -72,7 +80,7 @@ export default function SEO({
       const script = document.getElementById(scriptId);
       if (script) script.remove();
     };
-  }, [title, description, path, keywords, jsonLd, type]);
+  }, [title, description, path, keywords, jsonLd, type, noIndex]);
 
   return null;
 }
