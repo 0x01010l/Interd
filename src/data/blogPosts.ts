@@ -631,7 +631,7 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
   },
   {
-    slug: 'howto-write-care-instructions-customers-will-follow',
+    slug: 'how-to-write-care-instructions-customers-will-follow',
     title: 'How to Write Care Instructions Customers Will Actually Follow',
     description:
       'Turn ignored care icons into plain instructions that protect product longevity and reduce “damaged” complaints.',
