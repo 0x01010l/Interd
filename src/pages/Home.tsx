@@ -114,7 +114,7 @@ export default function Home() {
             
             <p className="text-xl text-white/60 mb-12 leading-relaxed max-w-2xl mx-auto">
               Custom AI agents and free ecommerce writing tools — for ecommerce, finance, and
-              cybersecurity niches, operated by FIX FIGURES LLC.
+              cybersecurity niches.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
