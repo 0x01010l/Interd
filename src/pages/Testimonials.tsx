@@ -33,7 +33,7 @@ export default function Testimonials() {
       <SEO
         title="Illustrative Agent Scenarios | Interdot"
         description="Illustrative Interdot custom AI agent scenarios for ecommerce, finance, and cybersecurity — examples of how teams use agents and free tools, not client testimonials."
-        path="/clients"
+        path="/scenarios"
         keywords="Interdot agent scenarios, ecommerce AI agents, finance AI agents, cybersecurity AI agents"
       />
       <section className="py-24">

@@ -20,27 +20,7 @@
         "Content-Type": "text/plain; charset=utf-8",
         "Cache-Control": "public, max-age=3600"
       }
-    },
-    { "route": "/", "rewrite": "/index.html" },
-    { "route": "/services", "rewrite": "/index.html" },
-    { "route": "/about", "rewrite": "/index.html" },
-    { "route": "/faq", "rewrite": "/index.html" },
-    { "route": "/clients", "rewrite": "/index.html" },
-    { "route": "/contact", "rewrite": "/index.html" },
-    { "route": "/privacy", "rewrite": "/index.html" },
-    { "route": "/privacy-policy", "rewrite": "/index.html" },
-    { "route": "/terms", "rewrite": "/index.html" },
-    { "route": "/blog", "rewrite": "/index.html" },
-    { "route": "/blog/*", "rewrite": "/index.html" },
-    { "route": "/tools", "rewrite": "/index.html" },
-    { "route": "/tools/product-description-generator", "rewrite": "/index.html" },
-    { "route": "/tools/shopify-title-generator", "rewrite": "/index.html" },
-    { "route": "/tools/etsy-tag-generator", "rewrite": "/index.html" },
-    { "route": "/tools/review-reply-generator", "rewrite": "/index.html" },
-    { "route": "/tools/ad-copy-generator", "rewrite": "/index.html" },
-    { "route": "/tools/product-faq-generator", "rewrite": "/index.html" },
-    { "route": "/tools/seo-meta-generator", "rewrite": "/index.html" },
-    { "route": "/tools/bulk-description-rewriter", "rewrite": "/index.html" }
+    }
   ],
   "responseOverrides": {
     "404": {

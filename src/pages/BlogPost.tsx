@@ -15,7 +15,13 @@ export default function BlogPost() {
 
   return (
     <PageLayout title={post.title}>
-      <SEO title={`${post.title} | Interdot`} description={post.description} path={`/blog/${post.slug}`} />
+      <SEO
+        title={`${post.title} | Interdot`}
+        description={post.description}
+        path={`/blog/${post.slug}`}
+        type="article"
+        keywords={`${post.title}, ecommerce writing, ${post.toolLabel}, Interdot`}
+      />
       <article className="py-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/blog" className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm mb-10">

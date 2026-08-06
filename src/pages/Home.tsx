@@ -5,7 +5,7 @@ import { Shield, BarChart3, Cpu, ArrowRight, Zap, Database, Activity } from 'luc
 import { Link } from 'react-router-dom';
 
 const HOME_DESCRIPTION =
-  'Interdot builds custom AI agents for ecommerce, finance, and cybersecurity — plus free AI writing tools that show those agent workflows in action. Contact us for custom agents or try free tools now.';
+  'Interdot (FIX FIGURES LLC) builds custom AI agents for ecommerce, finance, and cybersecurity — plus free AI writing tools. Not affiliated with unrelated Interdot Advisors brands.';
 
 const HOME_KEYWORDS =
   'custom AI agents, ecommerce AI agents, finance AI agents, cybersecurity AI agents, free AI tools, product description generator, Shopify title generator, Etsy tag generator, Interdot, FIX FIGURES LLC';
@@ -16,6 +16,9 @@ const homeJsonLd = [
     '@type': 'Organization',
     name: 'Interdot',
     legalName: 'FIX FIGURES LLC',
+    alternateName: ['Interdot Networks', 'Interdot AI'],
+    disambiguatingDescription:
+      'Interdot is operated by FIX FIGURES LLC and publishes custom AI agents and free ecommerce writing tools at interdot.net. Not affiliated with unrelated entities that may appear in search as Interdot Advisors.',
     url: 'https://interdot.net',
     logo: 'https://interdot.net/',
     email: 'contact@interdot.net',
@@ -112,6 +115,7 @@ export default function Home() {
             <p className="text-xl text-white/60 mb-12 leading-relaxed max-w-2xl mx-auto">
               Interdot designs custom AI agents for ecommerce, finance, and cybersecurity
               niches — then proves the workflows in public with free tools merchants can use today.
+              Operated by FIX FIGURES LLC (not affiliated with unrelated “Interdot Advisors” brands).
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
