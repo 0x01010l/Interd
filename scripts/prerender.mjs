@@ -130,8 +130,8 @@ function main() {
     path: '/',
     title: 'Interdot | Custom AI Agents & Free AI Tools',
     description:
-      'Interdot (FIX FIGURES LLC) builds custom AI agents for ecommerce, finance, and cybersecurity — plus free AI writing tools. Not affiliated with unrelated “Interdot Advisors” brands.',
-    body: `<h1>Custom AI Agents</h1><p>Interdot designs custom AI agents for ecommerce, finance, and cybersecurity niches — then proves the workflows in public with free tools merchants can use today. Operated by FIX FIGURES LLC, North Canton, Ohio.</p>`,
+      'Interdot (FIX FIGURES LLC) builds custom AI agents for ecommerce, finance, and cybersecurity — plus free AI writing tools.',
+    body: `<h1>Custom AI Agents</h1><p>Custom AI agents and free ecommerce writing tools from Interdot, operated by FIX FIGURES LLC in North Canton, Ohio.</p>`,
   });
 
   pages.push({
@@ -139,7 +139,7 @@ function main() {
     title: 'About Interdot | Custom AI Agents & Free Tools',
     description:
       'Interdot is operated by FIX FIGURES LLC. We build custom AI agents and free ecommerce writing tools. Publisher identity, address, and contact details.',
-    body: `<h1>About Interdot</h1><p>Legal entity: FIX FIGURES LLC. Brand: Interdot. Address: 6545 Market Avenue North, North Canton, OH 44721, United States. Contact: contact@interdot.net.</p><p>Interdot publishes free ecommerce writing tools and custom AI agent services. We are not affiliated with unrelated search results that may use similar names such as “Interdot Advisors.”</p>`,
+    body: `<h1>About Interdot</h1><p>Legal entity: FIX FIGURES LLC. Brand: Interdot. Address: 6545 Market Avenue North, North Canton, OH 44721, United States. Contact: contact@interdot.net.</p><p>Custom AI agents and free ecommerce writing tools for merchants and operators.</p>`,
   });
 
   pages.push({

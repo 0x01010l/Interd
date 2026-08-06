@@ -113,9 +113,8 @@ export default function Home() {
             </h1>
             
             <p className="text-xl text-white/60 mb-12 leading-relaxed max-w-2xl mx-auto">
-              Interdot designs custom AI agents for ecommerce, finance, and cybersecurity
-              niches — then proves the workflows in public with free tools merchants can use today.
-              Operated by FIX FIGURES LLC (not affiliated with unrelated “Interdot Advisors” brands).
+              Custom AI agents and free ecommerce writing tools — for ecommerce, finance, and
+              cybersecurity niches, operated by FIX FIGURES LLC.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

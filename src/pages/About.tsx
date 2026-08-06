@@ -87,10 +87,8 @@ export default function About() {
                   merchants and operators — not as placeholders for advertising.
                 </p>
                 <p>
-                  <span className="text-white font-semibold">Brand note:</span> Interdot at
-                  interdot.net is operated by FIX FIGURES LLC. We are not affiliated with unrelated
-                  businesses that may appear in search results under similar names such as
-                  &quot;Interdot Advisors.&quot;
+                  <span className="text-white font-semibold">What we publish:</span> Custom AI
+                  agents and free ecommerce writing tools for merchants and operators.
                 </p>
                 <p>
                   For privacy or legal requests, email{' '}
