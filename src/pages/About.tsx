@@ -2,11 +2,14 @@ import PageLayout from '../components/PageLayout';
 import SEO from '../components/SEO';
 import { Target, Eye, ShieldCheck, Zap, Wrench } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ABOUT_COPY } from '../data/staticPageCopy';
 
 const ABOUT_DESCRIPTION =
   'Interdot (FIX FIGURES LLC) builds custom AI agents for ecommerce, finance, and cybersecurity niches, and publishes free AI writing tools that demonstrate those agent workflows.';
 
 export default function About() {
+  const { publisher: pub } = ABOUT_COPY;
+
   return (
     <PageLayout>
       <SEO
@@ -33,12 +36,8 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-20">
             <h2 className="mono-label mb-4">Our Mission</h2>
-            <h1 className="text-5xl font-bold mb-8">Custom AI agents for real business niches.</h1>
-            <p className="text-xl text-white/60 leading-relaxed">
-              Interdot builds custom AI agents for ecommerce, finance, and cybersecurity —
-              then proves the methods with free tools anyone can try. Operated by FIX FIGURES LLC,
-              we focus on agent workflows teams can trust, audit, and ship.
-            </p>
+            <h1 className="text-5xl font-bold mb-8">{ABOUT_COPY.missionTitle}</h1>
+            <p className="text-xl text-white/60 leading-relaxed">{ABOUT_COPY.missionBody}</p>
           </div>
 
           <div className="bento-card mb-24">
@@ -47,27 +46,27 @@ export default function About() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-white/60 leading-relaxed">
               <div className="space-y-3">
                 <p>
-                  <span className="text-white font-semibold">Brand:</span> Interdot
+                  <span className="text-white font-semibold">Brand:</span> {pub.brand}
                 </p>
                 <p>
-                  <span className="text-white font-semibold">Legal entity:</span> FIX FIGURES LLC
+                  <span className="text-white font-semibold">Legal entity:</span> {pub.legal}
                 </p>
                 <p>
                   <span className="text-white font-semibold">Website:</span>{' '}
-                  <a href="https://interdot.net" className="text-brand-accent hover:underline">
-                    https://interdot.net
+                  <a href={pub.website} className="text-brand-accent hover:underline">
+                    {pub.website}
                   </a>
                 </p>
                 <p>
                   <span className="text-white font-semibold">Primary contact:</span>{' '}
-                  <a href="mailto:contact@interdot.net" className="text-brand-accent hover:underline">
-                    contact@interdot.net
+                  <a href={`mailto:${pub.email}`} className="text-brand-accent hover:underline">
+                    {pub.email}
                   </a>
                 </p>
                 <p>
                   <span className="text-white font-semibold">Support:</span>{' '}
-                  <a href="mailto:advisory@interdot.net" className="text-brand-accent hover:underline">
-                    advisory@interdot.net
+                  <a href={`mailto:${pub.support}`} className="text-brand-accent hover:underline">
+                    {pub.support}
                   </a>
                 </p>
               </div>
@@ -75,25 +74,22 @@ export default function About() {
                 <p>
                   <span className="text-white font-semibold">Business address:</span>
                   <br />
-                  6545 Market Avenue North
-                  <br />
-                  North Canton, OH 44721
-                  <br />
-                  United States
+                  {pub.addressLines.map((line) => (
+                    <span key={line}>
+                      {line}
+                      <br />
+                    </span>
+                  ))}
                 </p>
+                <p>{pub.publishNote}</p>
                 <p>
-                  We publish practical ecommerce writing tools, explanatory guides, and information
-                  about custom AI agent services. Tool guides and blog articles are written for
-                  merchants and operators — not as placeholders for advertising.
-                </p>
-                <p>
-                  <span className="text-white font-semibold">What we publish:</span> Custom AI
-                  agents and free ecommerce writing tools for merchants and operators.
+                  <span className="text-white font-semibold">What we publish:</span>{' '}
+                  {pub.whatWePublish}
                 </p>
                 <p>
                   For privacy or legal requests, email{' '}
-                  <a href="mailto:contact@interdot.net" className="text-brand-accent hover:underline">
-                    contact@interdot.net
+                  <a href={`mailto:${pub.email}`} className="text-brand-accent hover:underline">
+                    {pub.email}
                   </a>
                   . See also our{' '}
                   <Link to="/privacy-policy" className="text-brand-accent hover:underline">
@@ -113,37 +109,19 @@ export default function About() {
             <div className="bento-card">
               <Target className="w-10 h-10 text-brand-accent mb-6" />
               <h3 className="text-2xl font-bold mb-4">Niche-first agents</h3>
-              <p className="text-white/50 leading-relaxed">
-                We do not ship generic chatbots. Each custom agent is scoped to a niche
-                workflow — product listing ops, financial reasoning, or security investigation —
-                with clear inputs, policies, and outputs.
-              </p>
+              <p className="text-white/50 leading-relaxed">{ABOUT_COPY.nicheAgents}</p>
             </div>
             <div className="bento-card">
               <Eye className="w-10 h-10 text-brand-accent mb-6" />
               <h3 className="text-2xl font-bold mb-4">Proof before pitch</h3>
-              <p className="text-white/50 leading-relaxed">
-                Free ecommerce writing tools are living demos of the same agent approach:
-                structured prompts, practical guides, and Azure OpenAI on the server so
-                keys never touch the browser.
-              </p>
+              <p className="text-white/50 leading-relaxed">{ABOUT_COPY.proofBeforePitch}</p>
             </div>
           </div>
 
           <div className="bento-card mb-24">
             <Wrench className="w-10 h-10 text-brand-accent mb-6" />
             <h3 className="text-2xl font-bold mb-4">Custom agents + free tools</h3>
-            <p className="text-white/50 leading-relaxed mb-4">
-              Custom agents are how we help teams automate niche work with guardrails.
-              Free tools — product descriptions, Shopify titles, Etsy tags, review replies,
-              ad copy, FAQs, SEO metas, and bulk rewrites — show how those writing agents
-              behave in public, with human-written guidance on every page.
-            </p>
-            <p className="text-white/50 leading-relaxed mb-6">
-              When you need a deeper agent for your catalog, risk desk, or security stack,
-              the same Interdot team designs, grounds, and ships it. One company. One story.
-              Agents and tools that work together.
-            </p>
+            <p className="text-white/50 leading-relaxed mb-6">{ABOUT_COPY.agentsAndTools}</p>
             <Link to="/tools" className="text-brand-accent font-semibold hover:underline">
               Browse free AI tools →
             </Link>
@@ -155,11 +133,7 @@ export default function About() {
             </div>
             <div className="relative z-10 max-w-2xl">
               <h3 className="text-3xl font-bold mb-6">Our Commitment</h3>
-              <p className="text-lg text-white/70 mb-8 leading-relaxed">
-                We build AI that operators can explain. Custom agents are designed to be
-                reviewable and useful in regulated or high-stakes niches, while free tools
-                stay practical, private, and easy for merchants to adopt.
-              </p>
+              <p className="text-lg text-white/70 mb-8 leading-relaxed">{ABOUT_COPY.commitment}</p>
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2 text-brand-accent">
                   <ShieldCheck className="w-5 h-5" />
