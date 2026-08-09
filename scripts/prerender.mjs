@@ -84,8 +84,8 @@ function loadData() {
   const dump = `
 import { BLOG_POSTS } from './src/data/blogPosts.ts';
 import { TOOLS } from './src/data/tools.ts';
-import { PRIVACY_SECTIONS, TERMS_SECTIONS, FAQ_ITEMS, ABOUT_COPY } from './src/data/staticPageCopy.ts';
-console.log(JSON.stringify({ posts: BLOG_POSTS, tools: TOOLS, privacy: PRIVACY_SECTIONS, terms: TERMS_SECTIONS, faqs: FAQ_ITEMS, about: ABOUT_COPY }));
+import { PRIVACY_SECTIONS, TERMS_SECTIONS, FAQ_ITEMS, ABOUT_COPY, HUB_COPY } from './src/data/staticPageCopy.ts';
+console.log(JSON.stringify({ posts: BLOG_POSTS, tools: TOOLS, privacy: PRIVACY_SECTIONS, terms: TERMS_SECTIONS, faqs: FAQ_ITEMS, about: ABOUT_COPY, hub: HUB_COPY }));
 `;
   const tmp = path.join(root, '.prerender-dump.mts');
   fs.writeFileSync(tmp, dump);
@@ -107,7 +107,7 @@ function main() {
   const indexPath = path.join(dist, 'index.html');
   if (!fs.existsSync(indexPath)) throw new Error('dist/index.html missing — run vite build first');
   const template = fs.readFileSync(indexPath, 'utf8');
-  const { posts, tools, privacy, terms, faqs, about } = loadData();
+  const { posts, tools, privacy, terms, faqs, about, hub } = loadData();
 
   const pages = [];
 
@@ -115,7 +115,19 @@ function main() {
     path: '/',
     title: 'Interdot | Custom AI Agents & Free AI Tools',
     description: 'Custom AI agents and free ecommerce writing tools from Interdot (FIX FIGURES LLC).',
-    body: `<h1>Custom AI Agents</h1><p>Custom AI agents and free ecommerce writing tools — for ecommerce, finance, and cybersecurity niches, operated by FIX FIGURES LLC in North Canton, Ohio.</p><p>Explore free writing tools, custom agent services, guides, and publisher details on this site.</p>`,
+    body: `<article>
+      <h1>Custom AI Agents</h1>
+      <p>${escapeHtml(hub.home.lead)}</p>
+      <h2>What you will find here</h2>
+      <p>${escapeHtml(hub.home.whatYouFind)}</p>
+      <h2>Niches we serve</h2>
+      <p>${escapeHtml(hub.home.niches)}</p>
+      <h2>How agents ship</h2>
+      <p>${escapeHtml(hub.home.howWeWork)}</p>
+      <h2>Publisher and trust</h2>
+      <p>${escapeHtml(hub.home.trust)}</p>
+      <p><a href="/tools">Free AI tools</a> · <a href="/blog">Blog</a> · <a href="/services">Services</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy-policy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/faq">FAQ</a></p>
+    </article>`,
   });
 
   const pub = about.publisher;
@@ -154,9 +166,9 @@ function main() {
     title: 'Free Ecommerce AI Tools | Interdot Custom Agents',
     description:
       'Free Interdot AI writing tools — product descriptions, Shopify titles, Etsy tags, review replies, ads, FAQs, SEO metas, and bulk rewrites.',
-    body: `<h1>Ecommerce writing tools</h1><p>Eight focused generators with human-written guides on every page.</p><ul>${tools
+    body: `<article><h1>Ecommerce writing tools</h1><p>${escapeHtml(hub.toolsIndex.intro)}</p><p>${escapeHtml(hub.toolsIndex.howToUse)}</p><ul>${tools
       .map((t) => `<li><a href="${t.path}">${escapeHtml(t.name)}</a> — ${escapeHtml(t.benefit)}</li>`)
-      .join('')}</ul>`,
+      .join('')}</ul><p>${escapeHtml(hub.toolsIndex.next)}</p></article>`,
   });
 
   pages.push({
@@ -173,7 +185,20 @@ function main() {
     title: 'Contact Interdot | Custom AI Agents & Free Tools',
     description:
       'Contact Interdot (FIX FIGURES LLC) for custom AI agents or questions about free AI writing tools. Email contact@interdot.net.',
-    body: `<article><h1>Contact Interdot</h1><p>Ready for a custom agent in ecommerce, finance, or cybersecurity — or have a question about our free AI writing tools?</p><p>Main email: <a href="mailto:contact@interdot.net">contact@interdot.net</a></p><p>Technical support: <a href="mailto:advisory@interdot.net">advisory@interdot.net</a></p><p>HQ: 6545 Market Avenue North, North Canton, 44721, OH, US</p></article>`,
+    body: `<article>
+      <h1>Contact Interdot</h1>
+      <p>${escapeHtml(hub.contact.intro)}</p>
+      <h2>When to write</h2>
+      <p>${escapeHtml(hub.contact.whenToWrite)}</p>
+      <h2>Emails</h2>
+      <p>${escapeHtml(hub.contact.emails)}</p>
+      <p>Main email: <a href="mailto:contact@interdot.net">contact@interdot.net</a></p>
+      <p>Technical support: <a href="mailto:advisory@interdot.net">advisory@interdot.net</a></p>
+      <h2>Address</h2>
+      <p>${escapeHtml(hub.contact.address)}</p>
+      <h2>Related pages</h2>
+      <p>${escapeHtml(hub.contact.related)}</p>
+    </article>`,
   });
 
   const privacyHtml = sectionsToHtml('Privacy Policy', privacy);
@@ -205,7 +230,20 @@ function main() {
     title: 'Custom AI Agent Services | Interdot',
     description:
       'Commission custom AI agents for finance, cybersecurity, and ecommerce workflows from Interdot (FIX FIGURES LLC).',
-    body: `<article><h1>Custom AI agents for your niche</h1><p>Generic AI guesses. Interdot builds custom agents scoped to ecommerce, finance, and cybersecurity workflows — with free tools that show the same approach in public for merchant writing tasks.</p><h2>Finance Decision Agents</h2><p>Custom agents that turn market and ops data into audit-ready causal reasoning for finance teams.</p><h2>Security Ops Agents</h2><p>Custom agents for deterministic threat modeling and adversary logic prediction.</p><h2>Custom Agent Training</h2><p>Train niche agents on your proprietary datasets with absolute privacy — including ecommerce and ops workflows.</p></article>`,
+    body: `<article>
+      <h1>Custom AI agents for your niche</h1>
+      <p>${escapeHtml(hub.services.intro)}</p>
+      <h2>Finance Decision Agents</h2>
+      <p>${escapeHtml(hub.services.finance)}</p>
+      <h2>Security Ops Agents</h2>
+      <p>${escapeHtml(hub.services.security)}</p>
+      <h2>Custom Agent Training</h2>
+      <p>${escapeHtml(hub.services.training)}</p>
+      <h2>Free tools as public proof</h2>
+      <p>${escapeHtml(hub.services.freeToolsBridge)}</p>
+      <h2>Engagement process</h2>
+      <p>${escapeHtml(hub.services.process)}</p>
+    </article>`,
   });
 
   const faqBody = `<article><h1>Agents, tools, and how Interdot works</h1><p>Straight answers for merchants, operators, and anyone evaluating our free tools or custom agents.</p>${faqs

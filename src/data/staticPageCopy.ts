@@ -183,3 +183,53 @@ export const ABOUT_COPY = {
   commitment:
     'We build AI that operators can explain. Custom agents are designed to be reviewable and useful in regulated or high-stakes niches, while free tools stay practical, private, and easy for merchants to adopt.',
 };
+
+/** Crawl-first hub copy for homepage and other thin entry pages. */
+export const HUB_COPY = {
+  home: {
+    lead:
+      'Interdot is a brand of FIX FIGURES LLC. We design custom AI agents for ecommerce, finance, and cybersecurity niches, and we publish free ecommerce writing tools so merchants can try the same agent-style workflows in public.',
+    whatYouFind:
+      'On this site you will find eight free writing tools with human-written guides, an in-depth blog for catalog and marketplace copy, custom agent services, publisher identity details, privacy and terms pages, and a contact path for agent scoping.',
+    niches:
+      'Ecommerce writing agents help with product descriptions, titles, tags, review replies, ads, FAQs, and SEO metas. Finance decision agents focus on audit-ready reasoning traces from ops or market inputs. Security ops agents support threat modeling narratives that humans still review before action.',
+    howWeWork:
+      'We brief the workflow, ground the agent on approved facts and policies, keep reasoning steps reviewable, then ship into your stack — or leave free tools available as living demos. Tool prompts run through Microsoft Azure OpenAI on the server; keys never sit in the browser.',
+    trust:
+      'Publisher: FIX FIGURES LLC, 6545 Market Avenue North, North Canton, OH 44721, United States. Primary contact: contact@interdot.net. Privacy, Terms, About, FAQ, and Contact pages document who we are and how data is handled, including cookie consent for analytics and advertising partners.',
+  },
+  contact: {
+    intro:
+      'Use this page to commission a custom AI agent or ask a practical question about our free ecommerce writing tools. Interdot is operated by FIX FIGURES LLC in North Canton, Ohio.',
+    whenToWrite:
+      'Write when you need a scoped agent for listing ops, finance review, or security triage; when a free tool behaves unexpectedly; when you have a privacy or legal request; or when you want an illustrative scenario explained before a sales call. Include niche, data sources, success criteria, and constraints so we can answer with substance.',
+    emails:
+      'Main email: contact@interdot.net for agent scoping, partnerships, and general inquiries. Technical support: advisory@interdot.net for tool and integration questions. We respond in English during US business hours and route privacy requests to the same primary mailbox.',
+    address:
+      'Business address: 6545 Market Avenue North, North Canton, OH 44721, United States. Prefer email for first contact; use the form on this page if you want a structured brief without opening your mail client.',
+    related:
+      'Before writing, you can browse free tools, read the privacy policy (Azure OpenAI, cookies, AdSense consent), review terms of use, or open About for publisher identity. Custom agent work is scoped per niche — we do not sell a one-size chatbot license.',
+  },
+  services: {
+    intro:
+      'Interdot custom AI agent services are built for teams that need niche workflows with guardrails — not generic chat. We scope inputs, policies, and outputs with your operators, then ship agents your team can explain.',
+    finance:
+      'Finance decision agents convert market and ops data into step-by-step causal reasoning packages analysts can audit. Typical deliverables include structured logic traces, relationship maps between drivers, and synthesis reports that survive compliance review better than opaque scores.',
+    security:
+      'Security ops agents help map likely attack paths and summarize adversary logic from the telemetry and narratives you provide. Humans keep control of tickets and containment; the agent accelerates triage and documentation, not unsupervised action.',
+    training:
+      'Custom agent training grounds models and workflows on your proprietary datasets with privacy controls appropriate to the engagement — including ecommerce catalog ops alongside finance and security niches. We document refusal rules, claim limits, and evaluation criteria before go-live.',
+    freeToolsBridge:
+      'Free ecommerce writing tools on this site are public proofs of the same method: structured prompts, guides, and Azure OpenAI server-side. When free tools outgrow your catalog volume or brand rules, request a custom listing or ops agent through Contact.',
+    process:
+      'Engagements usually follow brief → ground → reason → ship. You leave with a scoped agent definition, evaluation checks, and a handoff plan. For illustrative (non-testimonial) scenarios, see /scenarios. Publisher identity and legal pages are linked from the site footer.',
+  },
+  toolsIndex: {
+    intro:
+      'These free Interdot tools draft ecommerce copy with Azure OpenAI on the server. Each page includes a human-written guide and FAQ so the page stays useful even if you never run the generator. Daily usage is rate-limited; do not paste secrets into prompts.',
+    howToUse:
+      'Pick a tool that matches the job — descriptions, Shopify titles, Etsy tags, review replies, ads, product FAQs, SEO metas, or bulk rewrites. Start with verified product facts, generate options, then edit claims against packaging and policy before you publish.',
+    next:
+      'Deeper how-tos live on the blog. Custom catalog or ops agents are available through Contact when free tools are not enough. Privacy details cover AI processing, cookies, and AdSense consent choices.',
+  },
+};

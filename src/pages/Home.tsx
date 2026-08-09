@@ -3,12 +3,13 @@ import SEO from '../components/SEO';
 import { motion } from 'motion/react';
 import { Shield, BarChart3, Cpu, ArrowRight, Zap, Database, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { HUB_COPY } from '../data/staticPageCopy';
 
 const HOME_DESCRIPTION =
-  'Custom AI agents and free ecommerce writing tools';
+  'Custom AI agents and free ecommerce writing tools from Interdot (FIX FIGURES LLC) — guides, free tools, and publisher details for merchants and operators.';
 
 const HOME_KEYWORDS =
-  'Custom AI agents and free ecommerce writing tools';
+  'custom AI agents, free ecommerce AI tools, Interdot, FIX FIGURES LLC, product description generator';
 
 const homeJsonLd = [
   {
@@ -130,6 +131,35 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Publisher overview — crawl + human substance below the hero */}
+      <section className="py-16 border-t border-brand-border/60">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-white/60 leading-relaxed">
+          <h2 className="text-2xl font-bold text-white">What Interdot publishes</h2>
+          <p>{HUB_COPY.home.lead}</p>
+          <p>{HUB_COPY.home.whatYouFind}</p>
+          <p>{HUB_COPY.home.niches}</p>
+          <p>{HUB_COPY.home.howWeWork}</p>
+          <p>{HUB_COPY.home.trust}</p>
+          <p className="text-sm">
+            <Link to="/about" className="text-brand-accent hover:underline">
+              About
+            </Link>
+            {' · '}
+            <Link to="/privacy-policy" className="text-brand-accent hover:underline">
+              Privacy
+            </Link>
+            {' · '}
+            <Link to="/contact" className="text-brand-accent hover:underline">
+              Contact
+            </Link>
+            {' · '}
+            <Link to="/faq" className="text-brand-accent hover:underline">
+              FAQ
+            </Link>
+          </p>
+        </div>
+      </section>
+
       {/* Bento Grid Sectors */}
       <section className="py-24 bg-brand-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -153,16 +183,16 @@ export default function Home() {
               </div>
               <div className="grid grid-cols-3 gap-4 border-t border-brand-border pt-6">
                 <div>
-                  <div className="mono-label mb-1">Accuracy</div>
-                  <div className="text-xl font-mono font-bold">99.98%</div>
+                  <div className="mono-label mb-1">Focus</div>
+                  <div className="text-xl font-mono font-bold">Finance</div>
                 </div>
                 <div>
-                  <div className="mono-label mb-1">Latency</div>
-                  <div className="text-xl font-mono font-bold">12ms</div>
+                  <div className="mono-label mb-1">Output</div>
+                  <div className="text-xl font-mono font-bold">Auditable</div>
                 </div>
                 <div>
-                  <div className="mono-label mb-1">Vectors</div>
-                  <div className="text-xl font-mono font-bold">4.2B+</div>
+                  <div className="mono-label mb-1">Style</div>
+                  <div className="text-xl font-mono font-bold">Niche</div>
                 </div>
               </div>
             </div>

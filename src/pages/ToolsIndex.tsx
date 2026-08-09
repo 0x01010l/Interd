@@ -15,6 +15,7 @@ import {
 import PageLayout from '../components/PageLayout';
 import SEO from '../components/SEO';
 import { TOOLS } from '../data/tools';
+import { HUB_COPY } from '../data/staticPageCopy';
 
 const TOOL_ICONS: Record<string, LucideIcon> = {
   'product-description-generator': FileText,
@@ -80,10 +81,9 @@ export default function ToolsIndex() {
             <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
               Ecommerce writing agents you can use free
             </h1>
-            <p className="text-xl text-white/60 leading-relaxed">
-              These free tools are public proofs of Interdot&apos;s ecommerce agents —
-              focused generators with human-written guides. Need a deeper custom agent for your catalog? Contact us.
-            </p>
+            <p className="text-xl text-white/60 leading-relaxed mb-4">{HUB_COPY.toolsIndex.intro}</p>
+            <p className="text-white/50 leading-relaxed mb-4">{HUB_COPY.toolsIndex.howToUse}</p>
+            <p className="text-white/50 leading-relaxed">{HUB_COPY.toolsIndex.next}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

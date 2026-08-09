@@ -2,6 +2,8 @@ import PageLayout from '../components/PageLayout';
 import SEO from '../components/SEO';
 import { Mail, MessageSquare, Globe, ExternalLink } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { HUB_COPY } from '../data/staticPageCopy';
 
 const TALLY_SRC = 'https://tally.so/embed/jaXl9Q?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1';
 
@@ -46,10 +48,10 @@ export default function Contact() {
             <div>
               <h2 className="mono-label mb-4">Contact Us</h2>
               <h1 className="text-5xl font-bold mb-8">Let&apos;s build your agent.</h1>
-              <p className="text-xl text-white/60 leading-relaxed mb-12">
-                Ready for a custom agent in ecommerce, finance, or cybersecurity — or have a question about our free AI writing tools? Our team is ready to help.
-              </p>
-              
+              <p className="text-xl text-white/60 leading-relaxed mb-6">{HUB_COPY.contact.intro}</p>
+              <p className="text-white/50 leading-relaxed mb-6">{HUB_COPY.contact.whenToWrite}</p>
+              <p className="text-white/50 leading-relaxed mb-12">{HUB_COPY.contact.emails}</p>
+
               <div className="space-y-8">
                 <div className="flex items-center space-x-6">
                   <div className="w-12 h-12 glass rounded-xl flex items-center justify-center">
@@ -83,10 +85,27 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="mono-label">HQ</div>
-                    <div className="text-xl font-bold">6545 Market Avenue North, North Canton, 44721, OH, US</div>
+                    <div className="text-xl font-bold">
+                      6545 Market Avenue North, North Canton, 44721, OH, US
+                    </div>
                   </div>
                 </div>
               </div>
+              <p className="mt-10 text-white/50 leading-relaxed">{HUB_COPY.contact.address}</p>
+              <p className="mt-4 text-white/50 leading-relaxed">{HUB_COPY.contact.related}</p>
+              <p className="mt-4 text-sm text-white/40">
+                <Link to="/about" className="text-brand-accent hover:underline">
+                  About
+                </Link>
+                {' · '}
+                <Link to="/privacy-policy" className="text-brand-accent hover:underline">
+                  Privacy
+                </Link>
+                {' · '}
+                <Link to="/terms" className="text-brand-accent hover:underline">
+                  Terms
+                </Link>
+              </p>
             </div>
 
             <div className="glass p-6 md:p-10 rounded-[2.5rem] border-brand-border">
@@ -100,7 +119,6 @@ export default function Contact() {
 
               {!iframeFailed ? (
                 <iframe
-                  src={TALLY_SRC}
                   data-tally-src={TALLY_SRC}
                   loading="lazy"
                   width="100%"

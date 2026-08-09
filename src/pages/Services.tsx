@@ -3,6 +3,7 @@ import SEO from '../components/SEO';
 import { motion } from 'motion/react';
 import { BarChart3, Shield, Cpu, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { HUB_COPY } from '../data/staticPageCopy';
 
 const VectorAnimation = ({ type }: { type: number }) => {
   if (type === 0) {
@@ -88,36 +89,36 @@ export default function Services() {
     {
       icon: <BarChart3 className="w-8 h-8 text-brand-accent" />,
       title: 'Finance Decision Agents',
-      description: 'Custom agents that turn market and ops data into audit-ready causal reasoning for finance teams.',
+      description: HUB_COPY.services.finance,
       features: [
         'High-frequency logic traces',
         'Causal relationship mapping',
         'Audit-ready synthesis reports',
-        'Multi-vector market prediction'
-      ]
+        'Multi-vector market prediction',
+      ],
     },
     {
       icon: <Shield className="w-8 h-8 text-red-500" />,
       title: 'Security Ops Agents',
-      description: 'Custom agents for deterministic threat modeling and adversary logic prediction.',
+      description: HUB_COPY.services.security,
       features: [
         'Attack surface vectorization',
         'Predictive adversary modeling',
         'Real-time logic-based alerts',
-        'Zero-hallucination threat intel'
-      ]
+        'Zero-hallucination threat intel',
+      ],
     },
     {
       icon: <Cpu className="w-8 h-8 text-purple-500" />,
       title: 'Custom Agent Training',
-      description: 'Train niche agents on your proprietary datasets with absolute privacy — including ecommerce and ops workflows.',
+      description: HUB_COPY.services.training,
       features: [
         'Zero-leakage training protocols',
         'Proprietary vector optimization',
         'Custom logic chain development',
-        'Secure on-prem deployment options'
-      ]
-    }
+        'Secure on-prem deployment options',
+      ],
+    },
   ];
 
   return (
@@ -147,11 +148,9 @@ export default function Services() {
           <div className="max-w-3xl mb-20">
             <h2 className="mono-label mb-4">Our Services</h2>
             <h1 className="text-5xl font-bold mb-8">Custom AI agents for your niche</h1>
-            <p className="text-xl text-white/60 leading-relaxed">
-              Generic AI guesses. Interdot builds custom agents scoped to ecommerce, finance,
-              and cybersecurity workflows — with free tools that show the same approach in public
-              for merchant writing tasks.
-            </p>
+            <p className="text-xl text-white/60 leading-relaxed mb-6">{HUB_COPY.services.intro}</p>
+            <p className="text-white/50 leading-relaxed mb-4">{HUB_COPY.services.freeToolsBridge}</p>
+            <p className="text-white/50 leading-relaxed">{HUB_COPY.services.process}</p>
           </div>
 
           <div className="space-y-12">
