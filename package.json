@@ -4,12 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "tsx server/index.ts",
-    "dev:client": "vite --port=3000 --host=0.0.0.0",
-    "build": "node scripts/generate-sitemap.mjs && vite build && node scripts/prerender.mjs",
-    "prerender": "node scripts/prerender.mjs",
-    "sitemap": "node scripts/generate-sitemap.mjs",
-    "start": "NODE_ENV=production tsx server/index.ts",
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit"
@@ -30,8 +26,6 @@
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^22.14.0",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
     "autoprefixer": "^10.4.21",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",

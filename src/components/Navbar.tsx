@@ -8,15 +8,11 @@ export default function Navbar() {
   const location = useLocation();
 
   const navLinks = [
-    { name: 'Tools', path: '/tools' },
     { name: 'Services', path: '/services' },
     { name: 'About', path: '/about' },
-    { name: 'Blog', path: '/blog' },
     { name: 'FAQ', path: '/faq' },
+    { name: 'Case Studies', path: '/clients' },
   ];
-
-  const isActive = (path: string) =>
-    location.pathname === path || (path !== '/' && location.pathname.startsWith(path + '/'));
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-brand-border/50">
@@ -36,7 +32,7 @@ export default function Navbar() {
                 key={link.path}
                 to={link.path}
                 className={`text-sm font-medium transition-colors hover:text-brand-accent ${
-                  isActive(link.path) ? 'text-brand-accent' : 'text-white/70'
+                  location.pathname === link.path ? 'text-brand-accent' : 'text-white/70'
                 }`}
               >
                 {link.name}
@@ -49,7 +45,7 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-white/70 hover:text-white" aria-label="Toggle menu">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-white/70 hover:text-white">
               {isOpen ? <X /> : <Menu />}
             </button>
           </div>
@@ -78,7 +74,7 @@ export default function Navbar() {
             onClick={() => setIsOpen(false)}
             className="block w-full bg-brand-accent text-white px-5 py-3 rounded-xl text-sm font-semibold text-center"
           >
-            Get in Touch
+            Request API Access
           </Link>
         </motion.div>
       )}

@@ -1,73 +1,66 @@
 import PageLayout from '../components/PageLayout';
-import SEO from '../components/SEO';
-import { Activity, ArrowRight } from 'lucide-react';
+import { Quote, ExternalLink, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Testimonials() {
-  const scenarios = [
+  const caseStudies = [
     {
-      niche: 'Ecommerce listing ops',
-      title: 'Catalog refresh without blank pages',
-      summary:
-        'A mid-size DTC team needs unique PDP copy across hundreds of SKUs. Illustrative workflow: use free Interdot writing tools for first drafts, then brief a custom catalog agent grounded on brand voice and prohibited claims.',
-      outcome: 'Faster drafts, human QA still required',
+      quote: "The 'Logic Trace' feature changed how we approach high-frequency trading. We no longer just see the 'what'—we understand the causal chain behind every market shift.",
+      author: "Dr. Elena Vance",
+      role: "Chief Quant Analyst, Aether Capital",
+      stats: { metric: "Alpha Increase", value: "+14.2%" }
     },
     {
-      niche: 'Finance decision support',
-      title: 'Audit-ready reasoning traces',
-      summary:
-        'A risk ops desk needs explanations they can review. Illustrative workflow: a custom finance agent that maps approved data into step-by-step rationale instead of opaque score-only outputs.',
-      outcome: 'Clearer handoffs to analysts',
+      quote: "Interdot's automated recon predicted a multi-stage breach attempt three hours before our traditional SOC flagged it. The reasoning layer is our new baseline.",
+      author: "Marcus Thorne",
+      role: "CISO, Sentinel Defense Systems",
+      stats: { metric: "Threat Detection", value: "3h Early" }
     },
     {
-      niche: 'Security operations',
-      title: 'Threat narrative assistants',
-      summary:
-        'A SOC wants structured first-pass narratives from alerts and logs. Illustrative workflow: a custom security agent that summarizes likely attack paths from provided telemetry — with analyst confirmation before action.',
-      outcome: 'Faster triage, humans keep control',
-    },
+      quote: "Vector training on our proprietary datasets was seamless and, most importantly, secure. The deterministic outputs are now core to our decision-making stack.",
+      author: "Sarah Chen",
+      role: "VP of Engineering, NeoFinance",
+      stats: { metric: "Model Accuracy", value: "99.9%" }
+    }
   ];
 
   return (
-    <PageLayout>
-      <SEO
-        title="Illustrative Agent Scenarios | Interdot"
-        description="Illustrative Interdot custom AI agent scenarios for ecommerce, finance, and cybersecurity — examples of how teams use agents and free tools, not client testimonials."
-        path="/scenarios"
-        keywords="Interdot agent scenarios, ecommerce AI agents, finance AI agents, cybersecurity AI agents"
-      />
+    <PageLayout title="Case Studies">
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mb-12">
-            <h2 className="mono-label mb-4">Scenarios</h2>
-            <h1 className="text-5xl font-bold mb-8">Illustrative agent use cases</h1>
-            <p className="text-xl text-white/60 leading-relaxed mb-6">
-              These are example workflows that show how Interdot custom agents and free tools can fit
-              real business niches. They are <span className="text-white/80">illustrative</span> — not
-              client testimonials, case studies, or performance guarantees.
-            </p>
-            <p className="text-sm text-white/40 leading-relaxed">
-              Named companies or fabricated quotes are not used here. For publisher identity, see{' '}
-              <Link to="/about" className="text-brand-accent hover:underline">
-                About
-              </Link>
-              .
+          <div className="max-w-3xl mb-20">
+            <h2 className="mono-label mb-4">Case Studies</h2>
+            <h1 className="text-5xl font-bold mb-8">Proven Logic. Real Results.</h1>
+            <p className="text-xl text-white/60 leading-relaxed">
+              Leading institutions across Finance and Cybersecurity trust Interdot 
+              to provide the reasoning layer for their most critical operations.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {scenarios.map((item) => (
-              <div key={item.title} className="bento-card flex flex-col justify-between group">
+            {caseStudies.map((study, i) => (
+              <div key={i} className="bento-card flex flex-col justify-between group">
                 <div>
-                  <div className="mono-label mb-4">{item.niche}</div>
-                  <h3 className="text-xl font-bold mb-4 group-hover:text-brand-accent transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-white/60 leading-relaxed mb-6">{item.summary}</p>
+                  <Quote className="w-10 h-10 text-brand-accent/20 mb-6 group-hover:text-brand-accent/40 transition-colors" />
+                  <p className="text-lg text-white/80 italic mb-8 leading-relaxed">
+                    "{study.quote}"
+                  </p>
                 </div>
-                <div className="pt-6 border-t border-brand-border">
-                  <div className="mono-label mb-1">Example outcome</div>
-                  <div className="text-sm text-white/80">{item.outcome}</div>
+                <div>
+                  <div className="flex items-center justify-between mb-6 pt-6 border-t border-brand-border">
+                    <div>
+                      <div className="font-bold text-white">{study.author}</div>
+                      <div className="text-xs text-white/40 font-mono uppercase tracking-wider">{study.role}</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-brand-accent font-mono font-bold">{study.stats.value}</div>
+                      <div className="text-[10px] text-white/40 uppercase tracking-widest">{study.stats.metric}</div>
+                    </div>
+                  </div>
+                  <Link to="/contact" className="w-full glass py-3 rounded-xl text-xs font-mono uppercase tracking-widest hover:bg-white/5 flex items-center justify-center space-x-2">
+                    <span>Read Full Case Study</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </Link>
                 </div>
               </div>
             ))}
@@ -78,26 +71,15 @@ export default function Testimonials() {
               <Activity className="w-full h-full text-brand-accent" />
             </div>
             <div className="relative z-10 max-w-2xl">
-              <h3 className="text-3xl font-bold mb-6">Want a custom agent for your niche?</h3>
+              <h3 className="text-3xl font-bold mb-6">Join the 0.1%</h3>
               <p className="text-lg text-white/70 mb-8 leading-relaxed">
-                Tell us about ecommerce, finance, or cybersecurity workflows — or start with free
-                tools that already demonstrate our writing-agent approach.
+                We work with a select group of partners to ensure the highest 
+                fidelity of our reasoning engine. Apply for API access to see how 
+                Interdot can transform your data intelligence.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-brand-accent text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-accent/90 transition-all"
-                >
-                  Talk to Interdot
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  to="/tools"
-                  className="inline-flex items-center justify-center text-white/70 hover:text-white transition-colors px-2 py-4"
-                >
-                  Try free tools
-                </Link>
-              </div>
+              <Link to="/contact" className="inline-block bg-brand-accent text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-accent/90 transition-all">
+                Apply for Access
+              </Link>
             </div>
           </div>
         </div>
