@@ -12,10 +12,12 @@ import Testimonials from './pages/Testimonials';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import Analytics from './components/Analytics';
 
 export default function App() {
   return (
     <Router>
+      <Analytics />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />

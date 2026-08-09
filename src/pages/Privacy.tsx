@@ -57,11 +57,13 @@ Reasoning-as-a-Service platform.
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">5. Cookies</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">5. Cookies &amp; Analytics</h2>
               <p>
-                We use essential cookies to maintain session integrity and platform performance. 
-                Analytical cookies are used only with explicit consent to improve our reasoning 
-                algorithms.
+                We use essential cookies to maintain session integrity and platform performance.
+                With your consent (Accept all on the cookie banner), we also load Google Analytics
+                (measurement ID G-CQY6T21J0M) to understand site usage. Essential only keeps
+                Analytics off. You can clear site data in your browser to see the banner again and
+                change your choice.
               </p>
             </section>
           </div>
