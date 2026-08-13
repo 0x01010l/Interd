@@ -83,14 +83,10 @@ export default function BlogPost() {
           {post.description}
         </p>
         <div className="prose-study article-body mt-10">
-          {post.content.map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
+          {post.content.map((para, i) =>
+            para.startsWith('## ') ? <h2 key={i}>{para.slice(3)}</h2> : <p key={i}>{para}</p>
+          )}
         </div>
-        <aside className="mt-12 paper-card p-6 text-sm text-brand-muted leading-relaxed">
-          Independent study guidance published by {SITE.legal}. This is not official WAEC or BECE
-          material and it does not promise grades. Confirm paper rules with your school.
-        </aside>
       </article>
       {related.length > 0 && (
         <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">

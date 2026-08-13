@@ -5,7 +5,12 @@ import SEO from '../components/SEO';
 export default function NotFound() {
   return (
     <PageLayout>
-      <SEO title="Page not found | Interdot Study" description="This page does not exist." path="/404" />
+      <SEO
+        title="Page not found | Interdot Study"
+        description="This page does not exist."
+        path="/404"
+        robots="noindex, nofollow"
+      />
       <section className="max-w-xl mx-auto px-4 py-24 text-center">
         <h1 className="font-serif text-4xl font-semibold mb-4">Page not found</h1>
         <p className="text-brand-muted mb-8">That URL is not a guide on Interdot Study.</p>

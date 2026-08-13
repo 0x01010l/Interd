@@ -8,9 +8,18 @@ type Props = {
   type?: 'website' | 'article';
   jsonLd?: unknown;
   published?: string;
+  robots?: string;
 };
 
-export default function SEO({ title, description, path, type = 'website', jsonLd, published }: Props) {
+export default function SEO({
+  title,
+  description,
+  path,
+  type = 'website',
+  jsonLd,
+  published,
+  robots = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+}: Props) {
   useEffect(() => {
     const canonical = `${SITE.url}${path === '/' ? '/' : path}`;
     document.title = title;
@@ -24,7 +33,7 @@ export default function SEO({ title, description, path, type = 'website', jsonLd
       el.content = value;
     };
     setMeta('name', 'description', description);
-    setMeta('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+    setMeta('name', 'robots', robots);
     setMeta('name', 'author', SITE.legal);
     setMeta('property', 'og:title', title);
     setMeta('property', 'og:description', description);
@@ -54,7 +63,7 @@ export default function SEO({ title, description, path, type = 'website', jsonLd
       s.text = JSON.stringify(jsonLd);
       document.head.appendChild(s);
     }
-  }, [title, description, path, type, jsonLd, published]);
+  }, [title, description, path, type, jsonLd, published, robots]);
 
   return null;
 }

@@ -34,7 +34,7 @@ export const PRIVACY_SECTIONS: { heading: string; paragraphs: string[] }[] = [
   {
     heading: '4. Advertising',
     paragraphs: [
-      'We may display ads through Google AdSense when the site is approved. Advertising cookies are used only after Accept all. You can opt out of personalized ads in Google Ads Settings. Ads are not a substitute for the educational guidance on the page and are not an endorsement of any product.',
+      'This site does not currently run advertising. If we later place ads, we will update this policy first and advertising cookies will load only after Accept all. Until then, Accept all only covers Analytics.',
     ],
   },
   {
@@ -73,7 +73,7 @@ export const TERMS_SECTIONS: { heading: string; paragraphs: string[] }[] = [
   {
     heading: 'Liability',
     paragraphs: [
-      `${SITE.legal} is not liable for exam results, school decisions, or third-party ads. Use of the site is at your own judgement. Last updated 13 August 2026.`,
+      `${SITE.legal} is not liable for exam results or school decisions. Use of the site is at your own judgement. Last updated 13 August 2026.`,
     ],
   },
 ];

@@ -1,22 +1,4 @@
 {
-  "navigationFallback": {
-    "rewrite": "/index.html",
-    "exclude": [
-      "/images/*.{png,jpg,gif}",
-      "/css/*",
-      "/assets/*",
-      "/robots.txt",
-      "/sitemap.xml",
-      "/404.html",
-      "/*.js",
-      "/*.css",
-      "/*.ico",
-      "/*.svg",
-      "/*.png",
-      "/*.jpg",
-      "/*.webp"
-    ]
-  },
   "routes": [
     {
       "route": "/sitemap.xml",

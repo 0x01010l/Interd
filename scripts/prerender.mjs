@@ -22,16 +22,18 @@ function escapeHtml(s) {
     .replace(/"/g, '&quot;');
 }
 
-function writeRouteHtml(template, routePath, { title, description, body, bodyHtml, jsonLd }) {
+function writeRouteHtml(template, routePath, { title, description, body, bodyHtml, jsonLd, robots }) {
   const htmlBody = bodyHtml || body || '';
   const canonical = `https://interdot.net${routePath === '/' ? '/' : routePath}`;
   let html = template;
   html = html.replace(/<meta\s+name="description"[^>]*>\s*/gi, '');
   html = html.replace(/<link\s+rel="canonical"[^>]*>\s*/gi, '');
   html = html.replace(/<title>[^<]*<\/title>/i, `<title>${escapeHtml(title)}</title>`);
+  const robotsContent =
+    robots || 'index, follow, max-image-preview:large, max-snippet:-1';
   const metaBlock = [
     `<meta name="description" content="${escapeHtml(description)}" />`,
-    `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />`,
+    `<meta name="robots" content="${robotsContent}" />`,
     `<link rel="canonical" href="${canonical}" />`,
     `<meta property="og:title" content="${escapeHtml(title)}" />`,
     `<meta property="og:description" content="${escapeHtml(description)}" />`,
@@ -173,7 +175,11 @@ function main() {
       path: `/guides/${post.slug}`,
       title: `${post.title} | ${site.name}`,
       description: post.description,
-      body: `<article><h1>${escapeHtml(post.title)}</h1><p><em>${escapeHtml(post.date)} · ${escapeHtml(post.readTime)}</em></p><p>${escapeHtml(post.description)}</p>${post.content.map((p) => `<p>${escapeHtml(p)}</p>`).join('')}</article>`,
+      body: `<article><h1>${escapeHtml(post.title)}</h1><p><em>${escapeHtml(post.date)} · ${escapeHtml(post.readTime)}</em></p><p>${escapeHtml(post.description)}</p>${post.content
+        .map((p) =>
+          p.startsWith('## ') ? `<h2>${escapeHtml(p.slice(3))}</h2>` : `<p>${escapeHtml(p)}</p>`
+        )
+        .join('')}</article>`,
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'Article',
@@ -187,6 +193,21 @@ function main() {
         publisher: { '@type': 'Organization', name: site.name, legalName: site.legal },
         mainEntityOfPage: `https://interdot.net/guides/${post.slug}`,
       },
+    });
+  }
+
+  for (const [from, to] of [
+    ['/blog', '/guides'],
+    ['/tools', '/guides'],
+    ['/services', '/guides'],
+    ['/clients', '/about'],
+  ]) {
+    pages.push({
+      path: from,
+      title: `Moved | ${site.name}`,
+      description: 'This URL has moved.',
+      robots: 'noindex, follow',
+      body: `<article><h1>This page moved</h1><p>Continue at <a href="${to}">${to}</a>.</p><script>location.replace(${JSON.stringify(to)})</script></article>`,
     });
   }
 
