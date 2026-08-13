@@ -1,60 +1,84 @@
 import { Link } from 'react-router-dom';
-import { Waypoints, Github, Twitter, Linkedin } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
+import { SITE } from '../data/site';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-brand-border bg-brand-bg pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <div className="col-span-1 md:col-span-2">
-            <Link to="/" className="flex items-center space-x-2 mb-6">
-              <Waypoints className="w-6 h-6 text-brand-accent" />
-              <span className="font-mono font-bold tracking-tighter text-xl">INTERDOT</span>
+    <footer className="border-t border-brand-line bg-brand-paper mt-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+          <div className="md:col-span-2">
+            <Link to="/" className="flex items-center gap-2 mb-4">
+              <BookOpen className="w-5 h-5 text-brand-accent" />
+              <span className="font-serif font-semibold text-xl">{SITE.name}</span>
             </Link>
-            <p className="text-white/50 max-w-sm mb-6 leading-relaxed">
-              Bridging the gap between raw data and decision through deterministic, 
-              audit-ready AI reasoning layers.
+            <p className="text-brand-muted max-w-md leading-relaxed">{SITE.tagline}</p>
+            <p className="text-sm text-brand-muted mt-4 leading-relaxed">
+              Independent educational guides — not an official WAEC or BECE site. We do not sell
+              leaked papers or grade promises.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-white/30 hover:text-brand-accent transition-colors">
-                <Github className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-white/30 hover:text-brand-accent transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-white/30 hover:text-brand-accent transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div>
           </div>
-          
           <div>
-            <h4 className="font-mono text-xs uppercase tracking-widest text-white/40 mb-6">Platform</h4>
-            <ul className="space-y-4">
-              <li><Link to="/services" className="text-sm text-white/60 hover:text-white transition-colors">Services</Link></li>
-              <li><Link to="/faq" className="text-sm text-white/60 hover:text-white transition-colors">Technical FAQ</Link></li>
-              <li><Link to="/clients" className="text-sm text-white/60 hover:text-white transition-colors">Case Studies</Link></li>
+            <h4 className="eyebrow mb-4">Read</h4>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <Link to="/guides" className="text-brand-muted hover:text-brand-accent">
+                  All guides
+                </Link>
+              </li>
+              <li>
+                <Link to="/guides/waec" className="text-brand-muted hover:text-brand-accent">
+                  WAEC
+                </Link>
+              </li>
+              <li>
+                <Link to="/guides/bece" className="text-brand-muted hover:text-brand-accent">
+                  BECE
+                </Link>
+              </li>
+              <li>
+                <Link to="/guides/writing" className="text-brand-muted hover:text-brand-accent">
+                  How to write
+                </Link>
+              </li>
             </ul>
           </div>
-          
           <div>
-            <h4 className="font-mono text-xs uppercase tracking-widest text-white/40 mb-6">Company</h4>
-            <ul className="space-y-4">
-              <li><Link to="/about" className="text-sm text-white/60 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/contact" className="text-sm text-white/60 hover:text-white transition-colors">Contact</Link></li>
-              <li><Link to="/privacy" className="text-sm text-white/60 hover:text-white transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="text-sm text-white/60 hover:text-white transition-colors">Terms of Use</Link></li>
+            <h4 className="eyebrow mb-4">Publisher</h4>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <Link to="/about" className="text-brand-muted hover:text-brand-accent">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link to="/faq" className="text-brand-muted hover:text-brand-accent">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-brand-muted hover:text-brand-accent">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link to="/privacy" className="text-brand-muted hover:text-brand-accent">
+                  Privacy
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" className="text-brand-muted hover:text-brand-accent">
+                  Terms
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
-        
-        <div className="pt-8 border-t border-brand-border flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-xs text-white/30 font-mono">
-            © 2026 INTERDOT NETWORKS. ALL RIGHTS RESERVED.
+        <div className="pt-6 border-t border-brand-line flex flex-col md:flex-row justify-between gap-3 text-xs text-brand-muted">
+          <p>
+            © 2026 {SITE.legal}. {SITE.name} is a publication of {SITE.legal}.
           </p>
-          <p className="text-xs text-white/30 font-mono">
-            CONTACT@INTERDOT.NET
-          </p>
+          <p>{SITE.email}</p>
         </div>
       </div>
     </footer>
