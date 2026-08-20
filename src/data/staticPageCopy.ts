@@ -27,8 +27,8 @@ export const PRIVACY_SECTIONS: { heading: string; paragraphs: string[] }[] = [
   {
     heading: '3. Cookies, consent, and Google Analytics',
     paragraphs: [
-      'Essential cookies remember your cookie choice (local storage key interdot_cookie_consent_v2). Google Analytics (measurement ID G-CQY6T21J0M) loads only after you choose Accept all. Essential only keeps Analytics off. You can clear site data in your browser to see the banner again.',
-      'Analytics, when allowed, helps us understand which guides are read so we can keep the blog useful. IP anonymization is requested in the Analytics configuration.',
+      'Essential cookies remember your cookie choice (local storage key interdot_cookie_consent_v3). Google Analytics (measurement ID G-CQY6T21J0M) is loaded with Consent Mode: analytics storage stays off until you choose Accept all. Essential only keeps analytics storage denied. You can clear site data in your browser to see the banner again.',
+      'When Accept all is chosen, Analytics helps us understand which guides are read so we can keep the blog useful. IP anonymization is requested in the Analytics configuration.',
     ],
   },
   {

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Cookie } from 'lucide-react';
 
-export const CONSENT_KEY = 'interdot_cookie_consent_v2';
+export const CONSENT_KEY = 'interdot_cookie_consent_v3';
 export type ConsentValue = 'accepted' | 'essential';
 
 export function getCookieConsent(): ConsentValue | null {
