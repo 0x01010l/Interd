@@ -7,21 +7,23 @@ const GA_ID = SITE.gaId;
 
 declare global {
   interface Window {
-    dataLayer: unknown[];
-    gtag: (...args: unknown[]) => void;
+    dataLayer: IArguments[];
+    // Google’s public gtag signature is intentionally loose.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    gtag: (...args: any[]) => void;
   }
 }
 
 function ensureGtag() {
-  if (typeof window.gtag === 'function' && document.getElementById('interdot-gtag')) return;
+  if (document.getElementById('interdot-gtag') && typeof window.gtag === 'function') return;
 
   window.dataLayer = window.dataLayer || [];
-  // Google’s snippet pushes the Arguments object; a rest-array breaks the queue processor.
-  window.gtag = function gtag(..._args: unknown[]) {
-    window.dataLayer.push(arguments as unknown as IArguments);
+  // Exact Google snippet shape — no rest params (bundlers break `arguments` otherwise).
+  window.gtag = function () {
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer.push(arguments);
   };
 
-  // Consent Mode v2 defaults before any config hits fire.
   window.gtag('consent', 'default', {
     ad_storage: 'denied',
     ad_user_data: 'denied',
@@ -64,11 +66,13 @@ function denyAnalyticsConsent() {
 
 function sendPageView(path: string) {
   if (typeof window.gtag !== 'function') return;
-  window.gtag('event', 'page_view', {
+  // Re-config after consent grant is the most reliable GA4 SPA pattern.
+  window.gtag('config', GA_ID, {
     page_path: path,
-    page_location: window.location.origin + path,
+    page_location: `${window.location.origin}${path}`,
     page_title: document.title,
-    send_to: GA_ID,
+    anonymize_ip: true,
+    send_page_view: true,
   });
 }
 
@@ -88,7 +92,6 @@ export default function Analytics() {
         denyAnalyticsConsent();
         setAllowed(false);
       }
-      // null = banner still open; defaults stay denied until they choose
     };
 
     apply(getCookieConsent());
@@ -103,7 +106,9 @@ export default function Analytics() {
   useEffect(() => {
     if (!allowed) return;
     const path = location.pathname + location.search;
-    sendPageView(path);
+    // Defer one tick so consent('update') is applied before page_view/config.
+    const t = window.setTimeout(() => sendPageView(path), 0);
+    return () => window.clearTimeout(t);
   }, [allowed, location.pathname, location.search]);
 
   return null;
