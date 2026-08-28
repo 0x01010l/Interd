@@ -15,38 +15,55 @@ export const PRIVACY_SECTIONS: { heading: string; paragraphs: string[] }[] = [
   {
     heading: '1. Who we are',
     paragraphs: [
-      `${SITE.brand} is published by ${SITE.legal} (“we,” “our”). This policy covers ${SITE.url} — an educational blog about WAEC, BECE, study methods, and exam writing. We do not require accounts. We do not operate a student portal.`,
+      `${SITE.brand} is published by ${SITE.legal} (“we,” “us,” “our”), ${SITE.address.join(', ')}. This policy covers ${SITE.url} — an educational blog about WAEC, BECE, study methods, and exam writing. We do not require accounts or student logins.`,
+      `Data controller: ${SITE.legal}. Contact: ${SITE.email}.`,
     ],
   },
   {
-    heading: '2. What we collect',
+    heading: '2. Information we collect',
     paragraphs: [
-      'We collect technical data needed to run the site (such as IP address and user-agent for security and abuse prevention) and messages you send via email. Do not send exam numbers, national IDs, passwords, or other sensitive identifiers in messages. We do not sell mailing lists.',
+      'Server and security logs may include IP address, browser type, referring page, and timestamps. If you email us, we receive your address and message content. Do not send exam numbers, national IDs, passwords, or other sensitive identifiers.',
+      'We do not sell personal information. We do not buy mailing lists. We do not operate behavioural profiling outside the analytics and advertising tools described below, and only after you grant consent where required.',
     ],
   },
   {
-    heading: '3. Cookies, consent, and Google Analytics',
+    heading: '3. Cookies, Consent Mode, and our CMP',
     paragraphs: [
-      'Essential cookies remember your cookie choice (local storage key interdot_cookie_consent_v3). Google Analytics (measurement ID G-CQY6T21J0M) is loaded with Consent Mode: analytics storage stays off until you choose Accept all. Essential only keeps analytics storage denied. You can clear site data in your browser to see the banner again.',
-      'When Accept all is chosen, Analytics helps us understand which guides are read so we can keep the blog useful. IP anonymization is requested in the Analytics configuration.',
+      'We use a Google-certified consent management platform (Google Funding Choices) together with an on-site cookie banner. Both honour Google Consent Mode v2. Until you choose Accept all, ad_storage, ad_user_data, ad_personalization, and analytics_storage remain denied.',
+      'Your choice is stored locally (key interdot_cookie_consent_v4). Reject all / Essential only keeps non-essential storage denied. Accept all enables Google Analytics (measurement ID G-CQY6T21J0M) and, when ads are active, Google AdSense (publisher ID ca-pub-5026973506244281). IP anonymization is requested in Analytics.',
+      'You can withdraw consent by clearing site data or using the cookie controls in your browser. European visitors may also see Google’s Funding Choices message where required by law.',
     ],
   },
   {
-    heading: '4. Advertising',
+    heading: '4. Google Analytics and advertising partners',
     paragraphs: [
-      'This site does not currently run advertising. If we later place ads, we will update this policy first and advertising cookies will load only after Accept all. Until then, Accept all only covers Analytics.',
+      'Google Analytics helps us understand which guides are useful. Google may process data in the United States and other countries under its own terms: https://policies.google.com/privacy',
+      'We use Google AdSense to monetise the blog. AdSense and its partners may use cookies or similar technologies to serve and measure ads, subject to your consent. Google’s ad technology partners are listed at https://support.google.com/adsense/answer/9012182. Our ads.txt file at /ads.txt declares authorised sellers.',
+      'You can manage ad personalisation in Google’s Ad Settings: https://adssettings.google.com',
     ],
   },
   {
-    heading: '5. Children',
+    heading: '5. Legal bases (EEA/UK visitors)',
+    paragraphs: [
+      'Where GDPR or UK GDPR applies, we rely on consent for analytics and advertising cookies, and on legitimate interests for essential site operation and security logging. You may lodge a complaint with your local supervisory authority.',
+    ],
+  },
+  {
+    heading: '6. Children',
     paragraphs: [
       'The blog is written for school students, including teenagers preparing for BECE and WAEC. We do not knowingly collect personal information from children through accounts, because we do not offer accounts. Parents may email us to request deletion of any message that included a child’s personal data.',
     ],
   },
   {
-    heading: '6. Contact and requests',
+    heading: '7. Retention and security',
     paragraphs: [
-      `Email ${SITE.email} to request access, correction, or deletion of personal data we hold. We use TLS in transit. This policy was last updated 13 August 2026.`,
+      'Email correspondence is kept only as long as needed to respond and maintain records. Analytics data retention follows Google’s account settings. We use TLS in transit and limit access to operational staff.',
+    ],
+  },
+  {
+    heading: '8. Your rights and contact',
+    paragraphs: [
+      `Email ${SITE.email} to request access, correction, deletion, or restriction of personal data we hold, or to object to processing where applicable. This policy was last updated 28 August 2026.`,
     ],
   },
 ];
@@ -89,7 +106,7 @@ export const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: 'Who writes the articles?',
-    a: 'Guides are original explainers produced for this publication, edited for students who sit essay-and-objective papers. They are not copied mark schemes.',
+    a: 'Named writers with classroom experience draft each guide; an editorial reviewer checks accuracy and policy compliance. See our Editorial policy page for credentials. Articles are not copied mark schemes.',
   },
   {
     q: 'Can teachers use these in class?',

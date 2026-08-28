@@ -62,6 +62,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/editorial-policy" className="text-brand-muted hover:text-brand-accent">
+                  Editorial policy
+                </Link>
+              </li>
+              <li>
                 <Link to="/privacy" className="text-brand-muted hover:text-brand-accent">
                   Privacy
                 </Link>

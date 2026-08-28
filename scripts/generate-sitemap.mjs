@@ -34,6 +34,7 @@ const urls = [
   '/faq',
   '/contact',
   '/privacy',
+  '/editorial-policy',
   '/terms',
 ];
 const slugs = loadPosts();

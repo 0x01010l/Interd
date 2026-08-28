@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Cookie } from 'lucide-react';
 
-export const CONSENT_KEY = 'interdot_cookie_consent_v3';
+export const CONSENT_KEY = 'interdot_cookie_consent_v4';
 export type ConsentValue = 'accepted' | 'essential';
 
 export function getCookieConsent(): ConsentValue | null {
@@ -42,16 +42,17 @@ export default function CookieConsent() {
             <Cookie className="w-5 h-5 text-brand-accent" />
           </div>
           <div className="flex-1 min-w-0">
-            <h2 className="font-serif font-semibold text-lg mb-2">Cookie preferences</h2>
+            <h2 className="font-serif font-semibold text-lg mb-2">Privacy &amp; cookie choices</h2>
             <p className="text-sm text-brand-muted leading-relaxed mb-4">
-              Essential cookies run the site. Google Analytics loads only if you choose Accept all.
-              Details are in our{' '}
+              We use essential storage for your cookie choice. With your permission we also use Google
+              Analytics and Google AdSense (via Google Funding Choices, a certified CMP). Reject all
+              keeps non-essential cookies off. Details in our{' '}
               <Link to="/privacy" className="text-brand-accent font-semibold hover:underline">
                 Privacy Policy
               </Link>
               .
             </p>
-            <div className="flex flex-col sm:flex-row gap-2">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-2">
               <button
                 type="button"
                 onClick={() => save('accepted')}
@@ -64,7 +65,7 @@ export default function CookieConsent() {
                 onClick={() => save('essential')}
                 className="border border-brand-line text-brand-ink px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-brand-bg"
               >
-                Essential only
+                Reject all
               </button>
             </div>
           </div>

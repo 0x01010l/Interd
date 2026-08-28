@@ -4,6 +4,7 @@ import About from './pages/About';
 import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
+import EditorialPolicy from './pages/EditorialPolicy';
 import Terms from './pages/Terms';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
@@ -31,7 +32,8 @@ export default function App() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />
-        <Route path="/privacy-policy" element={<Privacy />} />
+        <Route path="/privacy-policy" element={<Navigate to="/privacy" replace />} />
+        <Route path="/editorial-policy" element={<EditorialPolicy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/services" element={<Navigate to="/guides" replace />} />
         <Route path="/clients" element={<Navigate to="/about" replace />} />

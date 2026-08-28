@@ -13,6 +13,18 @@
         "Content-Type": "text/plain; charset=utf-8",
         "Cache-Control": "public, max-age=3600"
       }
+    },
+    {
+      "route": "/ads.txt",
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "public, max-age=3600"
+      }
+    },
+    {
+      "route": "/privacy-policy",
+      "redirect": "/privacy",
+      "statusCode": 301
     }
   ],
   "responseOverrides": {

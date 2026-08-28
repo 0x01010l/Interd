@@ -41,6 +41,14 @@ export default function About() {
             <br />
             Address: {SITE.address.join(', ')}
           </p>
+          <h2>Editorial team</h2>
+          <p>
+            Guides are written by named educators and reviewed before publication. See our{' '}
+            <Link to="/editorial-policy" className="text-brand-accent font-semibold hover:underline">
+              editorial policy
+            </Link>{' '}
+            for writer credentials, source standards, and how to request a correction.
+          </p>
           <h2>Editorial standard</h2>
           <p>{ABOUT_COPY.editorial}</p>
           <h2>How a guide is written</h2>
