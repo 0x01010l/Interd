@@ -1,8 +1,15 @@
 import PageLayout from '../components/PageLayout';
+import { getPageSeo } from '../data/seo';
 
 export default function Terms() {
+  const seo = getPageSeo('/terms');
   return (
-    <PageLayout title="Terms of Use">
+    <PageLayout
+      title={seo.title}
+      description={seo.description}
+      path="/terms"
+      breadcrumbLabel="Terms of Use"
+    >
       <section className="py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="mono-label mb-4">Legal</h2>

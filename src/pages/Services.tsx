@@ -2,6 +2,7 @@ import PageLayout from '../components/PageLayout';
 import { motion } from 'motion/react';
 import { BarChart3, Shield, Cpu, Database, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { getPageSeo } from '../data/seo';
 
 const VectorAnimation = ({ type }: { type: number }) => {
   if (type === 0) {
@@ -120,7 +121,21 @@ export default function Services() {
   ];
 
   return (
-    <PageLayout title="Services">
+    <PageLayout
+      title={getPageSeo('/services').title}
+      description={getPageSeo('/services').description}
+      path="/services"
+      breadcrumbLabel="Services"
+      jsonLd={{
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: 'Interdot Reasoning Layer',
+        provider: { '@type': 'Organization', name: 'FIX FIGURES LLC' },
+        description: getPageSeo('/services').description,
+        serviceType: 'Reasoning-as-a-Service',
+        areaServed: 'Worldwide',
+      }}
+    >
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-20">

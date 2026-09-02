@@ -1,10 +1,23 @@
 import PageLayout from '../components/PageLayout';
 import { Target, Eye, ShieldCheck, Zap } from 'lucide-react';
-
+import { getPageSeo } from '../data/seo';
 
 export default function About() {
+  const seo = getPageSeo('/about');
   return (
-    <PageLayout title="About Us">
+    <PageLayout
+      title={seo.title}
+      description={seo.description}
+      path="/about"
+      breadcrumbLabel="About"
+      jsonLd={{
+        '@context': 'https://schema.org',
+        '@type': 'AboutPage',
+        name: seo.title,
+        url: 'https://interdot.net/about',
+        description: seo.description,
+      }}
+    >
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-20">

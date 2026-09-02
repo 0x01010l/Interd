@@ -1,8 +1,10 @@
 import PageLayout from '../components/PageLayout';
 import { Quote, ExternalLink, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { getPageSeo } from '../data/seo';
 
 export default function Testimonials() {
+  const seo = getPageSeo('/clients');
   const caseStudies = [
     {
       quote: "The 'Logic Trace' feature changed how we approach high-frequency trading. We no longer just see the 'what'—we understand the causal chain behind every market shift.",
@@ -25,7 +27,12 @@ export default function Testimonials() {
   ];
 
   return (
-    <PageLayout title="Case Studies">
+    <PageLayout
+      title={seo.title}
+      description={seo.description}
+      path="/clients"
+      breadcrumbLabel="Case Studies"
+    >
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-20">

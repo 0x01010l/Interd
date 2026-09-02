@@ -2,12 +2,40 @@ import PageLayout from '../components/PageLayout';
 import { motion } from 'motion/react';
 import { Shield, BarChart3, Cpu, ArrowRight, Zap, Database, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { getPageSeo, speakableJsonLd } from '../data/seo';
 
 export default function Home() {
+  const seo = getPageSeo('/');
+  const speakable = speakableJsonLd('/', ['#speakable-home h1', '#speakable-home .speakable-lead']);
+
   return (
-    <PageLayout>
-      {/* Hero Section */}
-      <section className="relative py-24 overflow-hidden">
+    <PageLayout
+      title={seo.title}
+      description={seo.description}
+      path="/"
+      breadcrumbLabel="Home"
+      jsonLd={
+        speakable
+          ? [
+              speakable,
+              {
+                '@context': 'https://schema.org',
+                '@type': 'ProfessionalService',
+                name: 'Interdot Reasoning-as-a-Service',
+                url: 'https://interdot.net',
+                description: seo.description,
+                areaServed: 'Worldwide',
+                serviceType: [
+                  'Financial Logic Synthesis',
+                  'Automated Cyber Recon',
+                  'Custom Vector Training',
+                ],
+              },
+            ]
+          : undefined
+      }
+    >
+      <section className="relative py-24 overflow-hidden" id="speakable-home">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,#0070FF22,transparent_50%)]" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-4xl mx-auto">
@@ -19,22 +47,29 @@ export default function Home() {
               <Zap className="w-4 h-4 text-brand-accent" />
               <span className="mono-label !text-brand-accent">V2.0 Reasoning Engine Live</span>
             </motion.div>
-            
+
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1]">
               Reasoning-as-a-<span className="text-brand-accent">Service</span>
             </h1>
-            
-            <p className="text-xl text-white/60 mb-12 leading-relaxed max-w-2xl mx-auto">
-              Interdot synthesizes raw data into deterministic logic chains. 
-              High-fidelity intelligence for Finance and Cybersecurity sectors.
+
+            <p className="speakable-lead text-xl text-white/60 mb-12 leading-relaxed max-w-2xl mx-auto">
+              Interdot synthesizes raw data into deterministic logic chains. High-fidelity
+              intelligence for finance and cybersecurity — with audit-ready Logic Traces on every
+              output.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/contact" className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accent/90 text-white px-8 py-4 rounded-xl font-bold transition-all hover:scale-105 shadow-xl shadow-brand-accent/20 flex items-center justify-center space-x-2">
+              <Link
+                to="/contact"
+                className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accent/90 text-white px-8 py-4 rounded-xl font-bold transition-all hover:scale-105 shadow-xl shadow-brand-accent/20 flex items-center justify-center space-x-2"
+              >
                 <span>Get In Touch</span>
                 <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link to="/services" className="w-full sm:w-auto glass hover:bg-white/5 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center justify-center">
+              <Link
+                to="/services"
+                className="w-full sm:w-auto glass hover:bg-white/5 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center justify-center"
+              >
                 Explore Services
               </Link>
             </div>
@@ -42,26 +77,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Bento Grid Sectors */}
       <section className="py-24 bg-brand-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16">
             <h2 className="mono-label mb-4">Core Sectors</h2>
             <h3 className="text-3xl font-bold">Industry-Specific Logic Synthesis</h3>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Large Bento Card: Finance */}
             <div className="md:col-span-2 bento-card flex flex-col justify-between group">
               <div>
                 <div className="w-12 h-12 bg-brand-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 transition-colors">
                   <BarChart3 className="w-6 h-6 text-brand-accent" />
                 </div>
-                <h4 className="text-2xl font-bold mb-4">Financial Logic Synthesis</h4>
+                <h4 className="text-2xl font-bold mb-4">
+                  <Link to="/services" className="hover:text-brand-accent transition-colors">
+                    Financial Logic Synthesis
+                  </Link>
+                </h4>
                 <p className="text-white/50 leading-relaxed mb-8 max-w-lg">
-                  Beyond simple trend analysis. Our engine reconstructs market movements 
-                  into audit-ready logic traces, identifying causal relationships in 
-                  high-frequency data streams.
+                  Beyond simple trend analysis. Our engine reconstructs market movements into
+                  audit-ready logic traces, identifying causal relationships in high-frequency data
+                  streams.
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-4 border-t border-brand-border pt-6">
@@ -80,15 +117,14 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Small Bento Card: Cyber */}
             <div className="bento-card group">
               <div className="w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-500/20 transition-colors">
                 <Shield className="w-6 h-6 text-red-500" />
               </div>
               <h4 className="text-xl font-bold mb-4">Automated Cyber Recon</h4>
               <p className="text-white/50 text-sm leading-relaxed">
-                Deterministic threat modeling. We map attack surfaces and predict 
-                adversary logic before the first packet is sent.
+                Deterministic threat modeling. We map attack surfaces and predict adversary logic
+                before the first packet is sent.
               </p>
               <div className="mt-8 pt-6 border-t border-brand-border">
                 <div className="flex items-center justify-between mb-2">
@@ -96,7 +132,7 @@ export default function Home() {
                   <span className="text-xs text-red-500 font-mono">ACTIVE</span>
                 </div>
                 <div className="w-full bg-white/5 h-1 rounded-full overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: '85%' }}
                     className="h-full bg-red-500"
@@ -105,19 +141,17 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Small Bento Card: Vector Training */}
             <div className="bento-card group">
               <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-purple-500/20 transition-colors">
                 <Cpu className="w-6 h-6 text-purple-500" />
               </div>
               <h4 className="text-xl font-bold mb-4">Custom Vector Training</h4>
               <p className="text-white/50 text-sm leading-relaxed">
-                Train reasoning models on your proprietary datasets with zero 
-                leakage. Private, secure, and deterministic.
+                Train reasoning models on your proprietary datasets with zero leakage. Private,
+                secure, and deterministic.
               </p>
             </div>
 
-            {/* Medium Bento Card: Data Intelligence */}
             <div className="md:col-span-2 bento-card group flex flex-col md:flex-row gap-8">
               <div className="flex-1">
                 <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-500/20 transition-colors">
@@ -125,8 +159,8 @@ export default function Home() {
                 </div>
                 <h4 className="text-xl font-bold mb-4">Deterministic Intelligence</h4>
                 <p className="text-white/50 text-sm leading-relaxed">
-                  Our "Reasoning Layer" ensures that every output is backed by a 
-                  verifiable logic chain. No hallucinations, just pure synthesis.
+                  Our Reasoning Layer ensures every output is backed by a verifiable logic chain. No
+                  hallucinations — just pure synthesis.
                 </p>
               </div>
               <div className="flex-1 glass rounded-xl p-4 bg-white/[0.02]">
@@ -158,26 +192,43 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How it Works: Logic Flow */}
       <section className="py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="mono-label mb-4">The Architecture</h2>
             <h3 className="text-4xl font-bold">The Reasoning Layer</h3>
           </div>
-          
+
           <div className="relative">
-            {/* Background Line */}
             <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-border to-transparent -translate-y-1/2 hidden md:block" />
-            
+
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
               {[
-                { step: '01', title: 'Ingestion', desc: 'Raw multi-modal data streams ingested via secure API endpoints.' },
-                { step: '02', title: 'Vectorization', desc: 'Data is mapped into high-dimensional vector space for relational analysis.' },
-                { step: '03', title: 'Reasoning', desc: 'Our proprietary engine synthesizes causal logic chains across vectors.' },
-                { step: '04', title: 'Synthesis', desc: 'Deterministic, audit-ready intelligence delivered to your stack.' },
+                {
+                  step: '01',
+                  title: 'Ingestion',
+                  desc: 'Raw multi-modal data streams ingested via secure API endpoints.',
+                },
+                {
+                  step: '02',
+                  title: 'Vectorization',
+                  desc: 'Data is mapped into high-dimensional vector space for relational analysis.',
+                },
+                {
+                  step: '03',
+                  title: 'Reasoning',
+                  desc: 'Our proprietary engine synthesizes causal logic chains across vectors.',
+                },
+                {
+                  step: '04',
+                  title: 'Synthesis',
+                  desc: 'Deterministic, audit-ready intelligence delivered to your stack.',
+                },
               ].map((item, i) => (
-                <div key={i} className="glass p-8 rounded-2xl relative group hover:border-brand-accent/50 transition-colors">
+                <div
+                  key={i}
+                  className="glass p-8 rounded-2xl relative group hover:border-brand-accent/50 transition-colors"
+                >
                   <div className="text-4xl font-mono font-bold text-brand-accent/20 mb-4 group-hover:text-brand-accent/40 transition-colors">
                     {item.step}
                   </div>
@@ -190,18 +241,57 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Semantic entity cluster — topic authority for RaaS queries */}
+      <section className="py-20 border-t border-brand-border" aria-labelledby="raas-explainer">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 id="raas-explainer" className="text-2xl font-bold mb-6">
+            What is Reasoning-as-a-Service?
+          </h2>
+          <p className="text-white/60 leading-relaxed mb-4">
+            Reasoning-as-a-Service (RaaS) is an AI delivery model where conclusions are synthesized
+            as verifiable logic chains — not probabilistic text completions. Interdot maps your data
+            into vector space, reasons across causal relationships, and returns audit-ready outputs
+            with a{' '}
+            <Link to="/faq" className="text-brand-accent hover:underline">
+              Logic Trace
+            </Link>{' '}
+            for every decision.
+          </p>
+          <p className="text-white/60 leading-relaxed">
+            Quant funds use our{' '}
+            <Link to="/services" className="text-brand-accent hover:underline">
+              financial logic synthesis
+            </Link>{' '}
+            for market intelligence. CISO teams use{' '}
+            <Link to="/services" className="text-brand-accent hover:underline">
+              automated cyber recon
+            </Link>{' '}
+            to predict adversary behavior. See{' '}
+            <Link to="/clients" className="text-brand-accent hover:underline">
+              case studies
+            </Link>{' '}
+            or{' '}
+            <Link to="/contact" className="text-brand-accent hover:underline">
+              request API access
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+
       <section className="py-24">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="glass p-12 rounded-[2.5rem] text-center border-brand-accent/20 relative overflow-hidden">
             <div className="absolute inset-0 bg-brand-accent/5" />
             <h3 className="text-4xl font-bold mb-6 relative">Ready to bridge the gap?</h3>
             <p className="text-white/60 mb-10 max-w-xl mx-auto relative">
-              Join the world's leading quant funds and cybersecurity firms using 
-              Interdot for deterministic reasoning.
+              Join quant funds and cybersecurity firms using Interdot for deterministic reasoning.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative">
-              <Link to="/contact" className="bg-brand-accent hover:bg-brand-accent/90 text-white px-8 py-4 rounded-xl font-bold transition-all">
+              <Link
+                to="/contact"
+                className="bg-brand-accent hover:bg-brand-accent/90 text-white px-8 py-4 rounded-xl font-bold transition-all"
+              >
                 Get In Touch
               </Link>
               <Link to="/contact" className="text-white/60 hover:text-white transition-colors">

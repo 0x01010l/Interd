@@ -1,8 +1,15 @@
 import PageLayout from '../components/PageLayout';
+import { getPageSeo } from '../data/seo';
 
 export default function Privacy() {
+  const seo = getPageSeo('/privacy');
   return (
-    <PageLayout title="Privacy Policy">
+    <PageLayout
+      title={seo.title}
+      description={seo.description}
+      path="/privacy"
+      breadcrumbLabel="Privacy Policy"
+    >
       <section className="py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="mono-label mb-4">Legal</h2>

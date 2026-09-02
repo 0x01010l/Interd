@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Waypoints, Github, Twitter, Linkedin } from 'lucide-react';
+import { Waypoints, Github, Linkedin } from 'lucide-react';
+import { SITE } from '../data/site';
 
 export default function Footer() {
   return (
@@ -16,13 +17,20 @@ export default function Footer() {
               audit-ready AI reasoning layers.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-white/30 hover:text-brand-accent transition-colors">
+              <a
+                href={SITE.sameAs[0]}
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="text-white/30 hover:text-brand-accent transition-colors"
+              >
                 <Github className="w-5 h-5" />
               </a>
-              <a href="#" className="text-white/30 hover:text-brand-accent transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-white/30 hover:text-brand-accent transition-colors">
+              <a
+                href={SITE.sameAs[1]}
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="text-white/30 hover:text-brand-accent transition-colors"
+              >
                 <Linkedin className="w-5 h-5" />
               </a>
             </div>

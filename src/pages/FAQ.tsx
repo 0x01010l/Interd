@@ -1,33 +1,27 @@
 import PageLayout from '../components/PageLayout';
 import { HelpCircle, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { FAQ_ITEMS, getPageSeo } from '../data/seo';
 
 export default function FAQ() {
-  const faqs = [
-    {
-      q: "How do you prevent hallucinations?",
-      a: "Our engine uses a deterministic reasoning layer that requires every output to be synthesized from a verifiable chain of vector relationships. If a logic path cannot be validated against the source data, the system flags it as 'Inconclusive' rather than guessing."
-    },
-    {
-      q: "What is the latency of the reasoning API?",
-      a: "Our core engine is optimized for high-frequency environments. Standard reasoning synthesis for complex financial vectors averages 12-15ms. Custom deep-vector training models may vary based on dataset complexity."
-    },
-    {
-      q: "How is data vectorized for cybersecurity?",
-      a: "We map network behaviors, adversary tactics (MITRE ATT&CK), and system logs into a multi-dimensional vector space. This allows our engine to reason across disparate data sources to identify the logical progression of a threat."
-    },
-    {
-      q: "Is my proprietary data used to train global models?",
-      a: "No. Interdot employs strict data isolation protocols. Custom vector training is performed in siloed environments, and your data never leaks into our baseline reasoning engine."
-    },
-    {
-      q: "Can I audit the reasoning chains?",
-      a: "Yes. Every API response includes a 'Logic Trace' object—a step-by-step breakdown of the causal relationships the engine used to reach its conclusion."
-    }
-  ];
+  const seo = getPageSeo('/faq');
 
   return (
-    <PageLayout title="FAQ">
+    <PageLayout
+      title={seo.title}
+      description={seo.description}
+      path="/faq"
+      breadcrumbLabel="FAQ"
+      jsonLd={{
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: FAQ_ITEMS.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      }}
+    >
       <section className="py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
@@ -39,7 +33,7 @@ export default function FAQ() {
           </div>
 
           <div className="space-y-6">
-            {faqs.map((faq, i) => (
+            {FAQ_ITEMS.map((faq, i) => (
               <div key={i} className="bento-card group">
                 <div className="flex items-start space-x-4">
                   <div className="mt-1">
@@ -49,9 +43,7 @@ export default function FAQ() {
                     <h3 className="text-xl font-bold mb-4 group-hover:text-brand-accent transition-colors">
                       {faq.q}
                     </h3>
-                    <p className="text-white/60 leading-relaxed">
-                      {faq.a}
-                    </p>
+                    <p className="text-white/60 leading-relaxed">{faq.a}</p>
                   </div>
                 </div>
               </div>
@@ -63,7 +55,10 @@ export default function FAQ() {
             <p className="text-white/60 mb-8">
               Our technical team is available for deep-dive consultations.
             </p>
-            <Link to="/contact" className="inline-flex items-center space-x-2 text-brand-accent font-bold hover:underline">
+            <Link
+              to="/contact"
+              className="inline-flex items-center space-x-2 text-brand-accent font-bold hover:underline"
+            >
               <span>Contact Technical Support</span>
               <ChevronRight className="w-5 h-5" />
             </Link>

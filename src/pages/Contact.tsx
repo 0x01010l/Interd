@@ -1,8 +1,10 @@
 import PageLayout from '../components/PageLayout';
 import { Mail, MessageSquare, Globe } from 'lucide-react';
 import { useEffect } from 'react';
+import { getPageSeo } from '../data/seo';
 
 export default function Contact() {
+  const seo = getPageSeo('/contact');
   useEffect(() => {
     const script = document.createElement('script');
     script.textContent = `var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}`;
@@ -10,7 +12,12 @@ export default function Contact() {
   }, []);
 
   return (
-    <PageLayout title="Contact">
+    <PageLayout
+      title={seo.title}
+      description={seo.description}
+      path="/contact"
+      breadcrumbLabel="Contact"
+    >
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">

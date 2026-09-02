@@ -1,30 +1,40 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 import { motion } from 'motion/react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { useLocation } from 'react-router-dom';
+import SEO from './SEO';
 
 interface PageLayoutProps {
   children: ReactNode;
   title?: string;
+  description?: string;
+  path?: string;
+  breadcrumbLabel?: string;
+  jsonLd?: object | object[];
+  noindex?: boolean;
 }
 
-export default function PageLayout({ children, title }: PageLayoutProps) {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    if (title) {
-      document.title = `${title} | Interdot`;
-    } else {
-      document.title = 'Interdot | Reasoning-as-a-Service';
-    }
-  }, [pathname, title]);
-
+export default function PageLayout({
+  children,
+  title,
+  description,
+  path,
+  breadcrumbLabel,
+  jsonLd,
+  noindex,
+}: PageLayoutProps) {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title={title}
+        description={description}
+        path={path}
+        breadcrumbLabel={breadcrumbLabel}
+        jsonLd={jsonLd}
+        noindex={noindex}
+      />
       <Navbar />
-      <main className="flex-grow pt-16">
+      <main className="flex-grow pt-16" id="main-content">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
