@@ -79,10 +79,10 @@ export default function BlogPost() {
             </span>
           </p>
 
-          <div className="blog-body space-y-6 text-white/70 leading-relaxed text-lg">
+          <div className="blog-body">
             {post.content.map((block, i) =>
               block.startsWith('## ') ? (
-                <h2 key={i} className="text-2xl font-bold text-white pt-6">
+                <h2 key={i} id={`section-${i}`}>
                   {block.slice(3)}
                 </h2>
               ) : (

@@ -10,13 +10,18 @@
   <url><loc>https://interdot.net/terms</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.3</priority></url>
   <url><loc>https://interdot.net/blog</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://interdot.net/blog/trustworthy-ai-copilot-logic-traces</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://interdot.net/blog/agent-memory-without-data-leakage</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://interdot.net/blog/enterprise-ai-roadmap-chatbot-to-decision-system</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://interdot.net/blog/multi-agent-systems-that-dont-fight-each-other</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://interdot.net/blog/ai-agent-security-mitre-attack-playbook</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://interdot.net/blog/stop-ai-agent-hallucinations-in-production</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://interdot.net/blog/ai-agent-observability-what-to-log</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://interdot.net/blog/real-time-ai-reasoning-latency-budget</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://interdot.net/blog/stop-ai-agent-hallucinations-in-production</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://interdot.net/blog/rag-vs-reasoning-layer-which-one-do-you-need</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://interdot.net/blog/audit-ai-outputs-for-financial-compliance</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://interdot.net/blog/logic-trace-vs-chain-of-thought-for-enterprise</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://interdot.net/blog/reasoning-engineering-beyond-prompt-engineering</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://interdot.net/blog/single-reasoning-layer-vs-chain-of-agents</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://interdot.net/blog/logic-trace-vs-chain-of-thought-for-enterprise</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://interdot.net/blog/agent-memory-without-data-leakage</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://interdot.net/blog/building-ai-agents-that-fail-safely</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://interdot.net/blog/how-to-evaluate-ai-reasoning-vendors</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://interdot.net/blog/audit-ai-outputs-for-financial-compliance</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
 </urlset>

@@ -1,5 +1,6 @@
 import { POSTS1 } from './_posts1';
 import { POSTS2 } from './_posts2';
+import { POSTS3 } from './_posts3';
 
 export type BlogPost = {
   slug: string;
@@ -20,7 +21,7 @@ export const BLOG_CATEGORIES = {
 
 export type BlogCategory = keyof typeof BLOG_CATEGORIES;
 
-export const BLOG_POSTS: BlogPost[] = [...POSTS1, ...POSTS2].sort((a, b) =>
+export const BLOG_POSTS: BlogPost[] = [...POSTS1, ...POSTS2, ...POSTS3].sort((a, b) =>
   b.date.localeCompare(a.date)
 );
 
