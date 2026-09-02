@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { Shield, BarChart3, Cpu, ArrowRight, Zap, Database, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { getPageSeo, speakableJsonLd } from '../data/seo';
+import { BLOG_POSTS } from '../data/blogPosts';
 
 export default function Home() {
   const seo = getPageSeo('/');
@@ -276,6 +277,31 @@ export default function Home() {
             </Link>
             .
           </p>
+        </div>
+      </section>
+
+      <section className="py-20 border-t border-brand-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+              <p className="mono-label mb-3">From the blog</p>
+              <h2 className="text-3xl font-bold">AI agents &amp; reasoning methods</h2>
+            </div>
+            <Link to="/blog" className="text-brand-accent font-semibold hover:underline font-mono text-sm">
+              All articles →
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {BLOG_POSTS.slice(0, 3).map((post) => (
+              <Link key={post.slug} to={`/blog/${post.slug}`} className="bento-card group">
+                <p className="mono-label mb-2">{post.date}</p>
+                <h3 className="font-bold text-lg mb-2 group-hover:text-brand-accent transition-colors leading-snug">
+                  {post.title}
+                </h3>
+                <p className="text-sm text-white/50 line-clamp-2">{post.description}</p>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

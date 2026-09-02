@@ -14,6 +14,11 @@
 - Contact: https://interdot.net/contact
 - Privacy: https://interdot.net/privacy
 - Terms: https://interdot.net/terms
+- Blog: https://interdot.net/blog
+
+## Blog (AI agents & reasoning)
+
+High-demand guides on stopping agent hallucinations, RAG vs reasoning layers, multi-agent orchestration, compliance audits, and trustworthy copilots. Start at /blog.
 
 ## Core offerings
 

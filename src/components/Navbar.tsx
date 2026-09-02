@@ -9,6 +9,7 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'Services', path: '/services' },
+    { name: 'Blog', path: '/blog' },
     { name: 'About', path: '/about' },
     { name: 'FAQ', path: '/faq' },
     { name: 'Case Studies', path: '/clients' },
@@ -32,7 +33,10 @@ export default function Navbar() {
                 key={link.path}
                 to={link.path}
                 className={`text-sm font-medium transition-colors hover:text-brand-accent ${
-                  location.pathname === link.path ? 'text-brand-accent' : 'text-white/70'
+                  location.pathname === link.path ||
+                  (link.path === '/blog' && location.pathname.startsWith('/blog'))
+                    ? 'text-brand-accent'
+                    : 'text-white/70'
                 }`}
               >
                 {link.name}

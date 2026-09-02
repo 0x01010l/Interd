@@ -109,6 +109,13 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     description:
       'Terms governing use of the Interdot reasoning platform, intellectual property, and non-reliance clause for financial and security decisions.',
   },
+  '/blog': {
+    path: '/blog',
+    title: 'AI Agents & Reasoning Blog | Interdot',
+    description:
+      'Practical guides on stopping agent hallucinations, RAG vs reasoning layers, multi-agent orchestration, AI compliance, and building trustworthy copilots.',
+    keywords: ['AI agents blog', 'AI reasoning', 'enterprise AI guides', 'RaaS'],
+  },
 };
 
 export function getPageSeo(path: string): PageSeo {
