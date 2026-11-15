@@ -1,4 +1,4 @@
-import { useRef, type PointerEvent } from 'react';
+import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import {
   motion,
   useInView,
@@ -120,7 +120,8 @@ export default function AdvisoryNetworkVisual() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: '100px', amount: 0.12 });
   const reduceMotion = useReducedMotion();
-  const ambient = inView && !reduceMotion;
+  const [constructed, setConstructed] = useState(false);
+  const ambient = inView && constructed && !reduceMotion;
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const backX = useSpring(useTransform(pointerX, [-0.5, 0.5], [-10, 10]), {
@@ -148,6 +149,16 @@ export default function AdvisoryNetworkVisual() {
     damping: 25,
   });
 
+  useEffect(() => {
+    if (!inView || constructed) return;
+    if (reduceMotion) {
+      setConstructed(true);
+      return;
+    }
+    const timer = window.setTimeout(() => setConstructed(true), 1900);
+    return () => window.clearTimeout(timer);
+  }, [constructed, inView, reduceMotion]);
+
   const trackPointer = (event: PointerEvent<HTMLDivElement>) => {
     if (reduceMotion || event.pointerType === 'touch') return;
     const rect = event.currentTarget.getBoundingClientRect();
@@ -171,19 +182,49 @@ export default function AdvisoryNetworkVisual() {
     >
       <motion.div
         style={{ x: backX, y: backY }}
+        initial={{ opacity: 0, scale: 0.5 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
         className="pointer-events-none absolute inset-[4%] will-change-transform"
       >
         <div className="absolute left-[8%] top-[8%] h-[68%] w-[68%] rounded-full bg-[radial-gradient(circle,rgba(0,112,255,.13),rgba(96,165,250,.045)_48%,transparent_72%)]" />
         <div className="absolute bottom-[2%] right-[-4%] h-[58%] w-[58%] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,.12),transparent_70%)]" />
         <motion.div
+          initial={{ opacity: 0, scale: 0.65 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
           animate={ambient ? { rotate: 360 } : { rotate: 0 }}
-          transition={{ duration: 42, repeat: Infinity, ease: 'linear' }}
+          transition={{
+            opacity: { duration: 0.45, delay: 0.15 },
+            scale: { duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] },
+            rotate: { duration: 42, repeat: Infinity, ease: 'linear' },
+          }}
           className="absolute inset-[9%] rounded-full border border-dashed border-blue-200/70 will-change-transform"
         />
         <motion.div
+          initial={{ opacity: 0, scale: 0.65 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
           animate={ambient ? { rotate: -360 } : { rotate: 0 }}
-          transition={{ duration: 58, repeat: Infinity, ease: 'linear' }}
+          transition={{
+            opacity: { duration: 0.45, delay: 0.28 },
+            scale: { duration: 0.8, delay: 0.28, ease: [0.22, 1, 0.36, 1] },
+            rotate: { duration: 58, repeat: Infinity, ease: 'linear' },
+          }}
           className="absolute inset-[19%] rounded-full border border-blue-100/90 will-change-transform"
+        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.25 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          animate={ambient ? { rotate: 360 } : { rotate: 0 }}
+          transition={{
+            opacity: { duration: 0.5, delay: 0.42 },
+            scale: { duration: 0.9, delay: 0.42, ease: [0.22, 1, 0.36, 1] },
+            rotate: { duration: 16, repeat: Infinity, ease: 'linear' },
+          }}
+          className="absolute inset-[27%] rounded-full bg-[conic-gradient(from_0deg,transparent_0deg,rgba(0,112,255,.12)_35deg,transparent_80deg,transparent_300deg,rgba(56,189,248,.1)_335deg,transparent_360deg)] will-change-transform"
         />
       </motion.div>
 
@@ -215,10 +256,37 @@ export default function AdvisoryNetworkVisual() {
             </radialGradient>
           </defs>
 
-          <ellipse cx="310" cy="306" rx="238" ry="126" stroke="#dbeafe" strokeDasharray="4 8" />
-          <ellipse cx="310" cy="306" rx="160" ry="247" stroke="#e4efff" />
-          <ellipse cx="310" cy="306" rx="206" ry="205" stroke="#edf5ff" transform="rotate(38 310 306)" />
-          <circle cx="310" cy="306" r="145" fill="url(#core-glow)" />
+          {[
+            { rx: 238, ry: 126, stroke: '#dbeafe', dash: '4 8', rotate: 0 },
+            { rx: 160, ry: 247, stroke: '#e4efff', dash: undefined, rotate: 0 },
+            { rx: 206, ry: 205, stroke: '#edf5ff', dash: undefined, rotate: 38 },
+          ].map((ring, i) => (
+            <motion.ellipse
+              key={`${ring.rx}-${ring.ry}`}
+              cx="310"
+              cy="306"
+              rx={ring.rx}
+              ry={ring.ry}
+              stroke={ring.stroke}
+              strokeDasharray={ring.dash}
+              transform={ring.rotate ? `rotate(${ring.rotate} 310 306)` : undefined}
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.16 + i * 0.13, ease: 'easeOut' }}
+            />
+          ))}
+          <motion.circle
+            cx="310"
+            cy="306"
+            r="145"
+            fill="url(#core-glow)"
+            initial={{ opacity: 0, scale: 0.25 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            style={{ transformOrigin: '310px 306px' }}
+          />
 
           {ribbons.map((ribbon, i) => (
             <motion.path
@@ -234,8 +302,8 @@ export default function AdvisoryNetworkVisual() {
               viewport={{ once: true }}
               animate={ambient && i < 3 ? { strokeDashoffset: [0, -60] } : { strokeDashoffset: 0 }}
               transition={{
-                pathLength: { duration: 1.1, delay: 0.12 + i * 0.08 },
-                opacity: { duration: 0.7, delay: 0.12 + i * 0.08 },
+                pathLength: { duration: 1.1, delay: 0.48 + i * 0.08 },
+                opacity: { duration: 0.7, delay: 0.48 + i * 0.08 },
                 strokeDashoffset: { duration: 4 + i, repeat: Infinity, ease: 'linear' },
               }}
             />
@@ -259,7 +327,7 @@ export default function AdvisoryNetworkVisual() {
                 initial={{ pathLength: 0, opacity: 0 }}
                 whileInView={{ pathLength: 1, opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: 0.22 + i * 0.014 }}
+                transition={{ duration: 0.55, delay: 0.88 + i * 0.014 }}
               />
             ))}
 
@@ -273,7 +341,7 @@ export default function AdvisoryNetworkVisual() {
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: i % 4 === 0 ? 0.08 : 0.025 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.4 + i * 0.025 }}
+                  transition={{ delay: 1.05 + i * 0.025 }}
                 />
                 <motion.circle
                   cx={cx}
@@ -285,7 +353,7 @@ export default function AdvisoryNetworkVisual() {
                   initial={{ scale: 0, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ type: 'spring', delay: 0.34 + i * 0.025 }}
+                  transition={{ type: 'spring', delay: 1 + i * 0.025 }}
                   style={{ transformOrigin: `${cx}px ${cy}px` }}
                 />
               </g>
@@ -325,11 +393,25 @@ export default function AdvisoryNetworkVisual() {
         </svg>
 
         <motion.div
+          initial={{ opacity: 0, scale: 0.3 }}
+          whileInView={{ opacity: 0.5, scale: 1 }}
+          viewport={{ once: true }}
+          animate={ambient ? { opacity: [0.28, 0], scale: [1, 2.15] } : {}}
+          transition={
+            ambient
+              ? { duration: 2.8, repeat: Infinity, ease: 'easeOut' }
+              : { duration: 0.7, delay: 1.35, ease: [0.22, 1, 0.36, 1] }
+          }
+          className="absolute left-[47%] top-[49%] z-10 h-10 w-10 rounded-xl border border-brand-accent/35"
+          style={{ marginLeft: '-1.25rem', marginTop: '-1.25rem' }}
+        />
+
+        <motion.div
           style={{ x: frontX, y: frontY, marginLeft: '-1.25rem', marginTop: '-1.25rem' }}
           initial={{ opacity: 0, scale: 0.65 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.75, delay: 0.48, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.75, delay: 1.42, ease: [0.22, 1, 0.36, 1] }}
           className="absolute left-[47%] top-[49%] z-20 flex h-10 w-10 items-center justify-center rounded-xl border border-white bg-brand-accent text-white shadow-[0_14px_34px_rgba(0,112,255,.28)] will-change-transform"
         >
           <Waypoints className="h-3.5 w-3.5" />
@@ -345,7 +427,7 @@ export default function AdvisoryNetworkVisual() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.58 + i * 0.1 }}
+            transition={{ duration: 0.5, delay: 1.62 + i * 0.1 }}
             className={`absolute z-20 ${label.position} will-change-transform`}
           >
             <div className="flex items-center gap-2">
@@ -356,6 +438,31 @@ export default function AdvisoryNetworkVisual() {
               </span>
             </div>
           </motion.div>
+        ))}
+
+        {[
+          ['18%', '34%', 4],
+          ['31%', '13%', 3],
+          ['61%', '17%', 4],
+          ['84%', '42%', 3],
+          ['72%', '73%', 4],
+          ['44%', '84%', 3],
+          ['15%', '66%', 3],
+        ].map(([left, top, size], i) => (
+          <motion.span
+            key={`${left}-${top}`}
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            animate={ambient ? { opacity: [0.3, 1, 0.3], scale: [0.85, 1.2, 0.85] } : {}}
+            transition={
+              ambient
+                ? { duration: 2.6 + i * 0.25, delay: i * 0.18, repeat: Infinity }
+                : { duration: 0.45, delay: 1.15 + i * 0.08 }
+            }
+            className="absolute z-10 rounded-full bg-brand-accent shadow-[0_0_0_6px_rgba(0,112,255,.06)]"
+            style={{ left, top, width: size, height: size }}
+          />
         ))}
 
         <motion.div

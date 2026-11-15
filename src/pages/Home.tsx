@@ -132,7 +132,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto h-[30rem] w-full max-w-[34rem] lg:h-[38rem]"
+            className="relative mx-auto h-[34rem] w-full max-w-[38rem] sm:h-[37rem] lg:-mr-16 lg:h-[44rem] lg:w-[125%] lg:max-w-[46rem]"
             aria-hidden
           >
             <AdvisoryNetworkVisual />
