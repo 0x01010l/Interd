@@ -103,7 +103,7 @@ function main() {
 
   const home = pages.find((p) => p.path === '/');
   if (home) {
-    home.body = `<article><h1>INTERDOT</h1><p>${escapeHtml(site.description)}</p><h2>How we work</h2><ol>${steps.map((s) => `<li><strong>${escapeHtml(s.title)}</strong> — ${escapeHtml(s.body)}</li>`).join('')}</ol><p><a href="/contact">Start a conversation</a> · <a href="/approach">Approach</a></p></article>`;
+    home.body = `<article><h1>INTERDOT</h1><p>${escapeHtml(site.description)}</p><p>Scroll through our signal-to-introduction journey: growing companies, business-change signals, need mapping, vendor evaluation, and qualified introductions.</p><h2>How we work</h2><ol>${steps.map((s) => `<li><strong>${escapeHtml(s.title)}</strong> — ${escapeHtml(s.body)}</li>`).join('')}</ol><p><a href="/contact">Get in touch</a> · <a href="/approach">Approach</a></p><p>Email: contact@interdot.net · 6545 Market Avenue North, North Canton, OH 44721</p></article>`;
   }
 
   const approach = pages.find((p) => p.path === '/approach');

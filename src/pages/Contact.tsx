@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Mail, MessageSquare, MapPin } from 'lucide-react';
+import { Mail, MessageSquare, MapPin, Phone } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import { SITE } from '../data/site';
 import { getPageSeo } from '../data/seo';
@@ -62,6 +62,19 @@ export default function Contact() {
                     </a>
                   </div>
                 </div>
+                {SITE.phone ? (
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-accent/15 text-brand-accent">
+                      <Phone className="h-5 w-5" />
+                    </span>
+                    <div>
+                      <p className="mono-label">Phone</p>
+                      <a href={`tel:${SITE.phone.replace(/\s/g, '')}`} className="text-lg font-semibold hover:text-brand-accent">
+                        {SITE.phone}
+                      </a>
+                    </div>
+                  </div>
+                ) : null}
                 <div className="flex items-start gap-4">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-accent/15 text-brand-accent">
                     <MapPin className="h-5 w-5" />
