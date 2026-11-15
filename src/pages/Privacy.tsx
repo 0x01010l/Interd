@@ -19,8 +19,8 @@ export default function Privacy() {
           <div className="prose-dark">
             <h2>Who we are</h2>
             <p>
-              {SITE.brand} is operated by {SITE.legal} (“we,” “our”). This policy covers {SITE.url}
-              — a website for our B2B technology advisory and vendor matchmaking practice.
+              {SITE.brand} is operated by {SITE.legal} (“we,” “our”). This policy covers our B2B
+              technology advisory and vendor matchmaking website at {SITE.url}.
             </p>
             <h2>What we collect</h2>
             <p>

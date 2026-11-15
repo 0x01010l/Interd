@@ -11,26 +11,26 @@ export type PageSeo = {
 export const PAGE_SEO: Record<string, PageSeo> = {
   '/': {
     path: '/',
-    title: 'Interdot | B2B Technology Advisory & Vendor Matchmaking',
+    title: 'Interdot | Technology Advisory & Partner Matchmaking',
     description: SITE.description,
     keywords: [
       'B2B technology advisory',
       'vendor matchmaking',
       'technology partner introductions',
-      'business change signals',
+      'technology provider evaluation',
     ],
   },
   '/approach': {
     path: '/approach',
-    title: 'Our Approach | Signal-Led Vendor Matchmaking | Interdot',
+    title: 'Our Approach | Technology Partner Selection | Interdot',
     description:
-      'How Interdot monitors business-change signals, identifies technology needs, evaluates vendors, and facilitates qualified introductions.',
+      'How Interdot clarifies technology needs, evaluates providers, and facilitates focused partner introductions.',
   },
   '/services': {
     path: '/services',
     title: 'Advisory & Matchmaking Services | Interdot',
     description:
-      'Signal-led advisory, vendor matchmaking, and qualified introductions for growing companies and solution providers.',
+      'Technology needs advisory, provider research, and strategic partner introductions for growing companies.',
   },
   '/about': {
     path: '/about',
@@ -42,7 +42,7 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     path: '/faq',
     title: 'FAQ | Interdot Technology Advisory',
     description:
-      'Is Interdot a SaaS? How do introductions work? Who we serve and how to start a conversation.',
+      'How Interdot evaluates providers, facilitates introductions, and supports important technology decisions.',
   },
   '/contact': {
     path: '/contact',

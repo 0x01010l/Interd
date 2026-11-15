@@ -18,10 +18,10 @@ export default function Terms() {
               matchmaking. Website content is informational. Engagements are governed by separate
               agreements. Introductions do not guarantee a commercial outcome for either party.
             </p>
-            <h2>No SaaS license</h2>
+            <h2>Scope of services</h2>
             <p>
-              This site does not grant a software subscription or product license. We are a
-              consulting practice.
+              Services, deliverables, fees, and responsibilities are defined in the agreement for
+              each engagement.
             </p>
             <h2>Acceptable use</h2>
             <p>

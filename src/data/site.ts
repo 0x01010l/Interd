@@ -2,9 +2,9 @@ export const SITE = {
   name: 'Interdot',
   legal: 'FIX FIGURES LLC',
   brand: 'INTERDOT',
-  tagline: 'B2B technology advisory & vendor matchmaking',
+  tagline: 'Technology advisory & partner matchmaking',
   description:
-    'Interdot connects growing companies with the right technology partners—based on what is happening in their business right now. We monitor business-change signals, identify likely technology needs, evaluate relevant vendors, and facilitate qualified introductions.',
+    'Interdot helps growing companies clarify technology needs, evaluate suitable providers, and connect with the right technology partners.',
   url: 'https://interdot.net',
   email: 'contact@interdot.net',
   support: 'advisory@interdot.net',

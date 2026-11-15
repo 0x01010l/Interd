@@ -23,15 +23,16 @@ export default function Services() {
         serviceType: 'Technology Advisory',
       }}
     >
-      <section className="py-24 md:py-32">
+      <section className="relative overflow-hidden bg-[#f7faff] py-24 md:py-32">
+        <div className="blueprint-grid absolute inset-0" />
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <p className="mono-label mb-4 !text-brand-accent">Services</p>
-          <h1 className="max-w-3xl text-4xl font-bold tracking-tight md:text-6xl glow-text">
-            Advisory that ends in the right conversation.
+          <p className="eyebrow relative">Services</p>
+          <h1 className="relative mt-6 max-w-4xl text-4xl font-semibold tracking-[-0.045em] text-slate-950 md:text-7xl">
+            Better context. Better options. Better conversations.
           </h1>
-          <p className="mt-6 max-w-2xl text-xl text-white/55 leading-relaxed">
-            Three tightly connected offerings—designed for companies in motion and vendors who
-            prefer qualified introductions.
+          <p className="relative mt-7 max-w-2xl text-xl leading-relaxed text-slate-600">
+            Three connected services that help companies move from an emerging need to a
+            well-matched technology partner.
           </p>
 
           <div className="mt-16 space-y-5">
@@ -42,12 +43,12 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="glass flex flex-col gap-4 rounded-2xl p-8 md:flex-row md:items-start md:gap-10 md:p-10"
+                className="glass flex flex-col gap-4 rounded-3xl p-8 md:flex-row md:items-start md:gap-10 md:p-10"
               >
                 <span className="text-4xl font-bold text-brand-accent/30">0{i + 1}</span>
                 <div>
                   <h2 className="text-2xl font-bold">{s.title}</h2>
-                  <p className="mt-3 text-lg text-white/55 leading-relaxed">{s.body}</p>
+                  <p className="mt-3 text-lg leading-relaxed text-slate-600">{s.body}</p>
                 </div>
               </motion.div>
             ))}
@@ -55,14 +56,14 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="border-t border-brand-border bg-brand-surface/50 py-20">
+      <section className="border-t border-slate-200 bg-white py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <h2 className="text-3xl font-bold">Who engages us</h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {WHO_FOR.map((item) => (
               <div key={item.title} className="border-t-2 border-brand-accent pt-5">
                 <h3 className="text-lg font-bold">{item.title}</h3>
-                <p className="mt-2 text-white/55 leading-relaxed">{item.body}</p>
+                <p className="mt-2 leading-relaxed text-slate-600">{item.body}</p>
               </div>
             ))}
           </div>

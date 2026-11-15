@@ -27,11 +27,12 @@ export default function About() {
         },
       }}
     >
-      <section className="py-24 md:py-32">
+      <section className="relative overflow-hidden py-24 md:py-32">
+        <div className="blueprint-grid absolute inset-0" />
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="mono-label mb-4 !text-brand-accent">About</p>
-          <h1 className="text-4xl font-bold tracking-tight md:text-6xl glow-text">
-            An advisory practice—not a product company.
+          <p className="eyebrow relative">About</p>
+          <h1 className="relative mt-6 text-4xl font-semibold tracking-[-0.045em] text-slate-950 md:text-7xl">
+            Technology matchmaking, guided by context.
           </h1>
           <div className="prose-dark mt-10">
             <p>{ABOUT.lead}</p>
@@ -39,27 +40,27 @@ export default function About() {
             <p>{ABOUT.close}</p>
           </div>
 
-          <div className="glass mt-12 space-y-3 rounded-2xl p-8 text-sm">
+          <div className="glass mt-12 space-y-3 rounded-3xl p-8 text-sm">
             <p>
-              <span className="text-white/40">Brand:</span> {SITE.brand}
+              <span className="text-slate-400">Brand:</span> {SITE.brand}
             </p>
             <p>
-              <span className="text-white/40">Legal entity:</span> {SITE.legal}
+              <span className="text-slate-400">Legal entity:</span> {SITE.legal}
             </p>
             <p>
-              <span className="text-white/40">Email:</span>{' '}
+              <span className="text-slate-400">Email:</span>{' '}
               <a href={`mailto:${SITE.email}`} className="text-brand-accent hover:underline">
                 {SITE.email}
               </a>
             </p>
             <p>
-              <span className="text-white/40">Advisory:</span>{' '}
+              <span className="text-slate-400">Advisory:</span>{' '}
               <a href={`mailto:${SITE.support}`} className="text-brand-accent hover:underline">
                 {SITE.support}
               </a>
             </p>
             <p>
-              <span className="text-white/40">Address:</span> {SITE.address.join(', ')}
+              <span className="text-slate-400">Address:</span> {SITE.address.join(', ')}
             </p>
           </div>
 

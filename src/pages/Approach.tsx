@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
-import SciFiField from '../components/SciFiField';
 import { APPROACH_STEPS } from '../data/copy';
 import { getPageSeo } from '../data/seo';
 
@@ -16,21 +15,21 @@ export default function Approach() {
       path="/approach"
       breadcrumbLabel="Approach"
     >
-      <section className="relative overflow-hidden py-24 md:py-32">
-        <SciFiField intensity={0.5} />
-        <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="mono-label mb-4 !text-brand-accent">Approach</p>
-          <h1 className="text-4xl font-bold tracking-tight md:text-6xl glow-text">
-            Signal-led matchmaking—not generic vendor lists.
+      <section className="relative overflow-hidden bg-[#f7faff] py-24 md:py-32">
+        <div className="blueprint-grid absolute inset-0" />
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6">
+          <p className="eyebrow">Approach</p>
+          <h1 className="mt-6 text-4xl font-semibold tracking-[-0.045em] text-slate-950 md:text-7xl">
+            A clearer path from need to decision.
           </h1>
-          <p className="mt-6 text-xl text-white/55 leading-relaxed">
-            Technology buying rarely starts with a blank RFP. It starts when something in the
-            business changes. Our process begins there.
+          <p className="mt-7 max-w-2xl text-xl leading-relaxed text-slate-600">
+            We combine business understanding, structured research, and thoughtful introductions
+            to help teams move forward with confidence.
           </p>
         </div>
       </section>
 
-      <section className="border-t border-brand-border pb-28">
+      <section className="border-t border-slate-200 pb-28">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <ol>
             {APPROACH_STEPS.map((step, i) => (
@@ -40,24 +39,23 @@ export default function Approach() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="relative border-l border-brand-accent/40 py-12 pl-10"
+                className="relative border-l border-blue-200 py-12 pl-10"
               >
                 <span className="absolute -left-3.5 top-12 flex h-7 w-7 items-center justify-center rounded-full bg-brand-accent text-[10px] font-bold shadow-[0_0_20px_rgba(0,112,255,0.5)]">
                   {i + 1}
                 </span>
                 <p className="mono-label !text-brand-accent">{step.num}</p>
                 <h2 className="mt-2 text-2xl font-bold">{step.title}</h2>
-                <p className="mt-3 text-lg text-white/55 leading-relaxed">{step.body}</p>
+                <p className="mt-3 text-lg leading-relaxed text-slate-600">{step.body}</p>
               </motion.li>
             ))}
           </ol>
 
-          <div className="mt-8 glass rounded-2xl p-8">
-            <h2 className="text-xl font-bold">What this is not</h2>
-            <p className="mt-3 text-white/55 leading-relaxed">
-              We are not a SaaS marketplace, a paid lead dump, or a directory. Interdot is a
-              consulting practice: we advise on fit, then facilitate introductions when both sides
-              benefit from the conversation.
+          <div className="glass mt-8 rounded-3xl p-8 md:p-10">
+            <h2 className="text-2xl font-semibold text-slate-950">Start with the business, not the catalogue.</h2>
+            <p className="mt-3 max-w-2xl leading-relaxed text-slate-600">
+              Our recommendations are grounded in your goals, operating context, and readiness.
+              That keeps the shortlist relevant and the resulting conversations productive.
             </p>
             <Link to="/contact" className="btn-primary mt-6">
               Discuss an engagement

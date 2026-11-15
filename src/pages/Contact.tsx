@@ -20,17 +20,18 @@ export default function Contact() {
       path="/contact"
       breadcrumbLabel="Contact"
     >
-      <section className="py-24 md:py-32">
+      <section className="relative overflow-hidden bg-[#f7faff] py-24 md:py-32">
+        <div className="blueprint-grid absolute inset-0" />
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="grid grid-cols-1 gap-14 lg:grid-cols-2">
-            <div>
-              <p className="mono-label mb-4 !text-brand-accent">Contact</p>
-              <h1 className="text-4xl font-bold tracking-tight md:text-6xl glow-text">
-                Tell us what is changing.
+          <div className="relative grid grid-cols-1 gap-14 lg:grid-cols-2">
+            <div className="lg:pt-6">
+              <p className="eyebrow">Contact</p>
+              <h1 className="mt-6 text-4xl font-semibold tracking-[-0.045em] text-slate-950 md:text-7xl">
+                Start with the challenge.
               </h1>
-              <p className="mt-6 text-xl text-white/55 leading-relaxed">
-                Share whether you are seeking a technology partner—or offering one. We will reply
-                with next steps, not a pitch deck dump.
+              <p className="mt-7 text-xl leading-relaxed text-slate-600">
+                Tell us what your business is trying to achieve, where technology is creating
+                friction, or what kind of partnership you want to explore.
               </p>
 
               <div className="mt-12 space-y-7">
@@ -87,7 +88,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="glass rounded-2xl p-4 sm:p-6">
+            <div className="glass rounded-[2rem] p-4 sm:p-6">
               <iframe
                 data-tally-src={`https://tally.so/embed/${SITE.tallyFormId}?dynamicHeight=1`}
                 loading="lazy"

@@ -7,7 +7,7 @@ export default function NotFound() {
       <section className="px-4 py-32 text-center">
         <p className="mono-label mb-4 !text-brand-accent">404</p>
         <h1 className="text-4xl font-bold">Page not found</h1>
-        <p className="mt-4 text-white/50">This URL is not part of the Interdot advisory site.</p>
+        <p className="mt-4 text-slate-500">This URL is not part of the Interdot advisory site.</p>
         <Link to="/" className="btn-primary mt-8">
           Return home
         </Link>

@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-brand-bg: #050505;
-  --color-brand-surface: #0a0a0a;
-  --color-brand-elevated: #111111;
-  --color-brand-border: #1f1f1f;
+  --color-brand-bg: #ffffff;
+  --color-brand-surface: #f5f8fc;
+  --color-brand-elevated: #ffffff;
+  --color-brand-border: #dfe7f1;
   --color-brand-accent: #0070ff;
   --color-brand-accent-glow: #3b8eff;
-  --color-brand-muted: rgba(255, 255, 255, 0.55);
+  --color-brand-muted: #64748b;
 
   --radius-xl: 1.25rem;
   --radius-2xl: 1.75rem;
@@ -23,24 +23,32 @@
   }
 
   body {
-    @apply bg-brand-bg text-white font-sans antialiased;
+    @apply bg-brand-bg text-slate-950 font-sans antialiased;
     background-image:
-      radial-gradient(ellipse 90% 50% at 50% -20%, rgba(0, 112, 255, 0.18), transparent 55%),
-      radial-gradient(ellipse 40% 30% at 100% 40%, rgba(0, 112, 255, 0.06), transparent);
+      radial-gradient(ellipse 70% 35% at 90% 0%, rgba(0, 112, 255, 0.08), transparent 65%),
+      linear-gradient(#fff, #fff);
     min-height: 100vh;
   }
 
   ::selection {
-    background: rgba(0, 112, 255, 0.4);
-    color: white;
+    background: rgba(0, 112, 255, 0.18);
+    color: #0f172a;
   }
 }
 
 @layer components {
   .glass {
-    background-color: color-mix(in srgb, var(--color-brand-surface) 70%, transparent);
+    background-color: rgba(255, 255, 255, 0.78);
     backdrop-filter: blur(24px);
-    border: 1px solid var(--color-brand-border);
+    border: 1px solid rgba(203, 213, 225, 0.75);
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.07);
+  }
+
+  .glass-card {
+    background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.7));
+    backdrop-filter: blur(22px);
+    border: 1px solid rgba(255,255,255,.9);
+    box-shadow: 0 18px 55px rgba(15, 52, 96, 0.12);
   }
 
   .mono-label {
@@ -48,7 +56,15 @@
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: rgba(255, 255, 255, 0.4);
+    color: #64748b;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50/80 px-3.5 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-brand-accent;
+  }
+
+  .section-title {
+    @apply max-w-3xl text-4xl font-semibold leading-[1.04] tracking-[-0.045em] text-slate-950 md:text-6xl;
   }
 
   .btn-primary {
@@ -58,53 +74,52 @@
 
   .btn-primary:hover {
     background: #1a7fff;
-    transform: translateY(-1px) scale(1.02);
-    box-shadow: 0 12px 40px rgba(0, 112, 255, 0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(0, 112, 255, 0.25);
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-brand-border bg-white/[0.03] px-7 py-3.5 text-sm font-semibold text-white transition-all;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-7 py-3.5 text-sm font-semibold text-slate-800 transition-all;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
   }
 
   .btn-ghost:hover {
-    border-color: rgba(0, 112, 255, 0.5);
-    background: rgba(0, 112, 255, 0.08);
+    border-color: rgba(0, 112, 255, 0.35);
+    color: #0070ff;
+    transform: translateY(-2px);
   }
 
   .glow-text {
-    text-shadow: 0 0 40px rgba(0, 112, 255, 0.35);
+    color: #0f172a;
   }
 
-  .scanline {
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 112, 255, 0.03) 2px,
-      rgba(0, 112, 255, 0.03) 4px
-    );
+  .blueprint-grid {
+    background-image:
+      linear-gradient(rgba(0, 112, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 112, 255, 0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: linear-gradient(to bottom, black, transparent 92%);
   }
 
-  .story-chapter {
-    @apply relative min-h-[100vh] flex items-center;
+  .orbit-ring {
+    animation: orbit 28s linear infinite;
   }
 
-  .hud-frame {
-    border: 1px solid rgba(0, 112, 255, 0.25);
-    background: linear-gradient(135deg, rgba(0, 112, 255, 0.08), transparent 40%),
-      rgba(10, 10, 10, 0.85);
-    box-shadow:
-      inset 0 0 40px rgba(0, 112, 255, 0.06),
-      0 0 60px rgba(0, 112, 255, 0.08);
+  .orbit-ring-reverse {
+    animation: orbit 18s linear infinite reverse;
   }
 
   .prose-dark h2 {
-    @apply text-2xl font-bold text-white mt-10 mb-4;
+    @apply text-2xl font-bold text-slate-950 mt-10 mb-4;
   }
 
   .prose-dark p {
-    @apply text-white/60 leading-relaxed text-lg mb-5;
+    @apply text-slate-600 leading-relaxed text-lg mb-5;
   }
+}
+
+@keyframes orbit {
+  to { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {

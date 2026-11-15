@@ -17,12 +17,12 @@ export default function Navbar() {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 border-b border-brand-border/80 bg-brand-bg/80 backdrop-blur-xl"
+      className="fixed left-0 right-0 top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-2xl"
       aria-label="Main navigation"
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link to="/" className="group flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-accent text-white shadow-[0_0_20px_rgba(0,112,255,0.35)] transition-transform group-hover:scale-105">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-accent text-white shadow-[0_8px_24px_rgba(0,112,255,0.24)] transition-transform group-hover:-rotate-3 group-hover:scale-105">
             <Waypoints className="h-5 w-5" />
           </span>
           <span className="font-bold tracking-tighter text-xl">{SITE.brand}</span>
@@ -36,7 +36,7 @@ export default function Navbar() {
               className={`text-sm font-medium transition-colors ${
                 location.pathname === link.path
                   ? 'text-brand-accent'
-                  : 'text-white/60 hover:text-white'
+                  : 'text-slate-500 hover:text-slate-950'
               }`}
             >
               {link.name}
@@ -49,7 +49,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="md:hidden text-white/70"
+          className="text-slate-700 md:hidden"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Menu"
         >
@@ -63,14 +63,14 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="space-y-3 border-t border-brand-border bg-brand-surface p-4 md:hidden"
+            className="space-y-3 border-t border-slate-200 bg-white p-4 shadow-xl md:hidden"
           >
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className="block text-base font-medium text-white/80"
+                className="block text-base font-medium text-slate-700"
               >
                 {link.name}
               </Link>
