@@ -81,7 +81,7 @@ export default function Home() {
           className="blueprint-grid pointer-events-none absolute inset-0"
         />
 
-        <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 pb-24 pt-16 sm:px-8 lg:grid-cols-[1.08fr_.92fr] lg:pb-32 lg:pt-24">
+        <div className="relative mx-auto grid w-full max-w-[110rem] items-center gap-10 px-[clamp(1.25rem,4vw,4.5rem)] pb-24 pt-16 lg:grid-cols-[minmax(0,1.06fr)_minmax(30rem,.94fr)] lg:gap-6 lg:pb-32 lg:pt-24 xl:grid-cols-[minmax(0,1fr)_minmax(34rem,1fr)] xl:gap-10">
           <motion.div
             style={{ y: reduceMotion ? 0 : heroCopyY }}
             initial={{ opacity: 0 }}
@@ -132,7 +132,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto h-[36rem] w-full max-w-[42rem] sm:h-[40rem] lg:-mr-20 lg:h-[48rem] lg:w-[132%] lg:max-w-[50rem] xl:-mr-28 xl:h-[52rem] xl:w-[142%] xl:max-w-[56rem]"
+            className="relative mx-auto h-[36rem] w-full max-w-[42rem] sm:h-[40rem] lg:h-[48rem] lg:max-w-[52rem] xl:h-[52rem] xl:max-w-[56rem]"
             aria-hidden
           >
             <AdvisoryNetworkVisual />
