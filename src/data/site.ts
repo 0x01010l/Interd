@@ -14,7 +14,7 @@ export const SITE = {
   founded: '2024',
   sameAs: [
     'https://github.com/0x01010l',
-    'https://www.linkedin.com/company/interdot',
+    'https://www.linkedin.com/company/interdot-ai',
   ] as string[],
   tallyFormId: 'jaXl9Q',
 };

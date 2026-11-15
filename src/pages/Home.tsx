@@ -1,4 +1,11 @@
-import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef } from 'react';
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'motion/react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -12,29 +19,41 @@ import {
 } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import DecisionJourney from '../components/DecisionJourney';
+import SignalRibbon from '../components/SignalRibbon';
 import { getPageSeo } from '../data/seo';
 
 export default function Home() {
   const seo = getPageSeo('/');
-  const { scrollYProgress } = useScroll();
-  const orbY = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  const heroRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+  const smoothHero = useSpring(scrollYProgress, { stiffness: 95, damping: 28, mass: 0.4 });
+  const orbY = useTransform(smoothHero, [0, 1], [0, 90]);
+  const heroCopyY = useTransform(smoothHero, [0, 1], [0, -70]);
+  const heroVisualY = useTransform(smoothHero, [0, 1], [0, 125]);
+  const heroVisualRotate = useTransform(smoothHero, [0, 1], [0, 9]);
+  const heroVisualScale = useTransform(smoothHero, [0, 1], [1, 0.88]);
+  const gridOpacity = useTransform(smoothHero, [0, 1], [0.7, 0.15]);
 
   const services = [
     {
       icon: Radar,
-      number: '01',
+      tag: 'Discover',
       title: 'Opportunity intelligence',
       body: 'We identify moments of business change that create a real need for technology, before the search becomes noisy or urgent.',
     },
     {
       icon: Search,
-      number: '02',
+      tag: 'Define',
       title: 'Solution discovery',
       body: 'We translate operational goals into clear requirements, then research the providers best equipped to deliver.',
     },
     {
       icon: Network,
-      number: '03',
+      tag: 'Connect',
       title: 'Partner matchmaking',
       body: 'We create focused, context-rich introductions between decision-makers and relevant technology partners.',
     },
@@ -53,17 +72,21 @@ export default function Home() {
         url: 'https://interdot.net',
       }}
     >
-      <section className="relative isolate min-h-[92vh] overflow-hidden">
+      <section ref={heroRef} className="relative isolate min-h-[92vh] overflow-hidden">
         <motion.div
           style={{ y: orbY }}
           className="pointer-events-none absolute -right-40 -top-40 h-[44rem] w-[44rem] rounded-full bg-[radial-gradient(circle_at_38%_38%,rgba(255,255,255,0.9)_0%,rgba(0,112,255,0.22)_24%,rgba(0,112,255,0.08)_52%,transparent_72%)] blur-sm"
         />
-        <div className="blueprint-grid pointer-events-none absolute inset-0 opacity-70" />
+        <motion.div
+          style={{ opacity: reduceMotion ? 0.7 : gridOpacity }}
+          className="blueprint-grid pointer-events-none absolute inset-0"
+        />
 
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 pb-24 pt-16 sm:px-8 lg:grid-cols-[1.08fr_.92fr] lg:pb-32 lg:pt-24">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            style={{ y: reduceMotion ? 0 : heroCopyY }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="eyebrow">
@@ -102,8 +125,13 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.94, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
+            style={{
+              y: reduceMotion ? 0 : heroVisualY,
+              rotate: reduceMotion ? 0 : heroVisualRotate,
+              scale: reduceMotion ? 1 : heroVisualScale,
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             className="relative mx-auto h-[30rem] w-full max-w-[34rem] lg:h-[38rem]"
             aria-hidden
@@ -111,6 +139,31 @@ export default function Home() {
             <div className="absolute inset-[9%] rounded-full border border-blue-100 bg-white/55 shadow-[0_40px_120px_rgba(26,86,219,0.13)] backdrop-blur-2xl" />
             <div className="orbit-ring absolute inset-[4%] rounded-full border border-dashed border-blue-200/90" />
             <div className="orbit-ring-reverse absolute inset-[18%] rounded-full border border-blue-100" />
+
+            <svg
+              className="absolute inset-[12%] h-[76%] w-[76%] overflow-visible"
+              viewBox="0 0 100 100"
+              fill="none"
+              aria-hidden
+            >
+              {[
+                'M50 50 C38 43 28 31 18 23',
+                'M50 50 C65 42 72 34 84 31',
+                'M50 50 C38 61 29 69 18 77',
+                'M50 50 C63 61 72 70 83 79',
+              ].map((d, i) => (
+                <motion.path
+                  key={d}
+                  d={d}
+                  stroke={i === 3 ? '#0070ff' : '#bfdbfe'}
+                  strokeWidth={i === 3 ? 0.65 : 0.45}
+                  strokeDasharray={i === 3 ? '0' : '2 2'}
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: 1, opacity: 1 }}
+                  transition={{ duration: 1.1, delay: 0.45 + i * 0.13, ease: 'easeOut' }}
+                />
+              ))}
+            </svg>
 
             <div className="absolute left-1/2 top-1/2 flex h-36 w-36 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[2.2rem] bg-brand-accent text-white shadow-[0_24px_70px_rgba(0,112,255,0.35)]">
               <Waypoints className="h-14 w-14" />
@@ -184,7 +237,9 @@ export default function Home() {
                   <span className="flex h-13 w-13 items-center justify-center rounded-2xl bg-blue-50 text-brand-accent">
                     <service.icon className="h-6 w-6" />
                   </span>
-                  <span className="font-mono text-xs text-slate-300">{service.number}</span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-slate-400">
+                    {service.tag}
+                  </span>
                 </div>
                 <h3 className="mt-14 text-2xl font-semibold tracking-tight text-slate-950">
                   {service.title}
@@ -199,12 +254,26 @@ export default function Home() {
         </div>
       </section>
 
+      <SignalRibbon />
+
       <DecisionJourney />
 
       <section className="py-24 md:py-36">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="rounded-[2.5rem] bg-brand-accent p-7 text-white shadow-[0_30px_90px_rgba(0,112,255,0.28)] md:p-14 lg:p-18">
-            <div className="grid gap-12 lg:grid-cols-[1.05fr_.95fr] lg:items-end">
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-brand-accent p-7 text-white shadow-[0_30px_90px_rgba(0,112,255,0.28)] md:p-14 lg:p-18">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5, rotate: -30 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              className="pointer-events-none absolute -right-24 -top-36 h-[34rem] w-[34rem] rounded-full border border-white/20"
+            >
+              <div className="absolute inset-[16%] rounded-full border border-white/15" />
+              <div className="absolute inset-[34%] rounded-full border border-dashed border-white/25" />
+              <div className="absolute left-[23%] top-[14%] h-3 w-3 rounded-full bg-white shadow-[0_0_0_10px_rgba(255,255,255,.1)]" />
+              <div className="absolute bottom-[13%] right-[27%] h-2.5 w-2.5 rounded-full bg-blue-100 shadow-[0_0_0_9px_rgba(255,255,255,.08)]" />
+            </motion.div>
+            <div className="relative z-10 grid gap-12 lg:grid-cols-[1.05fr_.95fr] lg:items-end">
               <div>
                 <p className="font-mono text-xs uppercase tracking-[0.18em] text-blue-100">
                   A better starting point

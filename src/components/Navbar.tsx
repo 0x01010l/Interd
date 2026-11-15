@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
 import { Waypoints, Menu, X } from 'lucide-react';
 import { useState } from 'react';
@@ -7,6 +7,8 @@ import { SITE } from '../data/site';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 130, damping: 28, mass: 0.35 });
 
   const navLinks = [
     { name: 'Approach', path: '/approach' },
@@ -81,6 +83,11 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+      <motion.div
+        className="absolute bottom-[-1px] left-0 h-[2px] w-full origin-left bg-brand-accent"
+        style={{ scaleX: progress }}
+        aria-hidden
+      />
     </nav>
   );
 }
