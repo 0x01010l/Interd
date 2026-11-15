@@ -7,7 +7,16 @@ import {
   useSpring,
   useTransform,
 } from 'motion/react';
-import { Waypoints } from 'lucide-react';
+import {
+  Building2,
+  Cloud,
+  Database,
+  Factory,
+  ShieldCheck,
+  Store,
+  Waypoints,
+  Workflow,
+} from 'lucide-react';
 
 const points = [
   [92, 238, 4],
@@ -110,10 +119,23 @@ const ribbons = [
 ] as const;
 
 const labels = [
-  { position: 'left-[2%] top-[17%]', index: '01', text: 'Business context' },
-  { position: 'right-[1%] top-[25%]', index: '02', text: 'Need defined' },
-  { position: 'left-[4%] bottom-[20%]', index: '03', text: 'Provider fit' },
-  { position: 'right-[2%] bottom-[12%]', index: '04', text: 'Right conversation' },
+  { position: 'left-[15%] top-[13%]', index: '01', text: 'Business context' },
+  { position: 'right-[18%] top-[29%]', index: '02', text: 'Need defined' },
+  { position: 'left-[13%] bottom-[14%]', index: '03', text: 'Provider fit' },
+  { position: 'right-[15%] bottom-[8%]', index: '04', text: 'Right conversation' },
+];
+
+const businessNodes = [
+  { icon: Building2, label: 'Growing business', position: 'left-[-1%] top-[31%]' },
+  { icon: Store, label: 'Customer operations', position: 'left-[2%] top-[47%]' },
+  { icon: Factory, label: 'Core systems', position: 'left-[7%] top-[63%]' },
+];
+
+const solutionNodes = [
+  { icon: Cloud, label: 'Cloud', position: 'right-[7%] top-[19%]' },
+  { icon: ShieldCheck, label: 'Security', position: 'right-[0%] top-[37%]' },
+  { icon: Database, label: 'Data', position: 'right-[3%] top-[55%]' },
+  { icon: Workflow, label: 'Automation', position: 'right-[10%] top-[72%]' },
 ];
 
 export default function AdvisoryNetworkVisual() {
@@ -155,7 +177,7 @@ export default function AdvisoryNetworkVisual() {
       setConstructed(true);
       return;
     }
-    const timer = window.setTimeout(() => setConstructed(true), 1900);
+    const timer = window.setTimeout(() => setConstructed(true), 2700);
     return () => window.clearTimeout(timer);
   }, [constructed, inView, reduceMotion]);
 
@@ -309,6 +331,34 @@ export default function AdvisoryNetworkVisual() {
             />
           ))}
 
+          {[
+            'M0 218 C34 218 56 230 92 238',
+            'M0 310 C52 310 82 318 126 326',
+            'M0 406 C38 406 58 404 82 402',
+            'M454 96 C520 72 574 84 620 116',
+            'M548 262 C574 252 596 244 620 242',
+            'M526 412 C566 404 592 390 620 370',
+            'M370 512 C464 554 552 540 620 490',
+          ].map((d, i) => (
+            <motion.path
+              key={d}
+              d={d}
+              stroke={i < 3 ? '#9bc4ff' : '#66a3ff'}
+              strokeWidth={i === 0 || i === 3 ? 2 : 1.2}
+              strokeDasharray="5 7"
+              strokeLinecap="round"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 0.72 }}
+              viewport={{ once: true }}
+              animate={ambient ? { strokeDashoffset: [0, -48] } : { strokeDashoffset: 0 }}
+              transition={{
+                pathLength: { duration: 0.75, delay: 1.65 + i * 0.07 },
+                opacity: { duration: 0.45, delay: 1.65 + i * 0.07 },
+                strokeDashoffset: { duration: 3.5 + i * 0.2, repeat: Infinity, ease: 'linear' },
+              }}
+            />
+          ))}
+
           <motion.g
             animate={ambient ? { rotate: [-1.2, 1.2, -1.2] } : { rotate: 0 }}
             transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
@@ -390,6 +440,26 @@ export default function AdvisoryNetworkVisual() {
             }
             transition={{ duration: 4, delay: 0.45, repeat: Infinity, ease: 'easeInOut' }}
           />
+          <motion.circle
+            r="4"
+            fill="#0070ff"
+            animate={
+              ambient
+                ? { cx: [0, 92, 216, 290], cy: [218, 238, 252, 304], opacity: [0, 1, 1, 0] }
+                : { cx: 0, cy: 218, opacity: 0 }
+            }
+            transition={{ duration: 3.8, delay: 0.4, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <motion.circle
+            r="4"
+            fill="#38bdf8"
+            animate={
+              ambient
+                ? { cx: [290, 428, 526, 620], cy: [304, 356, 412, 490], opacity: [0, 1, 1, 0] }
+                : { cx: 290, cy: 304, opacity: 0 }
+            }
+            transition={{ duration: 4.2, delay: 1.45, repeat: Infinity, ease: 'easeInOut' }}
+          />
         </svg>
 
         <motion.div
@@ -437,6 +507,54 @@ export default function AdvisoryNetworkVisual() {
                 {label.text}
               </span>
             </div>
+          </motion.div>
+        ))}
+
+        {businessNodes.map(({ icon: Icon, label, position }, i) => (
+          <motion.div
+            key={label}
+            initial={{ opacity: 0, x: -24, scale: 0.72 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: true }}
+            animate={ambient ? { y: [-3, 3, -3] } : { y: 0 }}
+            transition={{
+              opacity: { duration: 0.4, delay: 1.76 + i * 0.13 },
+              x: { duration: 0.55, delay: 1.76 + i * 0.13, ease: [0.22, 1, 0.36, 1] },
+              scale: { duration: 0.55, delay: 1.76 + i * 0.13, ease: [0.22, 1, 0.36, 1] },
+              y: { duration: 4.8 + i * 0.5, repeat: Infinity, ease: 'easeInOut' },
+            }}
+            className={`absolute z-30 ${position} flex items-center gap-2`}
+          >
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-blue-100 bg-white text-brand-accent shadow-[0_10px_28px_rgba(31,79,145,.13)]">
+              <Icon className="h-4 w-4" />
+            </span>
+            <span className="hidden whitespace-nowrap font-mono text-[7px] uppercase tracking-[0.12em] text-slate-500 sm:block">
+              {label}
+            </span>
+          </motion.div>
+        ))}
+
+        {solutionNodes.map(({ icon: Icon, label, position }, i) => (
+          <motion.div
+            key={label}
+            initial={{ opacity: 0, x: 24, scale: 0.72 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: true }}
+            animate={ambient ? { y: [3, -3, 3] } : { y: 0 }}
+            transition={{
+              opacity: { duration: 0.4, delay: 2.08 + i * 0.12 },
+              x: { duration: 0.55, delay: 2.08 + i * 0.12, ease: [0.22, 1, 0.36, 1] },
+              scale: { duration: 0.55, delay: 2.08 + i * 0.12, ease: [0.22, 1, 0.36, 1] },
+              y: { duration: 5.1 + i * 0.45, repeat: Infinity, ease: 'easeInOut' },
+            }}
+            className={`absolute z-30 ${position} flex flex-row-reverse items-center gap-2`}
+          >
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-accent text-white shadow-[0_12px_30px_rgba(0,112,255,.24)]">
+              <Icon className="h-4 w-4" />
+            </span>
+            <span className="hidden whitespace-nowrap font-mono text-[7px] uppercase tracking-[0.12em] text-slate-500 sm:block">
+              {label}
+            </span>
           </motion.div>
         ))}
 

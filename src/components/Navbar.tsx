@@ -1,7 +1,7 @@
 import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
 import { Waypoints, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, type MouseEvent } from 'react';
 import { SITE } from '../data/site';
 
 export default function Navbar() {
@@ -9,6 +9,14 @@ export default function Navbar() {
   const location = useLocation();
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 130, damping: 28, mass: 0.35 });
+
+  const handleLogoClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    setIsOpen(false);
+    if (location.pathname === '/') {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const navLinks = [
     { name: 'Approach', path: '/approach' },
@@ -23,7 +31,7 @@ export default function Navbar() {
       aria-label="Main navigation"
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link to="/" className="group flex items-center gap-2.5">
+        <Link to="/" onClick={handleLogoClick} className="group flex items-center gap-2.5">
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-accent text-white shadow-[0_8px_24px_rgba(0,112,255,0.24)] transition-transform group-hover:-rotate-3 group-hover:scale-105">
             <Waypoints className="h-5 w-5" />
           </span>

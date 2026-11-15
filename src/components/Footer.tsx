@@ -1,14 +1,24 @@
-import { Link } from 'react-router-dom';
+import { type MouseEvent } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Waypoints, Linkedin } from 'lucide-react';
 import { SITE } from '../data/site';
 
 export default function Footer() {
+  const location = useLocation();
+
+  const handleLogoClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (location.pathname === '/') {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="border-t border-slate-200 bg-[#f7faff] pb-8 pt-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <Link to="/" className="mb-5 flex items-center gap-2">
+            <Link to="/" onClick={handleLogoClick} className="mb-5 flex items-center gap-2">
               <Waypoints className="h-5 w-5 text-brand-accent" />
               <span className="text-xl font-bold tracking-tighter">{SITE.brand}</span>
             </Link>
