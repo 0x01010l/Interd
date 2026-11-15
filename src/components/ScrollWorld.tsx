@@ -11,24 +11,23 @@ function easeInOut(t: number) {
 
 function lingerMap(t: number, linger: number) {
   if (linger <= 0) return t;
-  const L = Math.min(0.6, linger);
-  // Slow in the middle (copy peak), faster at edges — f(0)=0, f(1)=1
+  const L = Math.min(0.55, linger);
   const mid = 0.5;
-  const s = 1 + L * 2.2;
+  const s = 1 + L * 2;
   const x = (t - mid) * s;
-  const sigmoid = 1 / (1 + Math.exp(-x * 6));
-  const a = 1 / (1 + Math.exp(mid * s * 6));
-  const b = 1 / (1 + Math.exp(-(1 - mid) * s * 6));
+  const sigmoid = 1 / (1 + Math.exp(-x * 5.5));
+  const a = 1 / (1 + Math.exp(mid * s * 5.5));
+  const b = 1 / (1 + Math.exp(-(1 - mid) * s * 5.5));
   return (sigmoid - a) / (b - a);
 }
 
-function makeMat(color: string, emissive = color, intensity = 0.35) {
+function makeMat(color: string, emissive = color, intensity = 0.45) {
   return new THREE.MeshStandardMaterial({
     color,
     emissive,
     emissiveIntensity: intensity,
-    metalness: 0.55,
-    roughness: 0.35,
+    metalness: 0.45,
+    roughness: 0.4,
   });
 }
 
@@ -40,28 +39,27 @@ function addBox(
   x: number,
   y: number,
   z: number,
-  mat: THREE.Material
+  mat: THREE.Material,
+  cast = false
 ) {
   const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
   m.position.set(x, y, z);
-  m.castShadow = true;
-  m.receiveShadow = true;
+  m.castShadow = cast;
+  m.receiveShadow = cast;
   parent.add(m);
   return m;
 }
 
 function buildIsland(kind: string, accent: string): THREE.Group {
   const g = new THREE.Group();
-  const base = makeMat('#0a1220', '#001a44', 0.15);
-  const glow = makeMat(accent, accent, 0.7);
-  const soft = makeMat('#121a2a', accent, 0.12);
-  const white = makeMat('#dce7ff', accent, 0.2);
+  const base = makeMat('#0a1220', '#001a44', 0.22);
+  const glow = makeMat(accent, accent, 0.85);
+  const soft = makeMat('#121a2a', accent, 0.18);
+  const white = makeMat('#dce7ff', accent, 0.28);
 
-  // Floating plate
   const plate = new THREE.Mesh(new THREE.CylinderGeometry(4.2, 4.6, 0.35, 6), base);
-  plate.position.y = 0;
   g.add(plate);
-  const rim = new THREE.Mesh(new THREE.TorusGeometry(4.35, 0.06, 8, 6), glow);
+  const rim = new THREE.Mesh(new THREE.TorusGeometry(4.35, 0.07, 8, 6), glow);
   rim.rotation.x = Math.PI / 2;
   rim.position.y = 0.2;
   g.add(rim);
@@ -75,7 +73,10 @@ function buildIsland(kind: string, accent: string): THREE.Group {
     });
     addBox(g, 0.9, 3.6, 0.9, 0, 2, 0, white);
   } else if (kind === 'signals') {
-    const dish = new THREE.Mesh(new THREE.SphereGeometry(1.1, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2), glow);
+    const dish = new THREE.Mesh(
+      new THREE.SphereGeometry(1.1, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2),
+      glow
+    );
     dish.rotation.x = Math.PI;
     dish.position.y = 1.4;
     g.add(dish);
@@ -84,13 +85,12 @@ function buildIsland(kind: string, accent: string): THREE.Group {
       const ring = new THREE.Mesh(new THREE.TorusGeometry(1.4 + i * 0.35, 0.03, 8, 48), glow);
       ring.rotation.x = Math.PI / 2;
       ring.position.y = 1.5 + i * 0.15;
-      ring.userData.spin = 0.4 + i * 0.15;
+      ring.userData.spin = 0.35 + i * 0.12;
       g.add(ring);
     }
   } else if (kind === 'needs') {
     ['#0070FF', '#3b8eff', '#5aa2ff', '#89b8ff'].forEach((c, i) => {
-      const pillar = addBox(g, 0.7, 1.2 + i * 0.45, 0.7, -1.5 + i * 1.1, 0.7 + i * 0.2, 0, makeMat(c, c, 0.55));
-      pillar.userData.bob = i;
+      addBox(g, 0.7, 1.2 + i * 0.45, 0.7, -1.5 + i * 1.1, 0.7 + i * 0.2, 0, makeMat(c, c, 0.65));
     });
     addBox(g, 3.8, 0.08, 1.2, 0.2, 0.35, 1.6, soft);
   } else if (kind === 'vendors') {
@@ -112,7 +112,6 @@ function buildIsland(kind: string, accent: string): THREE.Group {
     orb.userData.pulse = true;
     g.add(orb);
   } else {
-    // CTA HQ
     addBox(g, 2.4, 1.8, 2.4, 0, 1.1, 0, soft);
     addBox(g, 1.2, 2.6, 1.2, 0, 2.4, 0, glow);
     const beacon = new THREE.Mesh(new THREE.SphereGeometry(0.4, 16, 16), white);
@@ -136,11 +135,12 @@ export default function ScrollWorld() {
   const [active, setActive] = useState(0);
   const activeRef = useRef(0);
   const [hintVisible, setHintVisible] = useState(true);
+  const [copyKey, setCopyKey] = useState(0);
   const reduce =
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const totalVh = useMemo(
-    () => WORLD_SECTIONS.reduce((s, sec) => s + sec.scroll, 0) + 0.4,
+    () => WORLD_SECTIONS.reduce((s, sec) => s + sec.scroll, 0) + 0.25,
     []
   );
 
@@ -148,85 +148,96 @@ export default function ScrollWorld() {
     const mount = mountRef.current;
     if (!mount) return;
 
+    const mobile = window.matchMedia('(max-width: 768px)').matches || navigator.maxTouchPoints > 1;
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x03060c, 0.028);
+    scene.fog = new THREE.FogExp2(0x05080f, 0.016);
     scene.background = new THREE.Color(0x050505);
 
-    const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 200);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
-    renderer.shadowMap.enabled = true;
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 160);
+    const renderer = new THREE.WebGLRenderer({
+      antialias: !mobile,
+      powerPreference: 'high-performance',
+      alpha: false,
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.25 : 1.5));
+    renderer.shadowMap.enabled = false;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     mount.appendChild(renderer.domElement);
 
-    const amb = new THREE.AmbientLight(0x334466, 0.55);
-    scene.add(amb);
-    const key = new THREE.DirectionalLight(0x0070ff, 1.4);
-    key.position.set(8, 18, 10);
-    key.castShadow = true;
+    scene.add(new THREE.AmbientLight(0x445577, 0.7));
+    const key = new THREE.DirectionalLight(0x0070ff, 1.55);
+    key.position.set(6, 16, 8);
     scene.add(key);
-    const fill = new THREE.PointLight(0x3b8eff, 1.2, 40);
-    fill.position.set(0, 8, 0);
+    const rimLight = new THREE.DirectionalLight(0x89b8ff, 0.55);
+    rimLight.position.set(-8, 6, -4);
+    scene.add(rimLight);
+    const fill = new THREE.PointLight(0x3b8eff, 1.4, 50);
+    fill.position.set(0, 10, 4);
     scene.add(fill);
 
-    // Star field
+    const starCount = mobile ? 420 : 700;
     const starGeo = new THREE.BufferGeometry();
-    const starCount = 900;
     const positions = new Float32Array(starCount * 3);
     for (let i = 0; i < starCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 120;
-      positions[i * 3 + 1] = Math.random() * 40 - 5;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 120;
+      positions[i * 3] = (Math.random() - 0.5) * 100;
+      positions[i * 3 + 1] = Math.random() * 36 - 4;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 100;
     }
     starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     scene.add(
       new THREE.Points(
         starGeo,
-        new THREE.PointsMaterial({ color: 0x88aaff, size: 0.05, transparent: true, opacity: 0.7 })
+        new THREE.PointsMaterial({ color: 0x88aaff, size: 0.06, transparent: true, opacity: 0.75 })
       )
     );
 
-    // Ground grid
-    const grid = new THREE.GridHelper(80, 60, 0x0070ff, 0x0a1a33);
-    grid.position.y = -1.2;
+    const grid = new THREE.GridHelper(90, 50, 0x0070ff, 0x0a1a33);
+    grid.position.y = -1.15;
     scene.add(grid);
 
-    const kinds = WORLD_SECTIONS.map((s) => s.id);
     const islands: THREE.Group[] = [];
-    const pathPoints: THREE.Vector3[] = [];
+    const islandCenters: THREE.Vector3[] = [];
+    const spacing = 11.5;
 
-    kinds.forEach((kind, i) => {
-      const island = buildIsland(kind, WORLD_SECTIONS[i].accent);
-      const x = i * 14;
-      const z = Math.sin(i * 0.9) * 3.5;
-      island.position.set(x, Math.sin(i) * 0.3, z);
+    WORLD_SECTIONS.forEach((sec, i) => {
+      const island = buildIsland(sec.id, sec.accent);
+      const x = i * spacing;
+      const z = Math.sin(i * 0.85) * 2.2;
+      island.position.set(x, 0, z);
       scene.add(island);
       islands.push(island);
-      pathPoints.push(new THREE.Vector3(x - 5.5, 4.2, z + 7.5));
-      pathPoints.push(new THREE.Vector3(x - 1.2, 3.2, z + 4.2));
-      pathPoints.push(new THREE.Vector3(x + 0.4, 2.6, z + 0.8));
-      pathPoints.push(new THREE.Vector3(x + 3.5, 3.8, z - 2.5));
+      islandCenters.push(new THREE.Vector3(x, 1.4, z));
+
+      const glow = new THREE.PointLight(sec.accent, 0.9, 16);
+      glow.position.set(x, 3.5, z);
+      scene.add(glow);
     });
-    pathPoints.push(new THREE.Vector3(kinds.length * 14 - 2, 5, -4));
 
-    const curve = new THREE.CatmullRomCurve3(pathPoints, false, 'catmullrom', 0.35);
-
-    // Energy ribbons between islands
+    // Energy ribbons — keep visual continuity between beats
     for (let i = 0; i < islands.length - 1; i++) {
-      const a = islands[i].position;
-      const b = islands[i + 1].position;
-      const mid = new THREE.Vector3().lerpVectors(a, b, 0.5).add(new THREE.Vector3(0, 2.2, 0));
-      const ribbon = new THREE.CatmullRomCurve3([
-        a.clone().add(new THREE.Vector3(0, 1.2, 0)),
-        mid,
-        b.clone().add(new THREE.Vector3(0, 1.2, 0)),
-      ]);
-      const tube = new THREE.Mesh(
-        new THREE.TubeGeometry(ribbon, 40, 0.04, 8, false),
-        makeMat('#0070FF', '#0070FF', 0.85)
+      const a = islands[i].position.clone().add(new THREE.Vector3(0, 1.1, 0));
+      const b = islands[i + 1].position.clone().add(new THREE.Vector3(0, 1.1, 0));
+      const mid = new THREE.Vector3().lerpVectors(a, b, 0.5);
+      mid.y += 1.6;
+      const ribbon = new THREE.CatmullRomCurve3([a, mid, b]);
+      scene.add(
+        new THREE.Mesh(
+          new THREE.TubeGeometry(ribbon, 36, 0.05, 8, false),
+          makeMat('#0070FF', '#0070FF', 1.05)
+        )
       );
-      scene.add(tube);
     }
+
+    // Camera waypoints: always orbit in front of the active island
+    const pathPoints: THREE.Vector3[] = [];
+    islands.forEach((island, i) => {
+      const c = island.position;
+      const approach = i === 0 ? 1 : 0.85;
+      pathPoints.push(new THREE.Vector3(c.x - 4.2 * approach, 3.6, c.z + 7.2));
+      pathPoints.push(new THREE.Vector3(c.x - 0.6, 2.9, c.z + 5.4));
+      pathPoints.push(new THREE.Vector3(c.x + 1.2, 2.55, c.z + 4.6));
+    });
+    const curve = new THREE.CatmullRomCurve3(pathPoints, false, 'catmullrom', 0.25);
 
     const resize = () => {
       const w = mount.clientWidth;
@@ -240,18 +251,24 @@ export default function ScrollWorld() {
 
     let raf = 0;
     const clock = new THREE.Clock();
-    const lookTarget = new THREE.Vector3();
     const camPos = new THREE.Vector3();
+    const lookTarget = new THREE.Vector3();
+    const lookSmooth = new THREE.Vector3().copy(islandCenters[0]);
+    let lastFrame = performance.now();
 
     const tick = () => {
       raf = requestAnimationFrame(tick);
+      const now = performance.now();
+      const frameDt = Math.min((now - lastFrame) / 1000, 0.05);
+      lastFrame = now;
       const dt = Math.min(clock.getDelta(), 0.05);
+
+      // Critically-damped feel — snappy but never jittery
       const target = progressRef.current;
-      const lerp = reduce ? 1 : 1 - Math.exp(-dt * 6.5);
+      const lerp = reduce ? 1 : 1 - Math.exp(-frameDt * 7.2);
       smoothRef.current += (target - smoothRef.current) * lerp;
       const p = THREE.MathUtils.clamp(smoothRef.current, 0, 0.999);
 
-      // Map global progress → section + linger
       let acc = 0;
       const weights = WORLD_SECTIONS.map((s) => s.scroll);
       const sum = weights.reduce((a, b) => a + b, 0);
@@ -267,39 +284,46 @@ export default function ScrollWorld() {
         acc += w;
       }
       local = lingerMap(easeInOut(THREE.MathUtils.clamp(local, 0, 1)), WORLD_SECTIONS[si].linger);
-      // Camera u across whole curve with section bias
-      const u = (si + local) / WORLD_SECTIONS.length;
-      curve.getPointAt(THREE.MathUtils.clamp(u, 0, 1), camPos);
-      const lookU = Math.min(1, u + 0.04);
-      curve.getPointAt(lookU, lookTarget);
-      lookTarget.y -= 0.6;
-      camera.position.copy(camPos);
-      camera.lookAt(lookTarget);
 
-      // Animate islands
+      const u = THREE.MathUtils.clamp((si + local) / WORLD_SECTIONS.length, 0, 1);
+      curve.getPointAt(u, camPos);
+      camera.position.copy(camPos);
+
+      // Always look at the active (and next) island — never into void
+      const next = Math.min(si + 1, islandCenters.length - 1);
+      lookTarget.copy(islandCenters[si]).lerp(islandCenters[next], local * 0.55);
+      lookTarget.y += 0.35;
+      lookSmooth.lerp(lookTarget, reduce ? 1 : 1 - Math.exp(-frameDt * 5.5));
+      camera.lookAt(lookSmooth);
+
       const t = clock.elapsedTime;
       islands.forEach((island, i) => {
-        island.rotation.y = Math.sin(t * 0.25 + i) * 0.08;
-        island.position.y = Math.sin(t * 0.7 + i) * 0.12;
+        island.rotation.y = Math.sin(t * 0.22 + i) * 0.06;
+        island.position.y = Math.sin(t * 0.55 + i) * 0.08;
         island.traverse((obj) => {
           if ((obj as THREE.Mesh).isMesh) {
             const mesh = obj as THREE.Mesh;
             if (mesh.userData.spin) mesh.rotation.z = t * mesh.userData.spin;
             if (mesh.userData.pulse) {
-              const s = 1 + Math.sin(t * 3) * 0.12;
+              const s = 1 + Math.sin(t * 2.6) * 0.1;
               mesh.scale.setScalar(s);
             }
           }
         });
-        const focus = 1 - Math.min(1, Math.abs(si + local - i) * 1.1);
-        island.scale.setScalar(0.92 + focus * 0.12);
+        const focus = 1 - Math.min(1, Math.abs(si + local - i) * 1.05);
+        island.scale.setScalar(0.94 + focus * 0.1);
       });
+
+      fill.position.x = islandCenters[si].x + Math.sin(t * 0.4) * 2;
+      fill.position.z = islandCenters[si].z + 3;
 
       if (si !== activeRef.current) {
         activeRef.current = si;
         setActive(si);
+        setCopyKey((k) => k + 1);
       }
       renderer.render(scene, camera);
+      void dt;
     };
     tick();
 
@@ -327,13 +351,15 @@ export default function ScrollWorld() {
   const section = WORLD_SECTIONS[active] ?? WORLD_SECTIONS[0];
 
   return (
-    <div className="sw-root relative bg-[#050505] text-white" style={{ height: `${totalVh * 100}vh` }} ref={scrollRef}>
+    <div
+      className="sw-root relative bg-[#050505] text-white"
+      style={{ height: `${totalVh * 100}vh` }}
+      ref={scrollRef}
+    >
       <div ref={mountRef} className="pointer-events-none fixed inset-0 z-0" aria-hidden />
 
-      {/* Atmosphere overlays */}
-      <div className="pointer-events-none fixed inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(5,5,5,0.35)_70%,rgba(5,5,5,0.85)_100%)]" />
+      <div className="pointer-events-none fixed inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,transparent_10%,rgba(5,5,5,0.25)_65%,rgba(5,5,5,0.72)_100%)]" />
 
-      {/* Top brand bar */}
       <div className="fixed top-0 inset-x-0 z-30 flex items-center justify-between px-4 py-4 sm:px-6">
         <Link to="/" className="flex items-center gap-2">
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0070FF] text-white shadow-[0_0_24px_rgba(0,112,255,0.45)]">
@@ -353,45 +379,56 @@ export default function ScrollWorld() {
                 const sum = WORLD_SECTIONS.reduce((a, b) => a + b.scroll, 0);
                 let acc = 0;
                 for (let j = 0; j < i; j++) acc += WORLD_SECTIONS[j].scroll;
-                window.scrollTo({ top: ((acc + 0.15) / sum) * max, behavior: 'smooth' });
+                window.scrollTo({ top: ((acc + 0.12) / sum) * max, behavior: 'smooth' });
               }}
               className={`transition-colors ${active === i ? 'text-[#0070FF]' : 'hover:text-white'}`}
             >
               {s.label}
             </button>
           ))}
-          <Link to="/contact" className="rounded-full bg-[#0070FF] px-4 py-1.5 text-white shadow-[0_0_20px_rgba(0,112,255,0.35)]">
+          <Link
+            to="/contact"
+            className="rounded-full bg-[#0070FF] px-4 py-1.5 text-white shadow-[0_0_20px_rgba(0,112,255,0.35)]"
+          >
             Contact
           </Link>
         </nav>
-        <Link to="/contact" className="md:hidden rounded-full bg-[#0070FF] px-3 py-1.5 text-xs font-semibold">
+        <Link
+          to="/contact"
+          className="md:hidden rounded-full bg-[#0070FF] px-3 py-1.5 text-xs font-semibold"
+        >
           Contact
         </Link>
       </div>
 
-      {/* Progress rail */}
       <div className="fixed right-3 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-2 md:flex">
         {WORLD_SECTIONS.map((s, i) => (
           <div
             key={s.id}
-            className={`h-8 w-1 rounded-full transition-all ${active === i ? 'bg-[#0070FF] h-12' : 'bg-white/20'}`}
+            className={`w-1 rounded-full transition-all duration-500 ${
+              active === i ? 'h-12 bg-[#0070FF]' : 'h-8 bg-white/20'
+            }`}
           />
         ))}
       </div>
 
-      {/* Sticky copy */}
       <div className="pointer-events-none fixed inset-x-0 bottom-0 z-20 px-4 pb-10 pt-24 sm:px-8 sm:pb-14">
-        <div className="pointer-events-auto mx-auto max-w-xl rounded-2xl border border-white/10 bg-black/55 p-6 backdrop-blur-xl sm:p-8 shadow-[0_0_60px_rgba(0,112,255,0.12)]">
+        <div
+          key={copyKey}
+          className="pointer-events-auto mx-auto max-w-xl animate-[swfade_520ms_ease] border-t border-[#0070FF]/35 bg-gradient-to-t from-black/80 via-black/45 to-transparent pt-6 sm:pt-8"
+        >
           <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[#0070FF]">
             {section.eyebrow}
           </p>
-          <h1 className="text-2xl font-bold leading-tight tracking-tight sm:text-4xl">{section.title}</h1>
+          <h1 className="text-2xl font-bold leading-tight tracking-tight sm:text-4xl">
+            {section.title}
+          </h1>
           <p className="mt-3 text-sm leading-relaxed text-white/60 sm:text-base">{section.body}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {section.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-[#0070FF]/40 bg-[#0070FF]/10 px-3 py-1 text-[11px] text-[#89b8ff]"
+                className="border border-[#0070FF]/35 bg-[#0070FF]/10 px-3 py-1 text-[11px] text-[#89b8ff]"
               >
                 {tag}
               </span>
@@ -423,6 +460,13 @@ export default function ScrollWorld() {
           Scroll to fly through the world
         </p>
       )}
+
+      <style>{`
+        @keyframes swfade {
+          from { opacity: 0; transform: translateY(12px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 }
