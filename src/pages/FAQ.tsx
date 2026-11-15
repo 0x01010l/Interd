@@ -22,17 +22,15 @@ export default function FAQ() {
         })),
       }}
     >
-      <section className="py-20 md:py-28">
+      <section className="py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="eyebrow mb-4">FAQ</p>
-          <h1 className="font-display text-4xl font-bold tracking-tight md:text-5xl">
+          <p className="mono-label mb-4 !text-brand-accent">FAQ</p>
+          <h1 className="text-4xl font-bold tracking-tight md:text-6xl glow-text">
             Straight answers.
           </h1>
-          <p className="mt-5 text-xl text-brand-muted">
-            Especially the one about whether we are a SaaS.
-          </p>
+          <p className="mt-5 text-xl text-white/55">Especially the one about whether we are a SaaS.</p>
 
-          <div className="mt-14 space-y-5">
+          <div className="mt-14 space-y-4">
             {FAQ_ITEMS.map((faq, i) => (
               <motion.div
                 key={faq.q}
@@ -40,15 +38,15 @@ export default function FAQ() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="panel p-7"
+                className="glass rounded-2xl p-7"
               >
-                <h2 className="font-display text-xl font-bold">{faq.q}</h2>
-                <p className="mt-3 text-brand-muted leading-relaxed">{faq.a}</p>
+                <h2 className="text-xl font-bold">{faq.q}</h2>
+                <p className="mt-3 text-white/55 leading-relaxed">{faq.a}</p>
               </motion.div>
             ))}
           </div>
 
-          <p className="mt-12 text-brand-muted">
+          <p className="mt-12 text-white/45">
             Still unsure?{' '}
             <Link to="/contact" className="font-semibold text-brand-accent hover:underline">
               Write us

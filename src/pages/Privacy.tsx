@@ -12,11 +12,11 @@ export default function Privacy() {
       path="/privacy"
       breadcrumbLabel="Privacy"
     >
-      <section className="py-20 md:py-28">
+      <section className="py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="eyebrow mb-4">Legal</p>
-          <h1 className="font-display text-4xl font-bold mb-10">Privacy Policy</h1>
-          <div className="prose-advisory">
+          <p className="mono-label mb-4 !text-brand-accent">Legal</p>
+          <h1 className="mb-10 text-4xl font-bold">Privacy Policy</h1>
+          <div className="prose-dark">
             <h2>Who we are</h2>
             <p>
               {SITE.brand} is operated by {SITE.legal} (“we,” “our”). This policy covers {SITE.url}
