@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { Asterisk } from 'lucide-react';
 
 const phrases = [
@@ -16,9 +16,8 @@ export default function SignalRibbon() {
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 28, mass: 0.4 });
-  const x = useTransform(smooth, [0, 1], ['8%', '-34%']);
-  const xReverse = useTransform(smooth, [0, 1], ['-18%', '5%']);
+  const x = useTransform(scrollYProgress, [0, 1], ['3%', '-25%']);
+  const xReverse = useTransform(scrollYProgress, [0, 1], ['-8%', '2%']);
 
   return (
     <section ref={ref} className="relative overflow-hidden border-y border-blue-100 bg-[#f7faff] py-12 md:py-18">
@@ -27,7 +26,7 @@ export default function SignalRibbon() {
         style={{ x: reduceMotion ? 0 : x }}
         className="flex w-max items-center gap-8 whitespace-nowrap"
       >
-        {[...phrases, ...phrases].map((phrase, i) => (
+        {phrases.map((phrase, i) => (
           <div key={`${phrase}-${i}`} className="flex items-center gap-8">
             <span className="text-4xl font-semibold tracking-[-0.045em] text-slate-900 md:text-6xl">
               {phrase}
@@ -42,7 +41,7 @@ export default function SignalRibbon() {
         style={{ x: reduceMotion ? 0 : xReverse }}
         className="mt-6 flex w-max gap-10 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.18em] text-brand-accent/70"
       >
-        {Array.from({ length: 10 }, (_, i) => (
+        {Array.from({ length: 6 }, (_, i) => (
           <span key={i}>Advisory · Research · Evaluation · Introduction</span>
         ))}
       </motion.div>

@@ -9,17 +9,16 @@ import {
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
-  Building2,
   Check,
   Network,
   Radar,
   Search,
   Sparkles,
-  Waypoints,
 } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import DecisionJourney from '../components/DecisionJourney';
 import SignalRibbon from '../components/SignalRibbon';
+import AdvisoryNetworkVisual from '../components/AdvisoryNetworkVisual';
 import { getPageSeo } from '../data/seo';
 
 export default function Home() {
@@ -136,60 +135,7 @@ export default function Home() {
             className="relative mx-auto h-[30rem] w-full max-w-[34rem] lg:h-[38rem]"
             aria-hidden
           >
-            <div className="absolute inset-[9%] rounded-full border border-blue-100 bg-white/55 shadow-[0_40px_120px_rgba(26,86,219,0.13)] backdrop-blur-2xl" />
-            <div className="orbit-ring absolute inset-[4%] rounded-full border border-dashed border-blue-200/90" />
-            <div className="orbit-ring-reverse absolute inset-[18%] rounded-full border border-blue-100" />
-
-            <svg
-              className="absolute inset-[12%] h-[76%] w-[76%] overflow-visible"
-              viewBox="0 0 100 100"
-              fill="none"
-              aria-hidden
-            >
-              {[
-                'M50 50 C38 43 28 31 18 23',
-                'M50 50 C65 42 72 34 84 31',
-                'M50 50 C38 61 29 69 18 77',
-                'M50 50 C63 61 72 70 83 79',
-              ].map((d, i) => (
-                <motion.path
-                  key={d}
-                  d={d}
-                  stroke={i === 3 ? '#0070ff' : '#bfdbfe'}
-                  strokeWidth={i === 3 ? 0.65 : 0.45}
-                  strokeDasharray={i === 3 ? '0' : '2 2'}
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 1.1, delay: 0.45 + i * 0.13, ease: 'easeOut' }}
-                />
-              ))}
-            </svg>
-
-            <div className="absolute left-1/2 top-1/2 flex h-36 w-36 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[2.2rem] bg-brand-accent text-white shadow-[0_24px_70px_rgba(0,112,255,0.35)]">
-              <Waypoints className="h-14 w-14" />
-            </div>
-
-            {[
-              { className: 'left-[4%] top-[17%]', icon: Building2, label: 'Business context' },
-              { className: 'right-[-2%] top-[27%]', icon: Radar, label: 'Market signals' },
-              { className: 'left-[1%] bottom-[15%]', icon: Search, label: 'Solution fit' },
-              { className: 'right-[3%] bottom-[10%]', icon: Network, label: 'Right partner' },
-            ].map(({ className, icon: Icon, label }, i) => (
-              <motion.div
-                key={label}
-                animate={{ y: [0, i % 2 ? 8 : -8, 0] }}
-                transition={{ duration: 4.5 + i * 0.45, repeat: Infinity, ease: 'easeInOut' }}
-                className={`glass-card absolute ${className} flex items-center gap-3 rounded-2xl p-3.5 pr-5`}
-              >
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-brand-accent">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <span className="whitespace-nowrap text-sm font-semibold text-slate-800">{label}</span>
-              </motion.div>
-            ))}
-
-            <div className="absolute left-1/2 top-[11%] h-2.5 w-2.5 rounded-full bg-brand-accent shadow-[0_0_0_8px_rgba(0,112,255,.1)]" />
-            <div className="absolute bottom-[19%] left-[27%] h-2 w-2 rounded-full bg-sky-400 shadow-[0_0_0_7px_rgba(56,189,248,.12)]" />
+            <AdvisoryNetworkVisual />
           </motion.div>
         </div>
       </section>

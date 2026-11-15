@@ -89,7 +89,7 @@ export default function DecisionJourney() {
   });
   const lineProgress = useTransform(progress, [0.08, 0.9], [0, 1]);
   const stageScale = useTransform(progress, [0, 0.5, 1], [0.97, 1, 0.985]);
-  const glowX = useTransform(progress, [0, 1], ['4%', '78%']);
+  const glowX = useTransform(progress, [0, 1], ['0vw', '58vw']);
 
   useMotionValueEvent(progress, 'change', (latest) => {
     const next = Math.min(stages.length - 1, Math.max(0, Math.floor(latest * stages.length)));
@@ -105,8 +105,8 @@ export default function DecisionJourney() {
         <div className="sticky top-16 flex h-[calc(100vh-4rem)] items-center overflow-hidden">
           <div className="blueprint-grid absolute inset-0 opacity-70" />
           <motion.div
-            style={{ left: glowX }}
-            className="pointer-events-none absolute top-[18%] h-[30rem] w-[30rem] rounded-full bg-blue-200/50 blur-[90px]"
+            style={{ x: glowX }}
+            className="pointer-events-none absolute -left-40 top-[8%] h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(circle,rgba(147,197,253,.38),rgba(191,219,254,.12)_45%,transparent_70%)] will-change-transform"
           />
 
           <div className="relative mx-auto grid w-full max-w-7xl grid-cols-[.78fr_1.22fr] items-center gap-14 px-8">
@@ -128,7 +128,7 @@ export default function DecisionJourney() {
 
             <motion.div
               style={{ scale: stageScale }}
-              className="relative min-h-[34rem] rounded-[2.5rem] border border-white/90 bg-white/65 p-10 shadow-[0_35px_100px_rgba(31,80,150,0.15)] backdrop-blur-2xl"
+              className="relative min-h-[34rem] rounded-[2.5rem] border border-white bg-white/90 p-10 shadow-[0_35px_100px_rgba(31,80,150,0.15)]"
             >
               <div className="absolute left-10 right-10 top-11 flex items-center justify-between">
                 {stages.map((stage, i) => {

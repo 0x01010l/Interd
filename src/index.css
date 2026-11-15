@@ -45,8 +45,7 @@
   }
 
   .glass-card {
-    background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.7));
-    backdrop-filter: blur(22px);
+    background: linear-gradient(135deg, rgba(255,255,255,.98), rgba(247,250,255,.94));
     border: 1px solid rgba(255,255,255,.9);
     box-shadow: 0 18px 55px rgba(15, 52, 96, 0.12);
   }
@@ -101,14 +100,6 @@
     mask-image: linear-gradient(to bottom, black, transparent 92%);
   }
 
-  .orbit-ring {
-    animation: orbit 28s linear infinite;
-  }
-
-  .orbit-ring-reverse {
-    animation: orbit 18s linear infinite reverse;
-  }
-
   .prose-dark h2 {
     @apply text-2xl font-bold text-slate-950 mt-10 mb-4;
   }
@@ -116,10 +107,6 @@
   .prose-dark p {
     @apply text-slate-600 leading-relaxed text-lg mb-5;
   }
-}
-
-@keyframes orbit {
-  to { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
