@@ -1,10 +1,12 @@
-import PageLayout from '../components/PageLayout';
-import { Mail, MessageSquare, Globe } from 'lucide-react';
 import { useEffect } from 'react';
+import { Mail, MessageSquare, MapPin } from 'lucide-react';
+import PageLayout from '../components/PageLayout';
+import { SITE } from '../data/site';
 import { getPageSeo } from '../data/seo';
 
 export default function Contact() {
   const seo = getPageSeo('/contact');
+
   useEffect(() => {
     const script = document.createElement('script');
     script.textContent = `var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}`;
@@ -18,51 +20,63 @@ export default function Contact() {
       path="/contact"
       breadcrumbLabel="Contact"
     >
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="grid grid-cols-1 gap-14 lg:grid-cols-2">
             <div>
-              <h2 className="mono-label mb-4">Contact Us</h2>
-              <h1 className="text-5xl font-bold mb-8">Let's Synthesize.</h1>
-              <p className="text-xl text-white/60 leading-relaxed mb-12">
-                Ready to integrate the reasoning layer? Our team of engineers and 
-                analysts is standing by to help you bridge the gap.
+              <p className="eyebrow mb-4">Contact</p>
+              <h1 className="font-display text-4xl font-bold tracking-tight md:text-5xl">
+                Tell us what is changing.
+              </h1>
+              <p className="mt-6 text-xl text-brand-muted leading-relaxed">
+                Share whether you are seeking a technology partner—or offering one. We will reply
+                with next steps, not a pitch deck dump.
               </p>
-              
-              <div className="space-y-8">
-                <div className="flex items-center space-x-6">
-                  <div className="w-12 h-12 glass rounded-xl flex items-center justify-center">
-                    <Mail className="w-6 h-6 text-brand-accent" />
-                  </div>
+
+              <div className="mt-12 space-y-7">
+                <div className="flex items-start gap-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-accent/10 text-brand-accent">
+                    <Mail className="h-5 w-5" />
+                  </span>
                   <div>
-                    <div className="mono-label">Main Email</div>
-                    <div className="text-xl font-bold">contact@interdot.net</div>
+                    <p className="eyebrow !text-brand-muted">Main</p>
+                    <a
+                      href={`mailto:${SITE.email}`}
+                      className="text-lg font-semibold text-brand-ink hover:text-brand-accent"
+                    >
+                      {SITE.email}
+                    </a>
                   </div>
                 </div>
-                <div className="flex items-center space-x-6">
-                  <div className="w-12 h-12 glass rounded-xl flex items-center justify-center">
-                    <MessageSquare className="w-6 h-6 text-brand-accent" />
-                  </div>
+                <div className="flex items-start gap-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-accent/10 text-brand-accent">
+                    <MessageSquare className="h-5 w-5" />
+                  </span>
                   <div>
-                    <div className="mono-label">Technical Support</div>
-                    <div className="text-xl font-bold">advisory@interdot.net</div>
+                    <p className="eyebrow !text-brand-muted">Advisory</p>
+                    <a
+                      href={`mailto:${SITE.support}`}
+                      className="text-lg font-semibold text-brand-ink hover:text-brand-accent"
+                    >
+                      {SITE.support}
+                    </a>
                   </div>
                 </div>
-                <div className="flex items-center space-x-6">
-                  <div className="w-12 h-12 glass rounded-xl flex items-center justify-center">
-                    <Globe className="w-6 h-6 text-brand-accent" />
-                  </div>
+                <div className="flex items-start gap-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-accent/10 text-brand-accent">
+                    <MapPin className="h-5 w-5" />
+                  </span>
                   <div>
-                    <div className="mono-label">HQ</div>
-                    <div className="text-xl font-bold">6545 Market Avenue North, North Canton, 44721, OH, US</div>
+                    <p className="eyebrow !text-brand-muted">HQ</p>
+                    <p className="text-lg font-semibold text-brand-ink">{SITE.address.join(', ')}</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="glass p-10 rounded-[2.5rem] border-brand-border">
+            <div className="panel p-6 sm:p-8">
               <iframe
-                data-tally-src="https://tally.so/embed/jaXl9Q?dynamicHeight=1"
+                data-tally-src={`https://tally.so/embed/${SITE.tallyFormId}?dynamicHeight=1`}
                 loading="lazy"
                 width="100%"
                 height="447"

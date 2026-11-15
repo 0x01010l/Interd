@@ -1,13 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { SITE } from '../data/site';
-import {
-  breadcrumbJsonLd,
-  definedTermSetJsonLd,
-  getPageSeo,
-  organizationJsonLd,
-  webSiteJsonLd,
-} from '../data/seo';
+import { breadcrumbJsonLd, getPageSeo, organizationJsonLd, webSiteJsonLd } from '../data/seo';
 
 type SEOProps = {
   title?: string;
@@ -72,21 +66,23 @@ export default function SEO({
     document.title = pageTitle;
     setMeta('name', 'description', pageDesc);
     setMeta('name', 'author', SITE.legal);
-    setMeta('name', 'robots', noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1');
+    setMeta(
+      'name',
+      'robots',
+      noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1'
+    );
     if (pageKeywords?.length) setMeta('name', 'keywords', pageKeywords.join(', '));
-
     setLink('canonical', canonical);
     setMeta('property', 'og:title', pageTitle);
     setMeta('property', 'og:description', pageDesc);
     setMeta('property', 'og:type', 'website');
     setMeta('property', 'og:url', canonical);
     setMeta('property', 'og:site_name', SITE.name);
-    setMeta('property', 'og:locale', 'en_US');
     setMeta('name', 'twitter:card', 'summary_large_image');
     setMeta('name', 'twitter:title', pageTitle);
     setMeta('name', 'twitter:description', pageDesc);
 
-    const graphs: object[] = [organizationJsonLd(), webSiteJsonLd(), definedTermSetJsonLd()];
+    const graphs: object[] = [organizationJsonLd(), webSiteJsonLd()];
     if (breadcrumbLabel) graphs.push(breadcrumbJsonLd(routePath, breadcrumbLabel));
     if (jsonLd) graphs.push(...(Array.isArray(jsonLd) ? jsonLd : [jsonLd]));
     setJsonLd(graphs);

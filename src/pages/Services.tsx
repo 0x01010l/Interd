@@ -1,195 +1,77 @@
-import PageLayout from '../components/PageLayout';
-import { motion } from 'motion/react';
-import { BarChart3, Shield, Cpu, Database, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
+import { ArrowRight } from 'lucide-react';
+import PageLayout from '../components/PageLayout';
+import { SERVICES, WHO_FOR } from '../data/copy';
 import { getPageSeo } from '../data/seo';
 
-const VectorAnimation = ({ type }: { type: number }) => {
-  if (type === 0) {
-    // Financial: Moving bars
-    return (
-      <div className="flex items-end gap-1 h-32">
-        {[...Array(12)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="w-3 bg-brand-accent/40 rounded-t-sm"
-            initial={{ height: 20 }}
-            animate={{ 
-              height: [20, 80, 40, 100, 30, 90, 20],
-            }}
-            transition={{ 
-              duration: 3, 
-              repeat: Infinity, 
-              delay: i * 0.1,
-              ease: "easeInOut" 
-            }}
-          />
-        ))}
-      </div>
-    );
-  }
-  if (type === 1) {
-    // Cyber: Scanning grid
-    return (
-      <div className="relative w-48 h-48 border border-red-500/20 rounded-lg overflow-hidden">
-        <div className="absolute inset-0 grid grid-cols-6 grid-rows-6">
-          {[...Array(36)].map((_, i) => (
-            <div key={i} className="border-[0.5px] border-red-500/10" />
-          ))}
-        </div>
-        <motion.div 
-          className="absolute top-0 left-0 w-full h-1 bg-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.5)]"
-          animate={{ top: ['0%', '100%', '0%'] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-        />
-        <motion.div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <Shield className="w-16 h-16 text-red-500/20" />
-        </motion.div>
-      </div>
-    );
-  }
-  // Vector Training: Floating particles
-  return (
-    <div className="relative w-48 h-48">
-      {[...Array(8)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-2 h-2 bg-purple-500 rounded-full"
-          initial={{ 
-            x: Math.random() * 100, 
-            y: Math.random() * 100,
-            opacity: 0 
-          }}
-          animate={{ 
-            x: [Math.random() * 150, Math.random() * 150, Math.random() * 150],
-            y: [Math.random() * 150, Math.random() * 150, Math.random() * 150],
-            opacity: [0, 1, 0]
-          }}
-          transition={{ 
-            duration: 5 + Math.random() * 5, 
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <Cpu className="w-16 h-16 text-purple-500/20" />
-      </div>
-    </div>
-  );
-};
-
 export default function Services() {
-  const services = [
-    {
-      icon: <BarChart3 className="w-8 h-8 text-brand-accent" />,
-      title: 'Financial Logic Synthesis',
-      description: 'Beyond standard data scraping. We provide deep causal analysis for market movements.',
-      features: [
-        'High-frequency logic traces',
-        'Causal relationship mapping',
-        'Audit-ready synthesis reports',
-        'Multi-vector market prediction'
-      ]
-    },
-    {
-      icon: <Shield className="w-8 h-8 text-red-500" />,
-      title: 'Automated Cyber Recon',
-      description: 'Deterministic threat modeling and adversary logic prediction.',
-      features: [
-        'Attack surface vectorization',
-        'Predictive adversary modeling',
-        'Real-time logic-based alerts',
-        'Zero-hallucination threat intel'
-      ]
-    },
-    {
-      icon: <Cpu className="w-8 h-8 text-purple-500" />,
-      title: 'Custom Vector Training',
-      description: 'Train reasoning models on your proprietary datasets with absolute privacy.',
-      features: [
-        'Zero-leakage training protocols',
-        'Proprietary vector optimization',
-        'Custom logic chain development',
-        'Secure on-prem deployment options'
-      ]
-    }
-  ];
+  const seo = getPageSeo('/services');
 
   return (
     <PageLayout
-      title={getPageSeo('/services').title}
-      description={getPageSeo('/services').description}
+      title={seo.title}
+      description={seo.description}
       path="/services"
       breadcrumbLabel="Services"
       jsonLd={{
         '@context': 'https://schema.org',
         '@type': 'Service',
-        name: 'Interdot Reasoning Layer',
+        name: 'B2B Technology Advisory & Vendor Matchmaking',
         provider: { '@type': 'Organization', name: 'FIX FIGURES LLC' },
-        description: getPageSeo('/services').description,
-        serviceType: 'Reasoning-as-a-Service',
-        areaServed: 'Worldwide',
+        description: seo.description,
+        serviceType: 'Technology Advisory',
       }}
     >
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mb-20">
-            <h2 className="mono-label mb-4">Our Services</h2>
-            <h1 className="text-5xl font-bold mb-8">The Reasoning Layer vs. Data Scraping</h1>
-            <p className="text-xl text-white/60 leading-relaxed">
-              Standard AI models scrape data and guess patterns. Interdot synthesizes 
-              reasoning chains. We don't just tell you what happened; we show you 
-              the logical "why" behind every data point.
-            </p>
-          </div>
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <p className="eyebrow mb-4">Services</p>
+          <h1 className="font-display max-w-3xl text-4xl font-bold tracking-tight md:text-5xl">
+            Advisory that ends in the right conversation.
+          </h1>
+          <p className="mt-6 max-w-2xl text-xl text-brand-muted leading-relaxed">
+            Three tightly connected offerings—designed for companies in motion and vendors who
+            prefer qualified introductions.
+          </p>
 
-          <div className="space-y-12">
-            {services.map((service, i) => (
+          <div className="mt-16 space-y-6">
+            {SERVICES.map((s, i) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                className="glass p-12 rounded-[2.5rem] grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+                key={s.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="panel flex flex-col gap-4 p-8 md:flex-row md:items-start md:gap-10 md:p-10"
               >
-                <div className={i % 2 !== 0 ? 'lg:order-2' : ''}>
-                  <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-3xl font-bold mb-6">{service.title}</h3>
-                  <p className="text-lg text-white/60 mb-8 leading-relaxed">
-                    {service.description}
-                  </p>
-                  <ul className="space-y-4 mb-10">
-                    {service.features.map((feature, j) => (
-                      <li key={j} className="flex items-center space-x-3 text-white/80">
-                        <CheckCircle2 className="w-5 h-5 text-brand-accent" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link 
-                    to="/contact" 
-                    className="inline-flex items-center space-x-2 bg-white/5 hover:bg-white/10 text-white px-6 py-3 rounded-xl font-bold transition-all border border-brand-border"
-                  >
-                    <span>Request Access</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-                <div className={`bg-brand-bg/50 rounded-3xl p-8 border border-brand-border h-full min-h-[350px] flex items-center justify-center relative overflow-hidden ${i % 2 !== 0 ? 'lg:order-1' : ''}`}>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03),transparent_70%)]" />
-                  <div className="text-center relative z-10">
-                    <VectorAnimation type={i} />
-                    <div className="mono-label mt-8">Vector Synthesis Engine</div>
-                  </div>
+                <span className="font-display text-4xl font-bold text-brand-accent/30">
+                  0{i + 1}
+                </span>
+                <div>
+                  <h2 className="font-display text-2xl font-bold">{s.title}</h2>
+                  <p className="mt-3 text-lg text-brand-muted leading-relaxed">{s.body}</p>
                 </div>
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="border-t border-brand-line bg-brand-paper/60 py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <h2 className="font-display text-3xl font-bold">Who engages us</h2>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {WHO_FOR.map((item) => (
+              <div key={item.title} className="border-t-2 border-brand-accent pt-5">
+                <h3 className="font-display text-lg font-bold">{item.title}</h3>
+                <p className="mt-2 text-brand-muted leading-relaxed">{item.body}</p>
+              </div>
+            ))}
+          </div>
+          <Link to="/contact" className="btn-primary mt-12">
+            Request an introduction conversation
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
     </PageLayout>

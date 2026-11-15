@@ -2,9 +2,9 @@ export const SITE = {
   name: 'Interdot',
   legal: 'FIX FIGURES LLC',
   brand: 'INTERDOT',
-  tagline: 'Reasoning-as-a-Service for finance and cybersecurity',
+  tagline: 'B2B technology advisory & vendor matchmaking',
   description:
-    'Interdot delivers deterministic Reasoning-as-a-Service (RaaS): audit-ready logic chains for financial markets, automated cyber recon, and custom vector training — without black-box hallucinations.',
+    'Interdot connects growing companies with the right technology partners—based on what is happening in their business right now. We monitor business-change signals, identify likely technology needs, evaluate relevant vendors, and facilitate qualified introductions.',
   url: 'https://interdot.net',
   email: 'contact@interdot.net',
   support: 'advisory@interdot.net',
@@ -14,14 +14,15 @@ export const SITE = {
     'https://github.com/0x01010l',
     'https://www.linkedin.com/company/interdot',
   ],
+  tallyFormId: 'jaXl9Q',
 } as const;
 
 export const ROUTES = [
   '/',
+  '/approach',
   '/services',
   '/about',
   '/faq',
-  '/clients',
   '/contact',
   '/privacy',
   '/terms',

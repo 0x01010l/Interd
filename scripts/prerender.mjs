@@ -1,5 +1,5 @@
 /**
- * Post-build prerender: unique titles/meta + crawlable HTML inside #root for SPA SEO.
+ * Post-build prerender for SPA SEO.
  */
 import fs from 'fs';
 import path from 'path';
@@ -23,11 +23,11 @@ function escapeHtml(s) {
 }
 
 function siteNav() {
-  return `<header role="banner" style="border-bottom:1px solid #1a1a1a;padding:1rem 0;margin-bottom:1.5rem"><nav aria-label="Primary" style="max-width:48rem;margin:0 auto;padding:0 1.25rem;font-family:ui-monospace,monospace;font-size:0.85rem"><a href="/" style="font-weight:700;margin-right:1rem;color:#0070FF">INTERDOT</a><a href="/services" style="margin-right:0.75rem;color:#ccc">Services</a><a href="/blog" style="margin-right:0.75rem;color:#ccc">Blog</a><a href="/about" style="margin-right:0.75rem;color:#ccc">About</a><a href="/faq" style="margin-right:0.75rem;color:#ccc">FAQ</a><a href="/clients" style="margin-right:0.75rem;color:#ccc">Case Studies</a><a href="/contact" style="margin-right:0.75rem;color:#ccc">Contact</a><a href="/privacy" style="color:#ccc">Privacy</a></nav></header>`;
+  return `<header role="banner" style="border-bottom:1px solid #d4dae3;padding:1rem 0;margin-bottom:1.5rem"><nav aria-label="Primary" style="max-width:42rem;margin:0 auto;padding:0 1.25rem;font-family:system-ui,sans-serif;font-size:0.9rem"><a href="/" style="font-weight:700;margin-right:1rem;color:#0f766e">INTERDOT</a><a href="/approach" style="margin-right:0.75rem;color:#5a6578">Approach</a><a href="/services" style="margin-right:0.75rem;color:#5a6578">Services</a><a href="/about" style="margin-right:0.75rem;color:#5a6578">About</a><a href="/faq" style="margin-right:0.75rem;color:#5a6578">FAQ</a><a href="/contact" style="color:#0f766e;font-weight:600">Contact</a></nav></header>`;
 }
 
 function siteFooter() {
-  return `<footer role="contentinfo" style="border-top:1px solid #1a1a1a;margin-top:2rem;padding:1.5rem 0;font-family:ui-monospace,monospace;font-size:0.75rem;color:#666"><nav aria-label="Footer" style="max-width:48rem;margin:0 auto;padding:0 1.25rem"><a href="/services" style="margin-right:0.75rem">Services</a><a href="/about" style="margin-right:0.75rem">About</a><a href="/faq" style="margin-right:0.75rem">FAQ</a><a href="/terms" style="margin-right:0.75rem">Terms</a><a href="/contact">Contact</a></nav><p style="max-width:48rem;margin:0.75rem auto 0;padding:0 1.25rem">© FIX FIGURES LLC · contact@interdot.net</p></footer>`;
+  return `<footer role="contentinfo" style="border-top:1px solid #d4dae3;margin-top:2rem;padding:1.5rem 0;font-family:system-ui,sans-serif;font-size:0.8rem;color:#5a6578"><p style="max-width:42rem;margin:0 auto;padding:0 1.25rem">© FIX FIGURES LLC · contact@interdot.net · 6545 Market Avenue North, North Canton, OH 44721</p></footer>`;
 }
 
 function wrap(main) {
@@ -59,7 +59,7 @@ function writeRouteHtml(template, routePath, { title, description, body, jsonLd,
       `    <script type="application/ld+json">${JSON.stringify(graphs)}</script>\n  </head>`
     );
   }
-  const seeded = `<div id="root"><div class="prerender-seed" style="max-width:48rem;margin:0 auto;padding:2rem 1.25rem;font-family:Georgia,serif;line-height:1.75;color:#e8e8e8;background:#050505">${wrap(body)}</div></div>`;
+  const seeded = `<div id="root"><div class="prerender-seed" style="max-width:42rem;margin:0 auto;padding:2rem 1.25rem;font-family:Georgia,serif;line-height:1.75;color:#0b1324;background:#f7f8fa">${wrap(body)}</div></div>`;
   html = html.replace(/<div id="root"><\/div>/i, seeded);
   const outDir = routePath === '/' ? dist : path.join(dist, routePath.replace(/^\//, ''));
   ensureDir(outDir);
@@ -69,56 +69,58 @@ function writeRouteHtml(template, routePath, { title, description, body, jsonLd,
 
 function loadData() {
   const dump = `
-import { PAGE_SEO, FAQ_ITEMS, organizationJsonLd, definedTermSetJsonLd, webSiteJsonLd } from './src/data/seo.ts';
+import { PAGE_SEO, FAQ_ITEMS, organizationJsonLd, webSiteJsonLd } from './src/data/seo.ts';
 import { SITE } from './src/data/site.ts';
-import { BLOG_POSTS } from './src/data/blogPosts.ts';
-console.log(JSON.stringify({ seo: PAGE_SEO, faqs: FAQ_ITEMS, site: SITE, org: organizationJsonLd(), terms: definedTermSetJsonLd(), web: webSiteJsonLd(), posts: BLOG_POSTS }));
+import { APPROACH_STEPS, SERVICES } from './src/data/copy.ts';
+console.log(JSON.stringify({ seo: PAGE_SEO, faqs: FAQ_ITEMS, site: SITE, org: organizationJsonLd(), web: webSiteJsonLd(), steps: APPROACH_STEPS, services: SERVICES }));
 `;
   const tmp = path.join(root, '.prerender-dump.mts');
   fs.writeFileSync(tmp, dump);
   const res = spawnSync('npx', ['tsx', tmp], { cwd: root, encoding: 'utf8' });
-  try { fs.unlinkSync(tmp); } catch { /* ignore */ }
+  try {
+    fs.unlinkSync(tmp);
+  } catch {
+    /* ignore */
+  }
   if (res.status !== 0) throw new Error(res.stderr || res.stdout);
   return JSON.parse(res.stdout.trim().split('\n').filter(Boolean).pop());
 }
 
 function main() {
   const indexPath = path.join(dist, 'index.html');
-  if (!fs.existsSync(indexPath)) throw new Error('dist/index.html missing — run vite build first');
+  if (!fs.existsSync(indexPath)) throw new Error('dist/index.html missing');
   const template = fs.readFileSync(indexPath, 'utf8');
-  const { seo, faqs, site, org, terms, web, posts } = loadData();
-  const baseGraphs = [org, web, terms];
+  const { seo, faqs, site, org, web, steps, services } = loadData();
+  const base = [org, web];
 
   const pages = Object.values(seo).map((p) => ({
     path: p.path,
     title: p.title,
     description: p.description,
-    body: `<article><h1>${escapeHtml(p.title.split('|')[0].trim())}</h1><p>${escapeHtml(p.description)}</p><p><a href="/contact">Contact Interdot</a> · <a href="/services">Services</a> · <a href="/faq">FAQ</a></p></article>`,
-    jsonLd: baseGraphs,
+    body: `<article><h1>${escapeHtml(p.title.split('|')[0].trim())}</h1><p>${escapeHtml(p.description)}</p><p><a href="/contact">Contact</a></p></article>`,
+    jsonLd: base,
   }));
 
   const home = pages.find((p) => p.path === '/');
   if (home) {
-    home.body = `<article id="speakable-home"><h1>Reasoning-as-a-Service for Finance &amp; Cybersecurity</h1><p>${escapeHtml(site.description)}</p><h2>Financial Logic Synthesis</h2><p>Audit-ready causal analysis for quant funds and risk teams. High-frequency logic traces with 12ms average latency.</p><h2>Automated Cyber Recon</h2><p>Deterministic threat modeling with MITRE ATT&CK vectorization. Predict adversary logic before exploitation.</p><h2>Custom Vector Training</h2><p>Private reasoning models on your data with zero leakage and verifiable Logic Traces.</p><nav aria-label="Related"><a href="/services">Explore services</a> · <a href="/clients">Case studies</a> · <a href="/contact">Request API access</a></nav></article>`;
-    home.jsonLd = [
-      ...baseGraphs,
-      {
-        '@context': 'https://schema.org',
-        '@type': 'ProfessionalService',
-        name: 'Interdot Reasoning-as-a-Service',
-        url: site.url,
-        description: site.description,
-        areaServed: 'Worldwide',
-        serviceType: ['Financial Logic Synthesis', 'Automated Cyber Recon', 'Custom Vector Training'],
-      },
-    ];
+    home.body = `<article><h1>INTERDOT</h1><p>${escapeHtml(site.description)}</p><h2>How we work</h2><ol>${steps.map((s) => `<li><strong>${escapeHtml(s.title)}</strong> — ${escapeHtml(s.body)}</li>`).join('')}</ol><p><a href="/contact">Start a conversation</a> · <a href="/approach">Approach</a></p></article>`;
   }
 
-  const faqPage = pages.find((p) => p.path === '/faq');
-  if (faqPage) {
-    faqPage.body = `<article><h1>Technical FAQ</h1>${faqs.map((f) => `<section><h2>${escapeHtml(f.q)}</h2><p>${escapeHtml(f.a)}</p></section>`).join('')}</article>`;
-    faqPage.jsonLd = [
-      ...baseGraphs,
+  const approach = pages.find((p) => p.path === '/approach');
+  if (approach) {
+    approach.body = `<article><h1>Our approach</h1>${steps.map((s) => `<section><h2>${escapeHtml(s.num)}. ${escapeHtml(s.title)}</h2><p>${escapeHtml(s.body)}</p></section>`).join('')}</article>`;
+  }
+
+  const servicesPage = pages.find((p) => p.path === '/services');
+  if (servicesPage) {
+    servicesPage.body = `<article><h1>Services</h1>${services.map((s) => `<section><h2>${escapeHtml(s.title)}</h2><p>${escapeHtml(s.body)}</p></section>`).join('')}</article>`;
+  }
+
+  const faq = pages.find((p) => p.path === '/faq');
+  if (faq) {
+    faq.body = `<article><h1>FAQ</h1>${faqs.map((f) => `<section><h2>${escapeHtml(f.q)}</h2><p>${escapeHtml(f.a)}</p></section>`).join('')}</article>`;
+    faq.jsonLd = [
+      ...base,
       {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
@@ -131,62 +133,20 @@ function main() {
     ];
   }
 
-  const blogPage = pages.find((p) => p.path === '/blog');
-  if (blogPage) {
-    blogPage.body = `<article><h1>AI Agents &amp; Reasoning Blog</h1><ul>${posts.map((p) => `<li><a href="/blog/${p.slug}">${escapeHtml(p.title)}</a> — ${escapeHtml(p.description)}</li>`).join('')}</ul></article>`;
-    blogPage.jsonLd = [
-      ...baseGraphs,
-      {
-        '@context': 'https://schema.org',
-        '@type': 'Blog',
-        name: 'Interdot AI Reasoning Blog',
-        url: `${site.url}/blog`,
-        blogPost: posts.map((p) => ({
-          '@type': 'BlogPosting',
-          headline: p.title,
-          url: `${site.url}/blog/${p.slug}`,
-          datePublished: p.date,
-        })),
-      },
-    ];
-  }
-
   for (const page of pages) writeRouteHtml(template, page.path, page);
 
-  for (const post of posts) {
-    writeRouteHtml(template, `/blog/${post.slug}`, {
-      title: `${post.title} | Interdot Blog`,
-      description: post.description,
-      body: `<article><h1>${escapeHtml(post.title)}</h1><p><em>${escapeHtml(post.date)} · ${escapeHtml(post.readTime)}</em></p><p>${escapeHtml(post.description)}</p>${post.content.map((b) => (b.startsWith('## ') ? `<h2>${escapeHtml(b.slice(3))}</h2>` : `<p>${escapeHtml(b)}</p>`)).join('')}<p><a href="/contact">Get in Touch</a></p></article>`,
-      jsonLd: [
-        ...baseGraphs,
-        {
-          '@context': 'https://schema.org',
-          '@type': 'BlogPosting',
-          headline: post.title,
-          description: post.description,
-          datePublished: post.date,
-          author: { '@type': 'Organization', name: site.legal },
-          publisher: { '@type': 'Organization', name: site.legal },
-          mainEntityOfPage: `${site.url}/blog/${post.slug}`,
-        },
-      ],
-    });
-  }
-
-  // 404 page
   writeRouteHtml(template, '/404', {
     title: 'Page not found | Interdot',
-    description: 'The requested page does not exist.',
+    description: 'Page not found.',
     robots: 'noindex, nofollow',
-    body: '<article><h1>Page not found</h1><p><a href="/">Return home</a></p></article>',
+    body: '<article><h1>Page not found</h1><p><a href="/">Home</a></p></article>',
   });
 
-  for (const f of ['staticwebapp.config.json', 'robots.txt', 'sitemap.xml', 'llms.txt']) {
+  for (const f of ['staticwebapp.config.json', 'robots.txt', 'sitemap.xml', 'llms.txt', '404.html']) {
     const src = path.join(root, 'public', f);
     if (fs.existsSync(src)) fs.copyFileSync(src, path.join(dist, f));
   }
-  console.log(`Prerendered ${pages.length + posts.length} routes`);
+  console.log(`Prerendered ${pages.length + 1} routes`);
 }
 
 main();

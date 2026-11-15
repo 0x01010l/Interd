@@ -1,67 +1,101 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-  
-  --color-brand-bg: #050505;
-  --color-brand-surface: #0F0F0F;
-  --color-brand-border: #1F1F1F;
-  --color-brand-accent: #0070FF;
-  
-  --radius-xl: 1.5rem;
-  --radius-2xl: 2rem;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-bg: #eef1f4;
+  --color-brand-paper: #f7f8fa;
+  --color-brand-ink: #0b1324;
+  --color-brand-muted: #5a6578;
+  --color-brand-line: #d4dae3;
+  --color-brand-accent: #0f766e;
+  --color-brand-accent-dark: #0b5f59;
+  --color-brand-glow: #134e4a;
+  --color-brand-warm: #c2410c;
+
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-brand-bg text-white font-sans antialiased;
+    @apply bg-brand-bg text-brand-ink font-sans antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 10% -10%, rgba(15, 118, 110, 0.12), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(194, 65, 12, 0.06), transparent),
+      linear-gradient(180deg, #eef1f4 0%, #e8ecf1 100%);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-brand-accent) 28%, white);
+    color: var(--color-brand-ink);
   }
 }
 
 @layer components {
-  .glass {
-    background-color: color-mix(in srgb, var(--color-brand-surface) 50%, transparent);
-    backdrop-filter: blur(24px);
-    border: 1px solid var(--color-brand-border);
+  .font-display {
+    font-family: var(--font-display);
   }
-  
-  .bento-card {
-    background-color: color-mix(in srgb, var(--color-brand-surface) 50%, transparent);
-    backdrop-filter: blur(24px);
-    border: 1px solid var(--color-brand-border);
-    border-radius: var(--radius-2xl);
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-  }
-  
-  .bento-card:hover {
-    border-color: color-mix(in srgb, var(--color-brand-accent) 50%, transparent);
-    box-shadow: 0 0 30px rgba(0, 112, 255, 0.1);
-  }
-  
-  .mono-label {
-    font-family: var(--font-mono);
-    font-size: 10px;
+
+  .eyebrow {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--color-brand-accent);
   }
 
-  .blog-body h2 {
-    @apply text-2xl font-bold text-white mt-12 mb-4 scroll-mt-24;
+  .glass {
+    background: color-mix(in srgb, var(--color-brand-paper) 78%, transparent);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--color-brand-line);
   }
 
-  .blog-body p {
-    @apply text-white/70 leading-[1.85] text-lg;
+  .panel {
+    background: var(--color-brand-paper);
+    border: 1px solid var(--color-brand-line);
+    border-radius: var(--radius-2xl);
   }
 
-  .blog-body p + p {
-    @apply mt-5;
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-accent px-6 py-3 text-sm font-semibold text-white transition-all;
   }
 
-  .blog-lead {
-    @apply text-xl text-white/60 leading-relaxed;
+  .btn-primary:hover {
+    background: var(--color-brand-accent-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(15, 118, 110, 0.28);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-brand-line bg-brand-paper/70 px-6 py-3 text-sm font-semibold text-brand-ink transition-all;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--color-brand-accent);
+    color: var(--color-brand-accent-dark);
+  }
+
+  .prose-advisory h2 {
+    @apply font-display text-2xl font-bold text-brand-ink mt-10 mb-4;
+  }
+
+  .prose-advisory p {
+    @apply text-brand-muted leading-relaxed text-lg mb-5;
+  }
+
+  .signal-grid {
+    background-image:
+      linear-gradient(to right, rgba(11, 19, 36, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11, 19, 36, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
   }
 }

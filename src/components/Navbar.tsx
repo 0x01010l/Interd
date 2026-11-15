@@ -1,87 +1,92 @@
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
 import { Waypoints, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { SITE } from '../data/site';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   const navLinks = [
+    { name: 'Approach', path: '/approach' },
     { name: 'Services', path: '/services' },
-    { name: 'Blog', path: '/blog' },
     { name: 'About', path: '/about' },
     { name: 'FAQ', path: '/faq' },
-    { name: 'Case Studies', path: '/clients' },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-brand-border/50" aria-label="Main navigation">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="w-8 h-8 bg-brand-accent rounded-lg flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(0,112,255,0.5)] transition-shadow">
-              <Waypoints className="w-5 h-5 text-white" />
-            </div>
-            <span className="font-mono font-bold tracking-tighter text-xl">INTERDOT</span>
-          </Link>
+    <nav
+      className="fixed top-0 left-0 right-0 z-50 border-b border-brand-line/80 bg-brand-paper/80 backdrop-blur-xl"
+      aria-label="Main navigation"
+    >
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+        <Link to="/" className="group flex items-center gap-2.5">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-ink text-brand-paper transition-transform group-hover:scale-105">
+            <Waypoints className="h-5 w-5" />
+          </span>
+          <span className="font-display text-lg font-bold tracking-tight text-brand-ink">
+            {SITE.brand}
+          </span>
+        </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-sm font-medium transition-colors hover:text-brand-accent ${
-                  location.pathname === link.path ||
-                  (link.path === '/blog' && location.pathname.startsWith('/blog'))
-                    ? 'text-brand-accent'
-                    : 'text-white/70'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <Link to="/contact" className="bg-brand-accent hover:bg-brand-accent/90 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all hover:scale-105 active:scale-95 shadow-lg shadow-brand-accent/20">
-               Get in Touch
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-white/70 hover:text-white">
-              {isOpen ? <X /> : <Menu />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Nav */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden glass border-t border-brand-border/50 p-4 space-y-4"
-        >
+        <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
-              onClick={() => setIsOpen(false)}
-              className="block text-lg font-medium text-white/70 hover:text-brand-accent"
+              className={`text-sm font-semibold transition-colors ${
+                location.pathname === link.path
+                  ? 'text-brand-accent'
+                  : 'text-brand-muted hover:text-brand-ink'
+              }`}
             >
               {link.name}
             </Link>
           ))}
-          <Link 
-            to="/contact" 
-            onClick={() => setIsOpen(false)}
-            className="block w-full bg-brand-accent text-white px-5 py-3 rounded-xl text-sm font-semibold text-center"
-          >
-            Request API Access
+          <Link to="/contact" className="btn-primary !py-2.5 !px-5">
+            Get in touch
           </Link>
-        </motion.div>
-      )}
+        </div>
+
+        <button
+          type="button"
+          className="md:hidden text-brand-ink"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Menu"
+        >
+          {isOpen ? <X /> : <Menu />}
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="border-t border-brand-line bg-brand-paper p-4 space-y-3 md:hidden"
+          >
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setIsOpen(false)}
+                className="block text-base font-semibold text-brand-ink"
+              >
+                {link.name}
+              </Link>
+            ))}
+            <Link
+              to="/contact"
+              onClick={() => setIsOpen(false)}
+              className="btn-primary w-full"
+            >
+              Get in touch
+            </Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

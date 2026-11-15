@@ -1,6 +1,6 @@
-import PageLayout from '../components/PageLayout';
-import { HelpCircle, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
+import PageLayout from '../components/PageLayout';
 import { FAQ_ITEMS, getPageSeo } from '../data/seo';
 
 export default function FAQ() {
@@ -22,47 +22,39 @@ export default function FAQ() {
         })),
       }}
     >
-      <section className="py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="mono-label mb-4">Technical FAQ</h2>
-            <h1 className="text-5xl font-bold mb-8">Inside the Engine</h1>
-            <p className="text-xl text-white/60 leading-relaxed">
-              Deep dives into the mechanics of reasoning-as-a-service.
-            </p>
-          </div>
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <p className="eyebrow mb-4">FAQ</p>
+          <h1 className="font-display text-4xl font-bold tracking-tight md:text-5xl">
+            Straight answers.
+          </h1>
+          <p className="mt-5 text-xl text-brand-muted">
+            Especially the one about whether we are a SaaS.
+          </p>
 
-          <div className="space-y-6">
+          <div className="mt-14 space-y-5">
             {FAQ_ITEMS.map((faq, i) => (
-              <div key={i} className="bento-card group">
-                <div className="flex items-start space-x-4">
-                  <div className="mt-1">
-                    <HelpCircle className="w-6 h-6 text-brand-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-4 group-hover:text-brand-accent transition-colors">
-                      {faq.q}
-                    </h3>
-                    <p className="text-white/60 leading-relaxed">{faq.a}</p>
-                  </div>
-                </div>
-              </div>
+              <motion.div
+                key={faq.q}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="panel p-7"
+              >
+                <h2 className="font-display text-xl font-bold">{faq.q}</h2>
+                <p className="mt-3 text-brand-muted leading-relaxed">{faq.a}</p>
+              </motion.div>
             ))}
           </div>
 
-          <div className="mt-20 glass p-12 rounded-[2.5rem] text-center">
-            <h3 className="text-2xl font-bold mb-4">Still have questions?</h3>
-            <p className="text-white/60 mb-8">
-              Our technical team is available for deep-dive consultations.
-            </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center space-x-2 text-brand-accent font-bold hover:underline"
-            >
-              <span>Contact Technical Support</span>
-              <ChevronRight className="w-5 h-5" />
+          <p className="mt-12 text-brand-muted">
+            Still unsure?{' '}
+            <Link to="/contact" className="font-semibold text-brand-accent hover:underline">
+              Write us
             </Link>
-          </div>
+            .
+          </p>
         </div>
       </section>
     </PageLayout>
